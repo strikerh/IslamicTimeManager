@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- When selected, use grey -->
+
+    <item  android:state_checked="true">
+
+        <layer-list>
+            <item  android:height="1dp" android:gravity="bottom" android:left="1dp" android:right="1dp">
+                <shape android:shape="rectangle" >
+                   <solid android:color="@color/colorPrimary"></solid>
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
+
+
+
+    <!-- When not selected, use white-->
+    <item android:state_checked="false">
+        <shape android:shape="rectangle">
+
+            <stroke android:width="0dp" android:color="#ff0000"></stroke>
+
+        </shape>
+    </item>
+</selector>

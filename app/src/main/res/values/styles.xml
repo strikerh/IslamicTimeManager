@@ -1,0 +1,202 @@
+<resources>
+
+    <!-- Base application theme. -->
+     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+          <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+         <item name="android:direction">right_to_left</item>
+
+
+
+    </style>
+    <style name="txtcolor">
+        <item name="android:textColor">@color/txt</item>
+    </style>
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="txtBox" parent="Base.Widget.AppCompat.EditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/tools_height</item>
+        <item name="android:background">@drawable/text_field_bg</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:paddingEnd">10dp</item>
+        <item name="android:layout_marginEnd">10dp</item>
+    </style>
+
+
+
+
+
+    <style name="section">
+        <item name="android:padding">5dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+    </style>
+
+    <style name="section_title">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:background">@drawable/bg_section_title</item>
+    </style>
+    <style name="section_title_off">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:background">#aaa</item>
+    </style>
+    <style name="section_title_txt">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="section_title_switch">
+
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:checked">false</item>
+        <item name="android:textColor">#DDD</item>
+        <item name="android:textSize">10dp</item>
+        <item name="android:textAlignment">viewEnd</item>
+        <item name="android:textAllCaps">false</item>
+
+
+    </style>
+
+
+
+
+
+<style name="label">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textSize">12sp</item>
+    <item name="android:textColor">#000</item>
+</style>
+    <style name="section_box">
+        <item name="android:orientation">vertical</item>
+         <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background" >@drawable/haz_section_bg</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:paddingBottom">20dp</item>
+        <item name="android:paddingStart">15dp</item>
+        <item name="android:paddingEnd">15dp</item>
+
+    </style>
+    <style name="spinner" >
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/tools_height</item>
+        <item name="android:background">@drawable/haz_spinner</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:paddingBottom">3dp</item>
+    </style>
+
+    <style name="spinner.smaller">
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_height">@dimen/tools_small_height</item>
+
+    </style>
+
+    <style name="g_txtWithBtn_txt">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:background">@drawable/haz_gr1_txt</item>
+        <item name="android:layout_height">@dimen/tools_height</item>
+        <item name="android:gravity"> center </item>
+        <item name="android:textColor">#000</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_weight">0.5</item>
+
+
+    </style>
+    <style name="g_txtWithBtn_btn">
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">@dimen/tools_height</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:background">@drawable/haz_gr1_btn</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">clip_horizontal|center_vertical</item>
+
+
+
+    </style>
+
+    <style name="RowGroup">
+        <item name="android:orientation">horizontal</item>
+
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="toolWithLabelGroup">
+
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="weeklyBtn" >
+        <item name="android:layout_width">30dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:background">@drawable/haz_weekly_btn</item>
+        <item name="android:layout_weight">1</item>
+        
+        <item name="android:textColor">@color/toggle_color</item>
+
+
+
+    </style>
+
+    <style name="hToolWithLabel">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+    </style>
+
+    <style name="hLabel">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/tools_height</item>
+        <item name="android:textColor">#000</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_weight">1.5</item>
+    </style>
+
+    <style name="add_btn">
+        <item name="android:text"></item>
+        <item name="android:foreground">@drawable/ic_add_black_24dp</item>
+        <item name="android:layout_width">@dimen/tools_small_height</item>
+        <item name="android:layout_height">@dimen/tools_small_height</item>
+        <item name="android:background">@drawable/haz_add_btn</item>
+        <item name="android:layout_marginStart">5dp</item>
+    </style>
+
+
+</resources>
