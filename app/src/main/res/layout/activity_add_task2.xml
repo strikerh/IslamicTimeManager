@@ -20,7 +20,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/p2_nav_header_add_task2"
-        app:menu="@menu/activity_add_task2_drawer" />
+        app:headerLayout="@layout/app_nav_header"
+        app:menu="@menu/app_nav_menu" />
 
 </android.support.v4.widget.DrawerLayout>
