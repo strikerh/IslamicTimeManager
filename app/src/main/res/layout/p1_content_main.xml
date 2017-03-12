@@ -11,7 +11,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.hazemnabil.islamictodo2.MainActivity"
-    tools:showIn="@layout/p1_app_bar_main">
+    tools:showIn="@layout/activity_main">
 
     <TextView
         android:layout_width="wrap_content"

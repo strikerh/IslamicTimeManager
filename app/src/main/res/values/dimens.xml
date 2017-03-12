@@ -8,4 +8,5 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="tools_height">38dp</dimen>
     <dimen name="tools_small_height">30dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 </resources>

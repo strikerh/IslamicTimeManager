@@ -11,15 +11,13 @@
     android:layoutDirection="rtl"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.hazemnabil.islamictodo2.AddTask2"
-    tools:showIn="@layout/p2_app_bar_add_task2">
+    tools:showIn="@layout/activity_add_task2">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-
-        >
+        android:layout_alignParentStart="true">
 
 
         <LinearLayout
@@ -402,7 +400,7 @@
                     <TextView
                         android:id="@+id/ImportantTitleTxt"
                         style="@style/section_title_txt"
-                        android:text="درجة الأهمية" />
+                        android:text="معلومات أخرى" />
 
                     <Switch
                         android:id="@+id/ImportantTitleSw"
@@ -449,9 +447,10 @@
                             style="@style/spinner.smaller"
                             android:layout_weight="1" />
 
-                        <Button
+                        <ImageButton
                             android:id="@+id/button2"
                             style="@style/add_btn"
+
                          />
 
                     </LinearLayout>
@@ -470,7 +469,7 @@
                             style="@style/spinner.smaller"
                             android:layout_weight="1" />
 
-                        <Button
+                        <ImageButton
                             android:id="@+id/button3"
                             style="@style/add_btn"
                             />
@@ -504,13 +503,32 @@
                     <TextView
                         android:id="@+id/SubTasksTitleTxt"
                         style="@style/section_title_txt"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
                         android:text="المهام الفرعية" />
 
-                    <Switch
+                    <!--<Switch
                         android:id="@+id/SubTasksTitleSw"
                         android:text="ليس بها مهام فرعية"
                         style="@style/section_title_switch"
-                        android:onClick="onSwitch_subtasks"/>
+                        android:onClick="onSwitch_subtasks"/>-->
+
+                    <Button
+                        android:id="@+id/btn_subTasks_add"
+                        style="@style/section_btn_add"
+                        android:onClick="addSubTask"
+                        android:layout_marginEnd="10dp"
+                        android:layout_width="150dp"
+                        android:layout_weight="1"
+                        android:layout_height="@dimen/tools_small_height"
+                        android:layout_gravity="end"
+                        android:drawableEnd="@drawable/ic_control_point_black_24dp"
+                        android:background="#00ffffff"
+                        android:text="اضافة"
+                        android:drawableTint="#ffffff"
+                        android:textColor="#fff"
+                        />
+
 
                 </LinearLayout>
 
@@ -519,10 +537,16 @@
                     android:id="@+id/SubTasksBox"
                     style="@style/section_box"
                     android:layout_width="match_parent"
-                    android:layout_height="100px"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
+
+                    <fragment
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:name="com.example.hazemnabil.islamictodo2.SubTaskFragment"
+                        android:id="@+id/fragment3"
+                        tools:layout="@layout/fragment_subtask_list" />
                 </LinearLayout>
 
             </LinearLayout>

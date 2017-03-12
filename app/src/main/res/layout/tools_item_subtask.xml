@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layoutDirection="rtl">
+
+    <CheckBox
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ch_todoItem"
+        android:layout_weight="1"
+        android:text="نلنتا" />
+
+    <Button
+        android:layout_width="45dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_delete"
+
+        android:foreground="@drawable/ic_delete_black_24dp"
+        android:foregroundGravity="center"
+        style="@style/Base.Widget.AppCompat.Button.Borderless" />
+    <Button
+        android:layout_width="45dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_move"
+        android:foreground="@drawable/ic_menu_black_24dp"
+        android:foregroundGravity="center"
+        style="@style/Base.Widget.AppCompat.Button.Borderless" />
+</LinearLayout>

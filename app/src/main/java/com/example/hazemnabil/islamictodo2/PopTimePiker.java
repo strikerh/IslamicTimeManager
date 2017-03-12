@@ -43,18 +43,25 @@ public class PopTimePiker extends DialogFragment implements View.OnClickListener
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             mytime = String.valueOf(tp.getHour())+":"+String.valueOf(tp.getMinute());
+            t_h24 = tp.getHour();
+            t_m =tp.getMinute();
+        }else{
+            mytime = String.valueOf(tp.getCurrentHour())+":"+String.valueOf(tp.getCurrentMinute());
+            t_h24 = tp.getCurrentHour();
+            t_m =tp.getCurrentMinute();
+
+        }
 
             Toast.makeText(getContext(),mytime,Toast.LENGTH_SHORT).show();
 
-            t_h24 = tp.getHour();
-            t_m =tp.getMinute();
+
             if(t_h24 >=12){
                 t_h12 = t_h24 - 12;
                 ampm = "pm";
             }else{
                 t_h12 = t_h24;
             }
-        }
+
         this.dismiss();
         if(this.placeID !=-1) {
             this.SetTime(this.placeID, t_h12, t_m,  ampm);

@@ -41,7 +41,7 @@ public class PopDatePiker extends DialogFragment implements View.OnClickListener
     public void onClick(View v) {
         String mydate;
         int d_day =0 ,d_month = 0 , d_year =0;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+        if (android.os.Build.VERSION.SDK_INT >=22 ) {    //android.os.Build.VERSION_CODES.M
             mydate = dp.getDayOfMonth()+"/"+dp.getMonth()+"/" +dp.getYear();
 
             Toast.makeText(getContext(),mydate,Toast.LENGTH_SHORT).show();

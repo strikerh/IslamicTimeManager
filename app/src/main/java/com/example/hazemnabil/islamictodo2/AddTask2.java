@@ -1,5 +1,6 @@
 package com.example.hazemnabil.islamictodo2;
 
+import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -7,9 +8,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -25,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hazemnabil.islamictodo2.spinner.Spinner_adapter;
+import com.github.msarhan.ummalqura.calendar.UmmalquraCalendar;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -33,7 +37,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class AddTask2 extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener  {
 
 
     //////////////////////////
@@ -55,6 +59,11 @@ public class AddTask2 extends AppCompatActivity
         setContentView(R.layout.activity_add_task2);
         ViewGroup gr =(ViewGroup)findViewById(R.id.content_add_task2);
 
+        UmmalquraCalendar cal = new UmmalquraCalendar();
+        cal.get(Calendar.YEAR);       // 1436
+        cal.get(Calendar.MONTH);        // 5 <=> Jumada al-Akhirah
+        cal.get(Calendar.DAY_OF_MONTH); // 14
+        Toast.makeText(this,":"+cal.get(Calendar.YEAR)+":"+ cal.get(Calendar.YEAR)+":"+ cal.get(Calendar.DAY_OF_MONTH),Toast.LENGTH_SHORT).show();
 
           sTime = new GroupSection(
                 R.id.TimeSection, R.id.TimeTitle, R.id.TimeTitleTxt, R.id.TimeTitleSw, R.id.TimeBox);
@@ -65,8 +74,8 @@ public class AddTask2 extends AppCompatActivity
           sImportant = new GroupSection(
                 R.id.ImportantSection, R.id.ImportantTitle, R.id.ImportantTitleTxt, R.id.ImportantTitleSw, R.id.ImportantBox);
 
-          sSubtasks = new GroupSection(
-                R.id.SubTasksSection, R.id.SubTasksTitle, R.id.SubTasksTitleTxt, R.id.SubTasksTitleSw, R.id.SubTasksBox);
+//          sSubtasks = new GroupSection(
+//                R.id.SubTasksSection, R.id.SubTasksTitle, R.id.SubTasksTitleTxt, null, R.id.SubTasksBox);
 
 
 
@@ -101,6 +110,9 @@ public class AddTask2 extends AppCompatActivity
         //String[] mTestArray = getResources().getStringArray(R.array.TimeNames);
         myadapter = new Spinner_adapter(this,R.array.repeatType,RepeatType,myFont,R.layout.my_spinner_style);
         RepeatType.setAdapter(myadapter);
+
+
+
         pnl_week =   (LinearLayout) findViewById(R.id.pnl_week);
         RepeatType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
              @Override
@@ -124,6 +136,8 @@ public class AddTask2 extends AppCompatActivity
 
              }
         });
+
+
         Spinner ImportantSp = (Spinner) findViewById(R.id.sp_Important);
         //String[] mTestArray = getResources().getStringArray(R.array.TimeNames);
         myadapter = new Spinner_adapter(this,R.array.importantType,ImportantSp,myFont,R.layout.my_spinner_style);
@@ -229,6 +243,11 @@ public class AddTask2 extends AppCompatActivity
                 return false;
             }
         });
+
+
+
+
+
                 //////////////////////////////////////////
 
 
@@ -324,15 +343,55 @@ public class AddTask2 extends AppCompatActivity
         LinearLayout h1 = (LinearLayout) findViewById(sTime.secBox_id);
         LinearLayout h2 = (LinearLayout) findViewById(sRepeat.secBox_id);
         LinearLayout h3 = (LinearLayout) findViewById(sImportant.secBox_id);
-        LinearLayout h4 = (LinearLayout) findViewById(sSubtasks.secBox_id);
+     //   LinearLayout h4 = (LinearLayout) findViewById(sSubtasks.secBox_id);
         h1.setVisibility(View.GONE);
         h2.setVisibility(View.GONE);
         h3.setVisibility(View.GONE);
-        h4.setVisibility(View.GONE);
+       // h4.setVisibility(View.GONE);
+
+    }
+    public String value = "";
+    public SubTaskFragment f;
+    public void addSubTask(View view) {
+        Toast.makeText(this,"add",Toast.LENGTH_SHORT).show();
+        f =(SubTaskFragment) getSupportFragmentManager().findFragmentById(R.id.fragment3);
+
+
+        AlertDialog.Builder addSubTaskDialogBuilder = new AlertDialog.Builder(this);
+        addSubTaskDialogBuilder.setTitle("إضافة مهمة فرعية");
+
+        // Set up the input
+        final EditText input = new EditText(this);
+// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        input.setInputType(InputType.TYPE_CLASS_TEXT );
+        input.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+
+        addSubTaskDialogBuilder.setView(input);
+        // Set up the buttons
+        addSubTaskDialogBuilder.setPositiveButton("إضافة", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                value = input.getText().toString();
+                f.onAddSubtask(value);
+            }
+        });
+        addSubTaskDialogBuilder.setNegativeButton("إلغاء", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        addSubTaskDialogBuilder.show();
+
+    }
+    public void removeSubTask(View view) {
+        Toast.makeText(this,"remove",Toast.LENGTH_SHORT).show();
+        SubTaskFragment f =(SubTaskFragment) getSupportFragmentManager().findFragmentById(R.id.fragment3);
+        f.onRemoveSubtask(2);
 
     }
 
-class  GroupSection {
+    class  GroupSection {
     public int mainSec_id;
     public int secTitle_id;
     public int title_txt_id;
@@ -398,6 +457,7 @@ class  GroupSection {
         PopDatePiker pop = new PopDatePiker();
         pop.SetOutputLocation(R.id.txt_date);
         pop.show( manager,null);
+
 
 
     }

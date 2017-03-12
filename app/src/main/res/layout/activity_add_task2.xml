@@ -9,10 +9,29 @@
     android:layoutDirection="rtl"
     tools:openDrawer="start">
 
-    <include
-        layout="@layout/p2_app_bar_add_task2"
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+       >
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
+        </android.support.design.widget.AppBarLayout>
+
+        <include layout="@layout/p2_content_add_task2" />
+
+
+    </android.support.design.widget.CoordinatorLayout>
+
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
@@ -21,6 +40,7 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/app_nav_header"
-        app:menu="@menu/app_nav_menu" />
+        app:menu="@menu/app_nav_menu"
+        tools:visibility="gone"/>
 
 </android.support.v4.widget.DrawerLayout>
