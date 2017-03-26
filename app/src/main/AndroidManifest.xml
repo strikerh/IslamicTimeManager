@@ -27,12 +27,20 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".AddTask2"
+            android:name=".addTask.AddTask2"
             android:label="@string/title_activity_add_task2"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"></activity>
+            android:label="@string/title_activity_settings" />
+        <activity
+            android:name=".CalenderMonth"
+            android:label="@string/title_activity_calender_month"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".CalenderMonth2"
+            android:label="@string/title_activity_calender_month2"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

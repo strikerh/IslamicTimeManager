@@ -10,7 +10,7 @@
     android:focusableInTouchMode="true"
     android:layoutDirection="rtl"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.hazemnabil.islamictodo2.AddTask2"
+    tools:context="com.example.hazemnabil.islamictodo2.addTask.AddTask2"
     tools:showIn="@layout/activity_add_task2">
 
     <ScrollView
@@ -525,7 +525,7 @@
                         android:drawableEnd="@drawable/ic_control_point_black_24dp"
                         android:background="#00ffffff"
                         android:text="اضافة"
-                        android:drawableTint="#ffffff"
+
                         android:textColor="#fff"
                         />
 
@@ -544,9 +544,9 @@
                     <fragment
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:name="com.example.hazemnabil.islamictodo2.SubTaskFragment"
+                        android:name="com.example.hazemnabil.islamictodo2.addTask.SubTaskFragment"
                         android:id="@+id/fragment3"
-                        tools:layout="@layout/fragment_subtask_list" />
+                        tools:layout="@layout/p2_fragment_subtask_list" />
                 </LinearLayout>
 
             </LinearLayout>

@@ -1,4 +1,4 @@
-package com.example.hazemnabil.islamictodo2;
+package com.example.hazemnabil.islamictodo2.addTask;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.hazemnabil.islamictodo2.R;
 
 /**
  * Created by hazem.nabil on 16/02/2017.
@@ -27,7 +29,7 @@ public class PopDatePiker extends DialogFragment implements View.OnClickListener
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mainActivity = (AppCompatActivity)  getActivity();
-        view1 =  inflater.inflate(R.layout.popup_date_piker, container, false);
+        view1 =  inflater.inflate(R.layout.p2_popup_date_piker, container, false);
         dp = (DatePicker) view1.findViewById(R.id.datePicker2);
         Button bu = (Button) view1.findViewById(R.id.button);
         bu.setOnClickListener(this);

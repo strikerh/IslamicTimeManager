@@ -10,7 +10,7 @@ import android.widget.TextView;
  * Created by hazem.nabil on 27/02/2017.
  */
 
- class ChangeFonts {
+ public class ChangeFonts {
 
 
     public ChangeFonts(Context context, View v){

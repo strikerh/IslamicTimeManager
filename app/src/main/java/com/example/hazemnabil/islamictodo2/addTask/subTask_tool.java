@@ -1,4 +1,4 @@
-package com.example.hazemnabil.islamictodo2;
+package com.example.hazemnabil.islamictodo2.addTask;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.hazemnabil.islamictodo2.R;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -62,7 +64,7 @@ public class subTask_tool extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sub_task_tool, container, false);
+        return inflater.inflate(R.layout.p2_fragment_sub_task_tool, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

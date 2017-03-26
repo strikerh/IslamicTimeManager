@@ -1,4 +1,4 @@
-package com.example.hazemnabil.islamictodo2;
+package com.example.hazemnabil.islamictodo2.addTask;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,7 +8,8 @@ import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.example.hazemnabil.islamictodo2.SubTaskFragment.OnListFragmentInteractionListener;
+import com.example.hazemnabil.islamictodo2.R;
+import com.example.hazemnabil.islamictodo2.addTask.SubTaskFragment.OnListFragmentInteractionListener;
 import com.example.hazemnabil.islamictodo2.dummy.TaskContent.TaskItem;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public class MySubTaskRecyclerViewAdapter extends RecyclerView.Adapter<MySubTask
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_subtask, parent, false);
+                .inflate(R.layout.p2_fragment_subtask, parent, false);
         return new ViewHolder(view);
     }
 

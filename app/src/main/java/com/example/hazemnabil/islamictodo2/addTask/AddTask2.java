@@ -1,4 +1,4 @@
-package com.example.hazemnabil.islamictodo2;
+package com.example.hazemnabil.islamictodo2.addTask;
 
 import android.content.DialogInterface;
 import android.graphics.Typeface;
@@ -27,6 +27,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.hazemnabil.islamictodo2.ChangeFonts;
+import com.example.hazemnabil.islamictodo2.R;
 import com.example.hazemnabil.islamictodo2.spinner.Spinner_adapter;
 import com.github.msarhan.ummalqura.calendar.UmmalquraCalendar;
 
@@ -93,22 +95,22 @@ public class AddTask2 extends AppCompatActivity
 
 
         //  ArrayAdapter<CharSequence> myadapter = ArrayAdapter.createFromResource(this,R.array.TimeNames,android.R.layout.simple_spinner_item);
-        // ArrayAdapter<CharSequence> myadapter = ArrayAdapter.createFromResource(this,R.array.TimeNames,R.layout.tools_spinner_2);
+        // ArrayAdapter<CharSequence> myadapter = ArrayAdapter.createFromResource(this,R.array.TimeNames,R.layout.p2_tools_spinner_2);
 
         // myadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //myadapter.setDropDownViewResource(R.layout.tools_spinner);
+        //myadapter.setDropDownViewResource(R.layout.p2_tools_spinner);
 
         //--- Spinners ---
         Spinner_adapter myadapter;
         Spinner dd_day = (Spinner)findViewById(R.id.sp_TimeName) ;
-        myadapter = new Spinner_adapter(this,R.array.TimeNames,dd_day,myFont,R.layout.my_spinner_style);
+        myadapter = new Spinner_adapter(this,R.array.TimeNames,dd_day,myFont,R.layout.p2_my_spinner_style);
         dd_day.setAdapter(myadapter);
 
         //////////////////////////////////////////
 
         Spinner RepeatType = (Spinner) findViewById(R.id.sp_RepeatType);
         //String[] mTestArray = getResources().getStringArray(R.array.TimeNames);
-        myadapter = new Spinner_adapter(this,R.array.repeatType,RepeatType,myFont,R.layout.my_spinner_style);
+        myadapter = new Spinner_adapter(this,R.array.repeatType,RepeatType,myFont,R.layout.p2_my_spinner_style);
         RepeatType.setAdapter(myadapter);
 
 
@@ -140,7 +142,7 @@ public class AddTask2 extends AppCompatActivity
 
         Spinner ImportantSp = (Spinner) findViewById(R.id.sp_Important);
         //String[] mTestArray = getResources().getStringArray(R.array.TimeNames);
-        myadapter = new Spinner_adapter(this,R.array.importantType,ImportantSp,myFont,R.layout.my_spinner_style);
+        myadapter = new Spinner_adapter(this,R.array.importantType,ImportantSp,myFont,R.layout.p2_my_spinner_style);
         ImportantSp.setAdapter(myadapter);
 
 
@@ -150,7 +152,7 @@ public class AddTask2 extends AppCompatActivity
         mTestArray[1] = "عمل";
         mTestArray[2] = "اسلامي";
 
-        myadapter = new Spinner_adapter(this,mTestArray,GroupSp,myFont,R.layout.my_spinner_style);
+        myadapter = new Spinner_adapter(this,mTestArray,GroupSp,myFont,R.layout.p2_my_spinner_style);
         GroupSp.setAdapter(myadapter);
 
         Spinner TagSp = (Spinner) findViewById(R.id.sp_Tags);
@@ -159,7 +161,7 @@ public class AddTask2 extends AppCompatActivity
         mTags[1] = "عمل";
         mTags[2] = "اسلامي";
 
-        myadapter = new Spinner_adapter(this,mTags,TagSp,myFont,R.layout.my_spinner_style);
+        myadapter = new Spinner_adapter(this,mTags,TagSp,myFont,R.layout.p2_my_spinner_style);
         TagSp.setAdapter(myadapter);
 
 
@@ -484,7 +486,10 @@ public class AddTask2 extends AppCompatActivity
 /////////////////////////////////////////////////////////////
 
 
-
+    //TODO: weeks color on the old version (22).
+    //TODO:AddTask Move tool.
+    //TODO: insert button.
+    //TODO:Insert on Database.
 
 }
 

@@ -1,4 +1,4 @@
-package com.example.hazemnabil.islamictodo2;
+package com.example.hazemnabil.islamictodo2.addTask;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.hazemnabil.islamictodo2.R;
 import com.example.hazemnabil.islamictodo2.dummy.TaskContent;
 import com.example.hazemnabil.islamictodo2.dummy.TaskContent.TaskItem;
 
@@ -65,7 +66,7 @@ public class SubTaskFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_subtask_list, container, false);
+        View view = inflater.inflate(R.layout.p2_fragment_subtask_list, container, false);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
