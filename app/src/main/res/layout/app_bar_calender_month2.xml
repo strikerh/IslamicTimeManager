@@ -20,7 +20,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_calender_month2" />
+    <include layout="@layout/p3__content_calender_month2" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
