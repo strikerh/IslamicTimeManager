@@ -29,22 +29,22 @@ public class Spinner_adapter extends BaseAdapter {
             // TODO Auto-generated constructor stub
             mInflater = LayoutInflater.from(con);
         }
-        public Spinner_adapter(AppCompatActivity con, String[] COUNTRIES,Spinner mySpinner,Typeface myFont,int my_spinner_layout) {
-            this.theArray = COUNTRIES;
+        public Spinner_adapter(AppCompatActivity con, String[] DataArray,Spinner mySpinner,Typeface myFont,int my_spinner_layout) {
+            this.theArray = DataArray;
             this.mySpinner = mySpinner;
             this.myFont = myFont;
             this.my_spinner_layout = my_spinner_layout;
             // TODO Auto-generated constructor stub
             mInflater = LayoutInflater.from(con);
         }
-    public Spinner_adapter(AppCompatActivity con, int idOfArray,Spinner mySpinner,Typeface myFont,int my_spinner_layout) {
-        this.theArray = con.getResources().getStringArray(idOfArray);
-        this.mySpinner = mySpinner;
-        this.myFont = myFont;
-        this.my_spinner_layout = my_spinner_layout;
-        // TODO Auto-generated constructor stub
-        mInflater = LayoutInflater.from(con);
-    }
+        public Spinner_adapter(AppCompatActivity con, int idOfArray,Spinner mySpinner,Typeface myFont,int my_spinner_layout) {
+            this.theArray = con.getResources().getStringArray(idOfArray);
+            this.mySpinner = mySpinner;
+            this.myFont = myFont;
+            this.my_spinner_layout = my_spinner_layout;
+            // TODO Auto-generated constructor stub
+            mInflater = LayoutInflater.from(con);
+        }
 
         @Override
         public int getCount() {

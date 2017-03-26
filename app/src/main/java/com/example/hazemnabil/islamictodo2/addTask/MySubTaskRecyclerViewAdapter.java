@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.example.hazemnabil.islamictodo2.R;
 import com.example.hazemnabil.islamictodo2.addTask.SubTaskFragment.OnListFragmentInteractionListener;
-import com.example.hazemnabil.islamictodo2.dummy.TaskContent.TaskItem;
+import com.example.hazemnabil.islamictodo2.addTask.TaskContent.TaskItem;
 
 import java.util.List;
 

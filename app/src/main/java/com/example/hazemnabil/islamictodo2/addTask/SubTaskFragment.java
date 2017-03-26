@@ -11,8 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.hazemnabil.islamictodo2.R;
-import com.example.hazemnabil.islamictodo2.dummy.TaskContent;
-import com.example.hazemnabil.islamictodo2.dummy.TaskContent.TaskItem;
+import com.example.hazemnabil.islamictodo2.addTask.TaskContent.TaskItem;
 
 /**
  * A fragment representing a list of Items.

@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.hazemnabil.islamictodo2.addTask.AddTask2;
+import com.example.hazemnabil.islamictodo2.calenderMonth.CalenderMonth2;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -108,7 +109,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void openMonthCalender(View view) {
-        Intent myIntent = new Intent(this,CalenderMonth2.class);
+        Intent myIntent = new Intent(this, CalenderMonth2.class);
         startActivity(myIntent);
     }
 }

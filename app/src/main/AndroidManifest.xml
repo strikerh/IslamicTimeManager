@@ -38,7 +38,7 @@
             android:label="@string/title_activity_calender_month"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".CalenderMonth2"
+            android:name=".calenderMonth.CalenderMonth2"
             android:label="@string/title_activity_calender_month2"
             android:theme="@style/AppTheme"></activity>
     </application>
