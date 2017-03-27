@@ -4,11 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.hazemnabil.islamictodo2.calenderMonth.CalenderMonth2"
     tools:showIn="@layout/app_bar_calender_month2"
-    android:layoutDirection="rtl">
+    android:layoutDirection="rtl"
+    android:id="@+id/content_Calender_month2">
 
 
 
@@ -21,17 +22,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/txt_month"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="مايو" />
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/txt_altMonths"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="شوال شعبان" />
+            android:text="ش66وال شعبان" />
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -42,12 +43,18 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="horizontal">
 
         <GridView
+            android:id="@+id/grd_calender"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:numColumns="7"
+            android:stretchMode="columnWidth"
+            android:gravity="center"
+
+            />
 
     </LinearLayout>
 

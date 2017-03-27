@@ -35,6 +35,17 @@
     </string-array>
 
 
+    <string-array name="daysName">
+        <item>سبت</item>
+        <item>أحد</item>
+        <item>أثنين</item>
+        <item>ثلاثاء</item>
+        <item>أربعاء</item>
+        <item>خميس</item>
+        <item>جمعة</item>
+
+    </string-array>
+
     <string name="title_activity_settings">Settings</string>
 
     <!-- Strings related to Settings -->
