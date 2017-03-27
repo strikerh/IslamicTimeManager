@@ -68,7 +68,7 @@ public class CalenderMonth2 extends AppCompatActivity
         int height = metrics.heightPixels;
         Toast.makeText(CalenderMonth2.this, "win:"+String.valueOf(height), Toast.LENGTH_LONG).show();
 
-        MoMonth mm = new MoMonth(3,2017);
+        MoMonth mm = new MoMonth(5,2017);
         GridView gridview = (GridView) findViewById(R.id.grd_calender);
         gridview.setAdapter(new DaysAdapter(this,metrics,mm));
         gridview2 = gridview;

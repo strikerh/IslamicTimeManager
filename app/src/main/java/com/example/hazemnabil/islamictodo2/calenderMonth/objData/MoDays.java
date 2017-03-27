@@ -3,82 +3,67 @@ package com.example.hazemnabil.islamictodo2.calenderMonth.objData;
 import com.github.msarhan.ummalqura.calendar.UmmalquraCalendar;
 
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.Locale;
 
 public class MoDays {
 
-    public String dayOfWeek;
-    public int dayNum;
-    public int dayNumAlt;
-    public String dayWithMonthAlt;
-    public int monthNum;
-    public int monthNumAlt;
+    public String   _dayOfWeek_s;
+    public int      _dayOfWeek_n;
+    public int      _day_n       ,_day_alt_n;
+    public int      _month_n     ,_month_alt_n;
+    public int      _year_n      ,_year_alt_n;
+    public String   _month_s     ,_month_alt_s;
+    public String _dayWithMonth_s,_dayWithMonth_alt_s;
+
+    public Locale locateAr = new Locale("ar");
+
+
     public MoTask[] tasks;
     public MoMonth parentMonth;
+    public Calendar  mCal;
+    public Calendar  hCal;
 
     public MoDays(MoMonth parentMonth, int dayNum, MoTask[] tasks) {
         this.parentMonth = parentMonth;
-        this.dayOfWeek = dayOfWeek;
-        this.dayNum = dayNum;
-        this.dayNumAlt = dayNumAlt;
+
+
         this.tasks = tasks;
         //TODO: any DayAlt must auto calculated
         //TODO: get the month from parentMonth
+
+        setCalenders (parentMonth.year,parentMonth.monthNum,dayNum);
+        setAllAttribute();
+
     }
 
-    /// Getter
-    public String getDayOfWeek() {
-        return dayOfWeek;
+    /// Setter
+
+    public void setCalenders (int year,int month, int day){
+        mCal = Calendar.getInstance();
+        mCal.set(year,month,day);
+
+        hCal = new UmmalquraCalendar();
+        hCal.setTime(mCal.getTime());
+
     }
+    public void setAllAttribute(){
 
-    public int getDayNum() {
-        return dayNum;
-    }
+        this._dayOfWeek_n = mCal.get(Calendar.DAY_OF_WEEK);
+        this._dayOfWeek_s = mCal.getDisplayName(Calendar.DAY_OF_WEEK,Calendar.SHORT,locateAr);
 
-    public int getDayNumAlt() {
-        return dayNumAlt;
-    }
+        this._day_n = mCal.get(Calendar.DAY_OF_MONTH);
+        this._month_n = mCal.get(Calendar.MONTH);
+        this._year_n = mCal.get(Calendar.YEAR);
+        this._month_s =  mCal.getDisplayName(Calendar.MONTH,Calendar.SHORT,locateAr);
+        this._dayWithMonth_s =_day_n +" "+ _month_s ;
 
-    public int getMonthNum() {
-        return monthNum;
-    }
-
-    public int getMonthNumAlt() {
-        return monthNumAlt;
-    }
-
-    public MoTask[] getTasks() {
-        return tasks;
-    }
+        this._day_alt_n = hCal.get(Calendar.DAY_OF_MONTH);
+        this._month_alt_n = hCal.get(Calendar.MONTH);
+        this._year_alt_n = hCal.get(Calendar.YEAR);
+        this._month_alt_s = hCal.getDisplayName(Calendar.MONTH,Calendar.SHORT,locateAr);
+        this._dayWithMonth_alt_s =_day_alt_n +" "+ _month_alt_s ;
 
 
-    public String getMonthName() {
-        return "Name of the month";
-    }
-
-    public String getMonthNameAlt() {
-        return "Name of the Alt month";
-    }
-
-    public String getMonthAndDaysAlt() {
-       /* UmmalquraCalendar cal2 = new UmmalquraCalendar();
-        cal2.set(Calendar.YEAR,1395);
-        cal2.set(UmmalquraCalendar.MONTH,2);
-        cal2.get(Calendar.YEAR);       // 1436
-        cal2.get(Calendar.MONTH);        // 5 <=> Jumada al-Akhirah
-        cal2.get(Calendar.DAY_OF_MONTH); // 14
-        String mmm = cal2.getDisplayName(Calendar.MONTH,Calendar.SHORT,new Locale("ar"));*/
-
-        GregorianCalendar gCal = new GregorianCalendar(parentMonth.year, parentMonth.monthNum, dayNum);
-        Calendar uCal = new UmmalquraCalendar();
-        uCal.setTime(gCal.getTime());
-        String mmm2 = String.valueOf(uCal.get(Calendar.DAY_OF_MONTH));
-         mmm2 +=" "+ uCal.getDisplayName(Calendar.MONTH,Calendar.SHORT,new Locale("ar"));
-
-        //Toast.makeText(this,":"+cal2.get(Calendar.YEAR)+":"+ cal2.get(Calendar.YEAR)+":"+ cal2.get(Calendar.DAY_OF_MONTH),Toast.LENGTH_SHORT).show();
-
-        return mmm2;
     }
 
 

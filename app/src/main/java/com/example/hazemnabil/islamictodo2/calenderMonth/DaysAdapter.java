@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,8 +37,8 @@ public class DaysAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 7*6;
-    }
+        return 7*7;
+    } //49
 
     @Override
     public Object getItem(int position) {
@@ -63,17 +62,22 @@ public class DaysAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
             col = inflater.inflate(R.layout.p3_fragment_day, parent, false);
 
-            Log.i("hazem", "getView: "+moMonth.days[5]);
-
 
             TextView txtDay = (TextView) col.findViewById(R.id.txt_day);
             TextView txtDayAlt = (TextView) col.findViewById(R.id.txt_dayAlt);
             LinearLayout taskCont = (LinearLayout) col.findViewById(R.id.taskCont);
-            taskCont.setMinimumHeight(pxToDp((displayMetrics.heightPixels - 60) / 6));
+            taskCont.setMinimumHeight((pxToDp(displayMetrics.heightPixels )-100)/7);
+            LinearLayout MainLayout = (LinearLayout)col.findViewById(R.id.eveyDay);
 
-            if(dayPosition<30) {
-                txtDay.setText(String.valueOf(moMonth.days[dayPosition].dayNum));
-                txtDayAlt.setText(moMonth.days[dayPosition].getMonthAndDaysAlt());
+            if(dayPosition<moMonth.calenderDays.length) {
+                txtDay.setText(moMonth.getCalDayDataAt(dayPosition,"day_n"));
+                txtDayAlt.setText(moMonth.getCalDayDataAt(dayPosition,"dayWithMonth_alt_s"));
+
+
+                if(moMonth.getCalDayDataAt(dayPosition,"month") != String.valueOf(moMonth.monthNum) ){
+                    MainLayout.setBackgroundResource(R.drawable.bg_calendermonth_days_inactive);
+                }
+
             }
         }else {
 
