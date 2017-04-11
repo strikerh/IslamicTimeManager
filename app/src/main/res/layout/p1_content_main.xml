@@ -25,6 +25,12 @@
         android:layout_height="wrap_content"
         android:onClick="openMonthCalender"
         android:text="Month Calender" />
+    <Button
+        android:id="@+id/btn_dayCalender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="openDayCalender"
+        android:text="Month Calender" />
     <fragment
         android:id="@+id/fragment"
         android:name="com.example.hazemnabil.islamictodo2.addTask.CalenderFragment"

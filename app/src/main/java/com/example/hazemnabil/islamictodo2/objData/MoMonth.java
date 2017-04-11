@@ -1,4 +1,4 @@
-package com.example.hazemnabil.islamictodo2.calenderMonth.objData;
+package com.example.hazemnabil.islamictodo2.objData;
 
 import android.util.Log;
 
@@ -77,27 +77,47 @@ public class MoMonth {
 
         UmmalquraCalendar m1 = CalOption.convertToHejri(this.year, this.monthNum, 1);
         UmmalquraCalendar m2 = CalOption.convertToHejri(this.year, this.monthNum,  countDays());
+        this.monthNameAlt = m1.getDisplayName(Calendar.MONTH,Calendar.LONG,new Locale("ar")) +" , "+  m2.getDisplayName(Calendar.MONTH,Calendar.LONG,new Locale("ar")) +" "+ String.valueOf(m2.get(Calendar.YEAR))+"هـ" ;
+        return this.monthNameAlt;
+
+    }
+    public String getYearNameAlt(){
+
+        UmmalquraCalendar m1 = CalOption.convertToHejri(this.year, this.monthNum, 1);
+        UmmalquraCalendar m2 = CalOption.convertToHejri(this.year, this.monthNum,  countDays());
         this.monthNameAlt = m1.getDisplayName(Calendar.MONTH,Calendar.SHORT,new Locale("ar")) +" , "+  m2.getDisplayName(Calendar.MONTH,Calendar.SHORT,new Locale("ar"));
         return this.monthNameAlt;
 
     }
-    public String getCalDayDataAt(int position,String  hh){
+
+    public MoDays  getMoDay(int position){
+        MoDays tday = calenderDays[position];
+        return tday;
+    }
+    public String getCalDayDataAt(int position,String  whatINeed){
         MoDays tday = calenderDays[position];
 
 
 
-            if (hh == "day_n") {
+            if (whatINeed == "day_n") {
                 return String.valueOf(tday._day_n);
 
-            } else if (hh == "dayWithMonth_alt_s") {
+            } else if (whatINeed == "dayWithMonth_alt_s") {
                 return tday._dayWithMonth_alt_s;
 
-            } else if (hh == "month") {
+            } else if (whatINeed == "month") {
                 return String.valueOf(tday._month_n);
             }else {
                 return String.valueOf(tday._month_n);
             }
 
+    }
+    public MoTask[] getMoTasksAt(int position){
+        MoDays tday = calenderDays[position];
+        MoTask motask[] = tday.getTasks() ;
+
+
+        return motask;
     }
 
     public String getMonthName(){

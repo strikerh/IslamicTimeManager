@@ -6,7 +6,6 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,9 +13,10 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.hazemnabil.islamictodo2.addTask.AddTask2;
+import com.example.hazemnabil.islamictodo2.calenderDay.CalenderDay;
 import com.example.hazemnabil.islamictodo2.calenderMonth.CalenderMonth2;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends ActivityMaster
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
@@ -83,33 +83,13 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-        Toast.makeText(this, "Nav:"+id,Toast.LENGTH_SHORT).show();
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
 
     public void openMonthCalender(View view) {
         Intent myIntent = new Intent(this, CalenderMonth2.class);
+        startActivity(myIntent);
+    }
+    public void openDayCalender(View view) {
+        Intent myIntent = new Intent(this, CalenderDay.class);
         startActivity(myIntent);
     }
 }

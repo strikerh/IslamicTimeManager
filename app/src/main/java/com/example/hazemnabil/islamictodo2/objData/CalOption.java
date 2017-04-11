@@ -1,4 +1,4 @@
-package com.example.hazemnabil.islamictodo2.calenderMonth.objData;
+package com.example.hazemnabil.islamictodo2.objData;
 
 import com.github.msarhan.ummalqura.calendar.UmmalquraCalendar;
 

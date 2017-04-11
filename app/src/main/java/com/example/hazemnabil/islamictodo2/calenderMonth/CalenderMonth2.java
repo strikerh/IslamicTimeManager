@@ -1,31 +1,50 @@
 package com.example.hazemnabil.islamictodo2.calenderMonth;
 
+import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.hazemnabil.islamictodo2.ActivityMaster;
 import com.example.hazemnabil.islamictodo2.ChangeFonts;
 import com.example.hazemnabil.islamictodo2.R;
-import com.example.hazemnabil.islamictodo2.calenderMonth.objData.MoMonth;
+import com.example.hazemnabil.islamictodo2.objData.MoDays;
+import com.example.hazemnabil.islamictodo2.objData.MoMonth;
 
-public class CalenderMonth2 extends AppCompatActivity
+import java.util.Calendar;
+import java.util.Date;
+
+public class CalenderMonth2 extends ActivityMaster
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static final String TAG = "hazem";
     private Typeface myFont;
+    private DisplayMetrics metrics = new DisplayMetrics();
+    public int ll_calender_height;
+
+    LinearLayout llCalender ;
+    GridView gridview;
+    TextView t1  ;
+    TextView t2  ;
+
+    int currentMonth;
+    int currentYear;
+    MoMonth mm;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,36 +82,93 @@ public class CalenderMonth2 extends AppCompatActivity
 
         //Start My Coding
 
-        DisplayMetrics metrics = new DisplayMetrics();
+
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         int height = metrics.heightPixels;
-        Toast.makeText(CalenderMonth2.this, "win:"+String.valueOf(height), Toast.LENGTH_LONG).show();
+        Log.i(TAG, "height DP: Screen : "+pxToDp(height,metrics));
+       // Toast.makeText(CalenderMonth2.this, "win:"+String.valueOf(pxToDp(height,metrics)), Toast.LENGTH_LONG).show();
 
-        MoMonth mm = new MoMonth(5,2017);
-        GridView gridview = (GridView) findViewById(R.id.grd_calender);
-        gridview.setAdapter(new DaysAdapter(this,metrics,mm));
-        gridview2 = gridview;
+        Date date= new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        currentMonth = cal.get(Calendar.MONTH);
+        currentYear = cal.get(Calendar.YEAR);
+        createCalender1(currentMonth, currentYear);
 
-        TextView t1 = (TextView)findViewById(R.id.txt_month) ;
-        t1.setText(mm.getMonthName());
-        TextView t2 = (TextView)findViewById(R.id.txt_altMonths) ;
+
+    }
+
+
+
+
+
+
+
+    private void createCalender1(int month, int year) {
+
+
+        mm = new MoMonth(month, year);
+
+
+        llCalender = (LinearLayout) findViewById(R.id.ll_calender);
+        gridview = (GridView) findViewById(R.id.grd_calender);
+        t1 = (TextView) findViewById(R.id.txt_month);
+        t2 = (TextView) findViewById(R.id.txt_altMonths);
+
+        //gridview.setAdapter(new DaysAdapter(this,metrics,mm));
+
+
+        t1.setText(mm.getMonthName()+" "+ mm.year);
         t2.setText(mm.getMonthNameAlt());
 
 
-        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v,
-                                    int position, long id) {
-                Toast.makeText(CalenderMonth2.this, "" + position, Toast.LENGTH_SHORT).show();
+        final TypedArray styledAttributes = this.getTheme().obtainStyledAttributes(
+                new int[]{android.R.attr.actionBarSize});
+        int mActionBarSize = (int) styledAttributes.getDimension(0, 0);
+        styledAttributes.recycle();
+
+        llCalender.post(new Runnable() {
+            public void run() {
+                LinearLayout llCalender = (LinearLayout) findViewById(R.id.ll_calender);
+                int height = llCalender.getHeight();
+                ll_calender_height = llCalender.getHeight();
+
+                Log.i(TAG, "height DP: llCalender : " + pxToDp(llCalender.getHeight(), metrics));
+
+                gridview.setAdapter(new DaysAdapter(CalenderMonth2.this, mm, ll_calender_height));
             }
         });
 
+
+        // Toast.makeText(CalenderMonth2.this,"1: "+ String.valueOf(pxToDp(llCalender.getHeight(), metrics) ),Toast.LENGTH_SHORT).show();
+
+//now
+       /* gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v,
+                                    int position, long id) {
+                Toast.makeText(getBaseContext(), "pos:" + (position) + "id:" + id, Toast.LENGTH_SHORT).show();
+                if (position > 6) {
+                    LinearLayout hhw = (LinearLayout) v;
+                    hhw.setBackgroundColor(Color.RED);
+                    hhw.setOrientation(LinearLayout.VERTICAL);
+                    Toast.makeText(CalenderMonth2.this, "" + (position - 6) + " - " + v.getMinimumHeight(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });*/
     }
-    GridView gridview2;
+
+
+
+   /* public int pxToDp(int px,DisplayMetrics displayMetrics) {
+
+        return Math.round(px / (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+    }*/
+
     @Override
     public void onResume(){
         super.onResume();
 
-       // Toast.makeText(CalenderMonth2.this, "getMeasuredHeight:"+String.valueOf(gridview2.getMeasuredHeight()), Toast.LENGTH_LONG).show();
+       // Toast.makeText(CalenderMonth2.this, "getMeasuredHeight:"+String.valueOf(gridview.getMeasuredHeight()), Toast.LENGTH_LONG).show();
         //Toast.makeText(CalenderMonth2.this, "getHeight:"+String.valueOf(((TextView)findViewById(R.id.txt_dayAlt)).getHeight()), Toast.LENGTH_LONG).show();
 
     }
@@ -128,28 +204,40 @@ public class CalenderMonth2 extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+    public int pxToDp(int px,DisplayMetrics displayMetrics) {
 
-        } else if (id == R.id.nav_slideshow) {
+        return Math.round(px / (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+    }
 
-        } else if (id == R.id.nav_manage) {
+    public void btn_nextMonth(View view) {
+        currentMonth ++;
+        if(currentMonth>12) {currentMonth =1;currentYear++;}
+        createCalender1(currentMonth, currentYear);
+    }
+    public void btn_prevMonth(View view) {
+        currentMonth --;
+        if(currentMonth<1){ currentMonth =12;currentYear--;}
+        createCalender1(currentMonth, currentYear);
+    }
+    public void onAnyViewClicked(View view){
+        Log.i(TAG, "");
+        MoDays md;
+        if (view.getTag() instanceof String) {
 
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+            int nn = Integer.valueOf(view.getTag().toString());
+            if (nn == 3) {
+                md = (MoDays) ((LinearLayout) view.getParent().getParent().getParent()).getTag();
+            } else if (nn == 2) {
+                md = (MoDays) ((LinearLayout) view.getParent().getParent()).getTag();
+            } else {
+                md = (MoDays) ((LinearLayout) view).getTag();
+            }
         }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+        else {
+            md = (MoDays) ((LinearLayout) view).getTag();
+        }
+        Log.i(TAG, md._dayWithMonth_s);
+        Toast.makeText(getBaseContext(), "Just for test test test", Toast.LENGTH_SHORT).show();
     }
 }

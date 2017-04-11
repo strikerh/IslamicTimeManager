@@ -9,7 +9,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.InputType;
@@ -27,6 +26,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.hazemnabil.islamictodo2.ActivityMaster;
 import com.example.hazemnabil.islamictodo2.ChangeFonts;
 import com.example.hazemnabil.islamictodo2.R;
 import com.example.hazemnabil.islamictodo2.spinner.Spinner_adapter;
@@ -38,7 +38,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class AddTask2 extends AppCompatActivity
+public class AddTask2 extends ActivityMaster
         implements NavigationView.OnNavigationItemSelectedListener  {
 
 
