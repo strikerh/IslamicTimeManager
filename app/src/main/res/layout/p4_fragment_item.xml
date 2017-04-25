@@ -1,20 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:paddingTop="7dp"
+    android:paddingBottom="7dp"
+    android:layoutDirection="rtl"
+    android:id="@+id/root_task_item">
 
-    <TextView
-        android:id="@+id/id"
+
+
+
+    <CheckBox
+        android:id="@+id/chk_checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem" />
+         />
 
-    <TextView
-        android:id="@+id/content"
-        android:layout_width="wrap_content"
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/txt_task"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="مقابلة مع فلان الفلاني"
+                android:textSize="14sp"
+                android:textColor="#000"/>
+
+            <TextView
+                android:id="@+id/txt_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="بعد الشروق من 5:00"
+                android:textSize="10sp"
+                android:textColor="#000"/>
+         </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txt_taskCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#ee2233"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
+                android:text="عمل"
+                android:textColor="#fff"
+                android:layout_marginEnd="10dp"
+                android:textSize="12sp"
+                />
+            <TextView
+                android:id="@+id/txt_taskTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#22ee33"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
+                android:text="عمل"
+                android:textColor="#fff"
+                android:layout_marginEnd="10dp"
+                android:textSize="12sp" />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:numStars="3"
+                android:rating="1.5"
+                android:stepSize="0.5" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="@dimen/tools_height"
+        android:layout_height="match_parent"
+
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/btn_edit"
+            android:layout_width="@dimen/tools_height"
+            android:layout_height="@dimen/tools_height"
+           android:background="#00ffffff"
+            app:srcCompat="@drawable/ic_edit_black_24dp" />
+
+        <ImageButton
+            android:id="@+id/btn_move"
+            android:layout_width="@dimen/tools_height"
+            android:layout_height="@dimen/tools_height"
+            android:background="#00ffffff"
+            app:srcCompat="@drawable/ic_more_vert_black_24dp" />
+
+</LinearLayout>
+
+
 </LinearLayout>

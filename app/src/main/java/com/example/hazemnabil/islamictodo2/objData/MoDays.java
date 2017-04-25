@@ -1,5 +1,9 @@
 package com.example.hazemnabil.islamictodo2.objData;
 
+import android.content.Context;
+import android.database.Cursor;
+
+import com.example.hazemnabil.islamictodo2.DbConnections;
 import com.github.msarhan.ummalqura.calendar.UmmalquraCalendar;
 
 import java.util.Calendar;
@@ -19,12 +23,12 @@ public class MoDays {
     public Locale locateAr = new Locale("ar");
 
 
-    public MoTask[] tasks;
+    public Task[] tasks;
     public MoMonth parentMonth;
     public Calendar  mCal;
     public Calendar  hCal;
 
-    public MoDays(MoMonth parentMonth, int dayNum, MoTask[] tasks) {
+    public MoDays(MoMonth parentMonth, int dayNum, Task[] tasks) {
         this.parentMonth = parentMonth;
 
 
@@ -68,13 +72,13 @@ public class MoDays {
     }
 
 
-    public MoTask[] getTasks() {
+    public Task[] getTasks() {
 
         Random rand = new Random();
 
         int  n = rand.nextInt(10) ;
 
-        MoTask tasks[] = new MoTask[n];
+        Task tasks[] = new Task[n];
 
         for (int i = 0; i < n; i++) {
             tasks[i] = createRandomTask();
@@ -85,7 +89,34 @@ public class MoDays {
         return tasks;
     }
 
-    public MoTask createRandomTask() {
+
+    public Task createTaskFromDb(Context mContext , int b) {
+        Task tasks[];
+        DbConnections db = new DbConnections(mContext);
+        Cursor cursor = db.getMoTaskAtDay(5,5,2017);
+
+        if (cursor.getCount() >0) {
+
+
+            tasks = new Task[cursor.getCount()];
+
+            cursor.moveToFirst();
+            for (int i = 0; i < cursor.getCount(); i++) {
+
+               // tasks[i]=new Task(this,cursor.getString(1),)
+
+            }
+        }
+
+
+
+
+       return null;
+    }
+
+
+
+    public Task createRandomTask() {
 
         String tasksNameStrings[] = new String[14];
             tasksNameStrings[0] =  "ترتيب الأفكار";
@@ -129,13 +160,13 @@ public class MoDays {
         MoDays parentDay = this;
         String taskName =tasksNameStrings[n] ;
           n = rand.nextInt(3) ;
-        String taskCategory = tasksCategoryStrings[n] ;
+        int taskCategory = n ;
         int taskCategoryColor = tasksCatColorStrings[n];
-        String taskTags = "";
+        int taskTags = 0;
           n = rand.nextInt(3) ;
         Boolean isDone = isDoneAr[n];
 
-        MoTask task = new MoTask( parentDay,  taskName,  taskCategory,  taskCategoryColor,  taskTags,  isDone);
+        Task task = new Task( parentDay,  taskName,  taskCategory,  taskCategoryColor,  taskTags,  isDone);
 
 
 

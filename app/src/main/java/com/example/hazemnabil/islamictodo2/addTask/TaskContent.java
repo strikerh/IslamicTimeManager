@@ -14,12 +14,12 @@ import java.util.Map;
 public class TaskContent {
 
     /**
-     * An array of sample (task) items.
+     * An array of sample (Task) items.
      */
     public static final List<TaskItem> ITEMS = new ArrayList<TaskItem>();
 
     /**
-     * A map of sample (task) items, by ID.
+     * A map of sample (Task) items, by ID.
      */
     public static final Map<String, TaskItem> ITEM_MAP = new HashMap<String, TaskItem>();
 
@@ -61,7 +61,7 @@ public class TaskContent {
     }
 
     /**
-     * A task item representing a piece of content.
+     * A Task item representing a piece of content.
      */
     public static class TaskItem {
         public final String id;

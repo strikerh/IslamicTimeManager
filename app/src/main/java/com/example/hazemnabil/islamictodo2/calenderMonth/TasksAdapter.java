@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.hazemnabil.islamictodo2.R;
-import com.example.hazemnabil.islamictodo2.objData.MoTask;
+import com.example.hazemnabil.islamictodo2.objData.Task;
 
 /**
  * Created by hazem.nabil on 4/2/2017.
@@ -20,14 +20,14 @@ import com.example.hazemnabil.islamictodo2.objData.MoTask;
 
 public class TasksAdapter extends BaseAdapter {
     private Context mContext;
-    private MoTask[] moTasks;
+    private Task[] moTasks;
     private int taskLength;
 
 
 
 
 
-    public TasksAdapter(Context c, MoTask moTask[]) {
+    public TasksAdapter(Context c, Task moTask[]) {
         this.mContext = c;
         this.moTasks = moTask;
         taskLength = moTasks.length;
@@ -62,7 +62,7 @@ public class TasksAdapter extends BaseAdapter {
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
         task = inflater.inflate(R.layout.p3_fragment_day_task, parent, false);
 
-        //chk_isDone = (CheckBox) task.findViewById(R.id.chk_isDone);
+        //chk_isDone = (CheckBox) Task.findViewById(R.id.chk_isDone);
         img_isDone = (ImageView) task.findViewById(R.id.img_isDone);
         txt_taskCategory = (TextView) task.findViewById(R.id.txt_taskCategory);
 

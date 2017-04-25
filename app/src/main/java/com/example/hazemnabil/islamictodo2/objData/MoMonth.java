@@ -112,9 +112,9 @@ public class MoMonth {
             }
 
     }
-    public MoTask[] getMoTasksAt(int position){
+    public Task[] getMoTasksAt(int position){
         MoDays tday = calenderDays[position];
-        MoTask motask[] = tday.getTasks() ;
+        Task motask[] = tday.getTasks() ;
 
 
         return motask;

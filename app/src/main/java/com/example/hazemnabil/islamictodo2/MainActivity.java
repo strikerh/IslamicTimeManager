@@ -27,6 +27,9 @@ public class MainActivity extends ActivityMaster
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        DbConnections db = new DbConnections(this);
+        db.dummyData();
+
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
 //            @Override
