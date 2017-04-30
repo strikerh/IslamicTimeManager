@@ -135,10 +135,10 @@ public class CalenderDay extends ActivityMaster implements NavigationView.OnNavi
     @Override
     public MoDays onChangeDay() {
 
-        MoMonth moMonth = new MoMonth(4, 2017);
-        MoDays hh = moMonth.getMoDay(7);
+        MoMonth moMonth = new MoMonth(this, 4, 2017);
+        MoDays day = moMonth.getMoDay(10);
         Log.i(TAG, "onListFragmentInteraction: 777777777777777777777777");
-        return hh;
+        return day;
     }
 
     @Override

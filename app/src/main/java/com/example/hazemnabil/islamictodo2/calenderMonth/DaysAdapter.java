@@ -95,7 +95,7 @@ public class DaysAdapter extends BaseAdapter {
                 lstTasks.setAdapter(new TasksAdapter(mContext,moMonth.getMoTasksAt(dayPosition)));
                 MainLayout.setTag(moMonth.getMoDay(dayPosition));
 
-                if(moMonth.getCalDayDataAt(dayPosition,"month") != String.valueOf(moMonth.monthNum) ){
+                if(moMonth.getCalDayDataAt(dayPosition,"month") != String.valueOf(moMonth.month_n112) ){
                     MainLayout.setBackgroundResource(R.drawable.bg_calendermonth_days_inactive);
                     lstTasks.setAlpha(Float.parseFloat("0.5"));
 

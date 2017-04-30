@@ -30,7 +30,12 @@ public class TasksAdapter extends BaseAdapter {
     public TasksAdapter(Context c, Task moTask[]) {
         this.mContext = c;
         this.moTasks = moTask;
-        taskLength = moTasks.length;
+        if (moTask != null) {
+            taskLength = moTasks.length;
+        }else {
+            taskLength = 0;
+        }
+
     }
 
     @Override

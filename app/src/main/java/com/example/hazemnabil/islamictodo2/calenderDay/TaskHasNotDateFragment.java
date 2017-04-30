@@ -88,7 +88,7 @@ public class TaskHasNotDateFragment extends Fragment {
                 //MoMonth moMonth = new MoMonth(4, 2017);
                 //MoDays hh = moMonth.getMoDay(6);
                // hh.getTasks();
-                recyclerView.setAdapter(new MyItemRecyclerViewAdapter(hh.getTasks(), mListener));
+                recyclerView.setAdapter(new MyItemRecyclerViewAdapter(hh.getTasksList(), mListener));
 
 
             }

@@ -15,7 +15,6 @@ import com.example.hazemnabil.islamictodo2.R;
 import com.example.hazemnabil.islamictodo2.dummy.DummyContent.DummyItem;
 import com.example.hazemnabil.islamictodo2.objData.Task;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -31,8 +30,8 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     private final FragmentListener mListener;
     private Context mContext ;
 
-    public MyItemRecyclerViewAdapter(Task[] items, FragmentListener listener) {
-        mValues = Arrays.asList( items);
+    public MyItemRecyclerViewAdapter(List<Task> items, FragmentListener listener) {
+        mValues =  items;
         mListener = listener;
     }
 
@@ -88,6 +87,9 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     public int getItemCount() {
         return mValues.size();
     }
+
+
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;

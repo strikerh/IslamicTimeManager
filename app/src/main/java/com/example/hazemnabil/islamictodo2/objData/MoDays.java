@@ -1,21 +1,25 @@
 package com.example.hazemnabil.islamictodo2.objData;
 
 import android.content.Context;
-import android.database.Cursor;
 
-import com.example.hazemnabil.islamictodo2.DbConnections;
 import com.github.msarhan.ummalqura.calendar.UmmalquraCalendar;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
+
+
 public class MoDays {
+    private Context mContext;
 
     public String   _dayOfWeek_s;
     public int      _dayOfWeek_n;
     public int      _day_n       ,_day_alt_n;
-    public int      _month_n     ,_month_alt_n;
+    public int _month_n112, _month_alt_n112;
+    public int _month_n011, _month_alt_n011;
+
     public int      _year_n      ,_year_alt_n;
     public String   _month_s     ,_month_alt_s;
     public String _dayWithMonth_s,_dayWithMonth_alt_s;
@@ -28,15 +32,16 @@ public class MoDays {
     public Calendar  mCal;
     public Calendar  hCal;
 
-    public MoDays(MoMonth parentMonth, int dayNum, Task[] tasks) {
+    public MoDays(Context mContext, MoMonth parentMonth, int dayNum, Task[] tasks) {
         this.parentMonth = parentMonth;
+        this.mContext = mContext;
 
 
         this.tasks = tasks;
         //TODO: any DayAlt must auto calculated
         //TODO: get the month from parentMonth
 
-        setCalenders (parentMonth.year,parentMonth.monthNum,dayNum);
+        setCalenders (parentMonth.year,parentMonth.month_n011,dayNum);
         setAllAttribute();
 
     }
@@ -57,13 +62,15 @@ public class MoDays {
         this._dayOfWeek_s = mCal.getDisplayName(Calendar.DAY_OF_WEEK,Calendar.SHORT,locateAr);
 
         this._day_n = mCal.get(Calendar.DAY_OF_MONTH);
-        this._month_n = mCal.get(Calendar.MONTH);
+        this._month_n112 = mCal.get(Calendar.MONTH)+1;
+        this._month_n011 = mCal.get(Calendar.MONTH);
         this._year_n = mCal.get(Calendar.YEAR);
         this._month_s =  mCal.getDisplayName(Calendar.MONTH,Calendar.SHORT,locateAr);
         this._dayWithMonth_s =_day_n +" "+ _month_s ;
 
         this._day_alt_n = hCal.get(Calendar.DAY_OF_MONTH);
-        this._month_alt_n = hCal.get(Calendar.MONTH);
+        this._month_alt_n112 = hCal.get(Calendar.MONTH)+1;
+        this._month_alt_n011 = hCal.get(Calendar.MONTH);
         this._year_alt_n = hCal.get(Calendar.YEAR);
         this._month_alt_s = hCal.getDisplayName(Calendar.MONTH,Calendar.SHORT,locateAr);
         this._dayWithMonth_alt_s =_day_alt_n +""+ _month_alt_s ;
@@ -72,47 +79,32 @@ public class MoDays {
     }
 
 
-    public Task[] getTasks() {
+    public TasksList getTasks() {
+//        Random rand = new Random();
+//
+//        int  n = rand.nextInt(10) ;
+//
+//        Task tasks[] = new Task[n];
+//
+//        for (int i = 0; i < n; i++) {
+//            tasks[i] = createRandomTask();
+//        }
 
-        Random rand = new Random();
+        TasksList tasksList = new TasksList(mContext);
+        tasksList.prepareDayTasks(this._day_n,this._month_n112,this._year_n);
 
-        int  n = rand.nextInt(10) ;
+        return tasksList;
+    }
 
-        Task tasks[] = new Task[n];
-
-        for (int i = 0; i < n; i++) {
-            tasks[i] = createRandomTask();
-        }
-
-
-
-        return tasks;
+    public Task[] getTasksArray() {
+        return  getTasks().getTasksArray();
+    }
+    public List<Task> getTasksList() {
+        return  getTasks().getTasksList();
     }
 
 
-    public Task createTaskFromDb(Context mContext , int b) {
-        Task tasks[];
-        DbConnections db = new DbConnections(mContext);
-        Cursor cursor = db.getMoTaskAtDay(5,5,2017);
 
-        if (cursor.getCount() >0) {
-
-
-            tasks = new Task[cursor.getCount()];
-
-            cursor.moveToFirst();
-            for (int i = 0; i < cursor.getCount(); i++) {
-
-               // tasks[i]=new Task(this,cursor.getString(1),)
-
-            }
-        }
-
-
-
-
-       return null;
-    }
 
 
 

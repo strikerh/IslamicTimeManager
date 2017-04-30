@@ -84,11 +84,11 @@ public class TaskHasDateFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
             if (null != mListener) {
-                MoDays hh  = mListener.onChangeDay();
+                MoDays newDay  = mListener.onChangeDay();
                 //MoMonth moMonth = new MoMonth(4, 2017);
                 //MoDays hh = moMonth.getMoDay(6);
                // hh.getTasks();
-                recyclerView.setAdapter(new MyItemRecyclerViewAdapter(hh.getTasks(), mListener));
+                recyclerView.setAdapter(new MyItemRecyclerViewAdapter(newDay.getTasksList(), mListener));
 
 
             }

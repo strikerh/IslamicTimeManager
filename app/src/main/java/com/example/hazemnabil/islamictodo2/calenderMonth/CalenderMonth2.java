@@ -91,7 +91,7 @@ public class CalenderMonth2 extends ActivityMaster
         Date date= new Date();
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
-        currentMonth = cal.get(Calendar.MONTH);
+        currentMonth = cal.get(Calendar.MONTH)+1;
         currentYear = cal.get(Calendar.YEAR);
         createCalender1(currentMonth, currentYear);
 
@@ -107,7 +107,7 @@ public class CalenderMonth2 extends ActivityMaster
     private void createCalender1(int month, int year) {
 
 
-        mm = new MoMonth(month, year);
+        mm = new MoMonth(this,month, year);
 
 
         llCalender = (LinearLayout) findViewById(R.id.ll_calender);

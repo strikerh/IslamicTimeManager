@@ -8,7 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.example.hazemnabil.islamictodo2.objData.Task;
+import com.example.hazemnabil.islamictodo2.colection.Do;
+import com.example.hazemnabil.islamictodo2.colection.Vars;
 import com.example.hazemnabil.islamictodo2.objData.Task;
 
 import org.json.JSONException;
@@ -22,7 +23,7 @@ import java.util.Random;
 
 public class DbConnections extends SQLiteOpenHelper {
 
-    public static final int version = 52;
+    public static final int version = 68;
     public static final String dbName = "Tasks.db";
 
     public static final String TABLE_TASKS  = "tasks";
@@ -34,22 +35,23 @@ public class DbConnections extends SQLiteOpenHelper {
 
 
     private boolean flagIsFistTime = false;
-    private static final String TAG = "zoma";
-    private  SQLiteDatabase db;
+    private static final String TAG = Vars.TAG;
+   // private  SQLiteDatabase db;
 
 
     public DbConnections(Context context) {
         super(context, dbName, null, version);
-        Log.i(TAG, "------- ++==========  DbConnections(Constraction):  before");
-         db = this.getWritableDatabase();
-        Log.i(TAG, "------- ++==========  DbConnections(Constraction):  after");
+        SQLiteDatabase db = this.getWritableDatabase();
+
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         String SQL_CREATE_ENTRIES ="";
+       // db = this.getWritableDatabase();
 
-        SQL_CREATE_ENTRIES  = Task.createDbTableString(TABLE_TASKS);
+        SQL_CREATE_ENTRIES  = Task.createDbTableString();
+
         db.execSQL(SQL_CREATE_ENTRIES);
         SQL_CREATE_ENTRIES = "CREATE TABLE if not exists \""+ TABLE_CATEGORIES +"\" (\"id\" INTEGER PRIMARY KEY AUTOINCREMENT, \"name\" TEXT, \"color\" TEXT, \"description\" TEXT, \"source\" TEXT);\n";
         db.execSQL(SQL_CREATE_ENTRIES);
@@ -76,6 +78,8 @@ public class DbConnections extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
         String SQL_DELETE_ENTRIES;
+        //SQLiteDatabase db2 = this.getWritableDatabase();
+
         SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS \""+ TABLE_TASKS +"\" ;" ;
         db.execSQL(SQL_DELETE_ENTRIES);
         SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS \""+TABLE_CATEGORIES+"\" ;" ;
@@ -169,10 +173,11 @@ public class DbConnections extends SQLiteOpenHelper {
         int hours = rand.nextInt(23);
         int m = rand.nextInt(59);
         int s = rand.nextInt(59);
-        String sDate = "2017-"+to2Digits(month)+"-"+to2Digits(day)+"T"+to2Digits(hours)+":"+to2Digits(m)+":"+to2Digits(s)+" ";
+        String sDate = "2017-"+ Do.to2Digits(month)+"-"+ Do.to2Digits(day)+" "+ Do.to2Digits(hours)+":"+ Do.to2Digits(m)+":"+ Do.to2Digits(s)+" ";
         JSONObject dateTimeFrom = new JSONObject();
         JSONObject dateTimeTo = new JSONObject();
         JSONObject repeat = new JSONObject();
+
         try {
             dateTimeFrom.put("type", "m");
             dateTimeFrom.put("date", "2017/0"+month+"/0"+day);
@@ -214,6 +219,8 @@ public class DbConnections extends SQLiteOpenHelper {
 
     }
     public long insertCategory(String name,String color,String description ,String source){
+        SQLiteDatabase db = this.getWritableDatabase();
+
         ContentValues values = new ContentValues();
         values.put("name", name);
         values.put("color", color);
@@ -224,6 +231,7 @@ public class DbConnections extends SQLiteOpenHelper {
         return newRowId;
     }
     public long insertUser(String name){
+        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("name", name);
 
@@ -233,21 +241,21 @@ public class DbConnections extends SQLiteOpenHelper {
     }
 
     public long insertTask(String name,String sDate,String dateTimeFrom,String dateTimeTo,String repeat,int importance,int subTasks,int userId,String description,int isDone,int isArchived, String createdDate){
-
+        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put("name", name);
-        values.put("date_time_from", dateTimeFrom);
-        values.put("sdate", sDate);
-        values.put("date_time_to", dateTimeTo);
-        values.put("repeat", repeat);
-        values.put("importance", importance);
-        values.put("subTasks", subTasks);
-        values.put("userId", userId);
-        values.put("description", description);
-        values.put("isDone", isDone);
-        values.put("isArchived", isArchived);
-        values.put("created_date", createdDate);
+        values.put(Task.Col.NAME, name);
+        values.put(Task.Col.DATE_TIME_FROM, dateTimeFrom);
+        values.put(Task.Col.SDATE, sDate);
+        values.put(Task.Col.DATE_TIME_TO, dateTimeTo);
+        values.put(Task.Col.REPEAT, repeat);
+        values.put(Task.Col.IMPORTANCE, importance);
+        values.put(Task.Col.SUB_TASKS, subTasks);
+        values.put(Task.Col.USER, userId);
+        values.put(Task.Col.DESCRIPTION, description);
+        values.put(Task.Col.IS_DONE, isDone);
+        values.put(Task.Col.IS_ARCHIVED, isArchived);
+        values.put(Task.Col.CREATED_DATE, createdDate);
 
         long newRowId = db.insert(TABLE_TASKS, null, values);
         Log.i(TAG, "dummyData: TagId: " + newRowId);
@@ -257,9 +265,9 @@ public class DbConnections extends SQLiteOpenHelper {
 
     private boolean checkDbIsNew(){
         Log.i(TAG, "------- ++==========  checkDbIsNew: before");
-        SQLiteDatabase db2 = this.getReadableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         Log.i(TAG, "------- ++==========  checkDbIsNew: after");
-        Cursor cursor = db2.rawQuery("select * from "+TABLE_SQLITE_SEQ,null);
+        Cursor cursor = db.rawQuery("select * from "+TABLE_SQLITE_SEQ,null);
         Log.i(TAG, "checkDbIsNew: cursor.getCount(): "+cursor.getCount() );
         //cursor.moveToFirst();
         //Log.i(TAG, "checkDbIsNew: name: "+cursor.getString(0) +" -  seq: "+cursor.getString(1) );
@@ -307,7 +315,7 @@ public class DbConnections extends SQLiteOpenHelper {
      * ************************************************************************************   */
 
     public long insertData(String tableName,ContentValues Data){
-
+        SQLiteDatabase db = this.getWritableDatabase();
         long newRowId = db.insert(tableName, null, Data);
         return newRowId;
     }
@@ -321,12 +329,20 @@ public class DbConnections extends SQLiteOpenHelper {
         Cursor cursor = db2.rawQuery("select * from "+tableName +" "+whereQuery ,null);
         cursor.moveToFirst();
         DatabaseUtils.cursorRowToContentValues(cursor, result);
+        cursor.close();
         return result;
 
 
     }
-    public int updateRow(String tableName,String whereQuery,ContentValues values){
+    public Cursor getListOfRows(String tableName,String whereQuery){
+        SQLiteDatabase db2 = this.getReadableDatabase();
+        if(whereQuery!=null)    whereQuery = " where "+whereQuery;
+        Cursor cursor = db2.rawQuery("select * from "+tableName + whereQuery ,null);
+        return cursor;
 
+    }
+    public int updateRow(String tableName,String whereQuery,ContentValues values){
+        SQLiteDatabase db = this.getWritableDatabase();
         int count = db.update(
                 tableName,
                 values,
@@ -343,10 +359,7 @@ public class DbConnections extends SQLiteOpenHelper {
 *                    OTHERS
 * ***************************************************   */
 
-    private String to2Digits(int i){
-       return  ((i < 10 ? "0" : "") + i);
 
-    }
 
 
 }

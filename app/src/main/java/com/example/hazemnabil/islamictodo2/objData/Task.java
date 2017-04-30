@@ -2,6 +2,8 @@ package com.example.hazemnabil.islamictodo2.objData;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.DatabaseUtils;
 
 import com.example.hazemnabil.islamictodo2.DbConnections;
 
@@ -71,10 +73,12 @@ public class Task {
 */}
     public Task(Context context)  {
         this.mContext = context;
+        _TaskContent = new ContentValues();
     }
     public Task(Context context, ContentValues taskContent ) throws ParseException {
         this.mContext = context;
-        fillThisTask(taskContent);
+        _TaskContent = new ContentValues();
+        this.fillThisTask(taskContent);
 
     }
 
@@ -89,27 +93,37 @@ public class Task {
     }
 
 
+
+
+    public int fillThisTask(Cursor taskCursor)throws ParseException {
+        ContentValues taskContent =new ContentValues();
+        DatabaseUtils.cursorRowToContentValues(taskCursor, taskContent);
+        fillThisTask(taskContent);
+        return this._id;
+    }
+
+
     public void fillThisTask(ContentValues taskContent)throws ParseException {
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD HH:MM:SS");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-        if (_TaskContent.get(Col.ID) != null)              this._id                = (Integer) taskContent.get(Col.ID) ;
-        if (_TaskContent.get(Col.NAME) != null)            this._name              = (String) taskContent.get(Col.NAME) ;
-        if (_TaskContent.get(Col.SDATE) != null)           this._sdate             = dateFormat.parse( taskContent.getAsString(Col.SDATE));
-        if (_TaskContent.get(Col.DATE_TIME_FROM) != null)  this._date_time_from    = (String) taskContent.get(Col.DATE_TIME_FROM) ;
-        if (_TaskContent.get(Col.DATE_TIME_TO) != null)    this._date_time_to      = (String) taskContent.get(Col.DATE_TIME_TO) ;
-        if (_TaskContent.get(Col.REPEAT) != null)          this._repeat            = (String) taskContent.get(Col.REPEAT) ;
-        if (_TaskContent.get(Col.IMPORTANCE) != null)      this._importance        = (String) taskContent.get(Col.IMPORTANCE) ;
-        if (_TaskContent.get(Col.SUB_TASKS) != null)       this._subTasks          = (Integer) taskContent.get(Col.SUB_TASKS) ;
-        if (_TaskContent.get(Col.USER) != null)            this._userId            = (Integer) taskContent.get(Col.USER) ;
-        if (_TaskContent.get(Col.CATEGORY) != null)        this._category          = (Integer) taskContent.get(Col.CATEGORY) ;
-        if (_TaskContent.get(Col.TAGS) != null)            this._tags              = (Integer) taskContent.get(Col.TAGS) ;
-        if (_TaskContent.get(Col.DESCRIPTION) != null)     this._description       = (String) taskContent.get(Col.DESCRIPTION) ;
-        if (_TaskContent.get(Col.IS_DONE) != null)         this._isDone            = (Boolean) taskContent.get(Col.IS_DONE) ;
-        if (_TaskContent.get(Col.IS_ARCHIVED) != null)     this._isArchived        = (Boolean) taskContent.get(Col.IS_ARCHIVED) ;
-        if (_TaskContent.get(Col.CREATED_DATE) != null)    this._created_date      = dateFormat.parse( taskContent.getAsString(Col.SDATE));
-        if (_TaskContent.get(Col.DONE_DATE) != null)       this._done_date         = dateFormat.parse( taskContent.getAsString(Col.SDATE));
-        if (_TaskContent.get(Col.ARCHIVED_DATE) != null)   this._archived_date     = dateFormat.parse( taskContent.getAsString(Col.SDATE));
+        if (taskContent.get(Col.ID) != null)              this._id                = Integer.parseInt((String) taskContent.get(Col.ID) );
+        if (taskContent.get(Col.NAME) != null)            this._name              = (String) taskContent.get(Col.NAME) ;
+        if (taskContent.get(Col.SDATE) != null)           this._sdate             = dateFormat.parse((String) taskContent.getAsString(Col.SDATE));
+        if (taskContent.get(Col.DATE_TIME_FROM) != null)  this._date_time_from    = (String) taskContent.get(Col.DATE_TIME_FROM) ;
+        if (taskContent.get(Col.DATE_TIME_TO) != null)    this._date_time_to      = (String) taskContent.get(Col.DATE_TIME_TO) ;
+        if (taskContent.get(Col.REPEAT) != null)          this._repeat            = (String) taskContent.get(Col.REPEAT) ;
+        if (taskContent.get(Col.IMPORTANCE) != null)      this._importance        = (String) taskContent.get(Col.IMPORTANCE) ;
+        if (taskContent.get(Col.SUB_TASKS) != null)       this._subTasks          = Integer.parseInt((String)  taskContent.get(Col.SUB_TASKS) ) ;
+        if (taskContent.get(Col.USER) != null)            this._userId            = Integer.parseInt((String) taskContent.get(Col.USER) ) ;
+        if (taskContent.get(Col.CATEGORY) != null)        this._category          = Integer.parseInt((String) taskContent.get(Col.CATEGORY) ) ;
+        if (taskContent.get(Col.TAGS) != null)            this._tags              = Integer.parseInt((String)  taskContent.get(Col.TAGS) ) ;
+        if (taskContent.get(Col.DESCRIPTION) != null)     this._description       = (String) taskContent.get(Col.DESCRIPTION) ;
+        if (taskContent.get(Col.IS_DONE) != null)         this._isDone            = Boolean.parseBoolean( (String) taskContent.get(Col.IS_DONE) ) ;
+        if (taskContent.get(Col.IS_ARCHIVED) != null)     this._isArchived        = Boolean.parseBoolean( (String) taskContent.get(Col.IS_ARCHIVED) );
+        if (taskContent.get(Col.CREATED_DATE) != null)    this._created_date      = dateFormat.parse( taskContent.getAsString(Col.SDATE));
+        if (taskContent.get(Col.DONE_DATE) != null)       this._done_date         = dateFormat.parse( taskContent.getAsString(Col.SDATE));
+        if (taskContent.get(Col.ARCHIVED_DATE) != null)   this._archived_date     = dateFormat.parse( taskContent.getAsString(Col.SDATE));
     }
 
     public ContentValues createJson() throws JSONException {
@@ -201,9 +215,9 @@ public class Task {
 
 
 }
-    public static String createDbTableString(String TABLE_TASKS){
+    public static String createDbTableString(){
         String SQL_CREATE_ENTRIES ="";
-        SQL_CREATE_ENTRIES  = "CREATE TABLE if not exists \""+ TABLE_TASKS +"\"      ("+
+        SQL_CREATE_ENTRIES  = "CREATE TABLE if not exists \""+ DbConnections.TABLE_TASKS +"\"      ("+
                 Col.ID         +" INTEGER PRIMARY KEY AUTOINCREMENT, "+
                 Col.NAME               +" TEXT, " +
                 Col.SDATE              +" TEXT, " +
@@ -220,7 +234,7 @@ public class Task {
                 Col.IS_ARCHIVED        +" INTEGER, " +
                 Col.CREATED_DATE       +" TEXT, " +
                 Col.DONE_DATE          +" TEXT, " +
-                Col.ARCHIVED_DATE      +" TEXT,         );\n";
+                Col.ARCHIVED_DATE      +" TEXT        );";
 
         return SQL_CREATE_ENTRIES;
     }
@@ -234,7 +248,7 @@ public class Task {
         return newRowId;
 
     }
-    public boolean  db_getDataAndFillMe(){
+    public boolean db_getDataAndFillMeById(){
 
 
         DbConnections dbConnections = new DbConnections(mContext);
