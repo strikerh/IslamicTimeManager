@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.hazemnabil.islamictodo2.R;
-import com.example.hazemnabil.islamictodo2.objData.MoDays;
 
 /**
  * A fragment representing a list of Items.
@@ -84,11 +83,11 @@ public class TaskHasNotDateFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
             if (null != mListener) {
-                MoDays hh  = mListener.onChangeDay();
+               // MoDays hh  = mListener.onChangeDay();
                 //MoMonth moMonth = new MoMonth(4, 2017);
                 //MoDays hh = moMonth.getMoDay(6);
                // hh.getTasks();
-                recyclerView.setAdapter(new MyItemRecyclerViewAdapter(hh.getTasksList(), mListener));
+               // recyclerView.setAdapter(new MyItemRecyclerViewAdapter(hh.getTasksList(), mListener));
 
 
             }

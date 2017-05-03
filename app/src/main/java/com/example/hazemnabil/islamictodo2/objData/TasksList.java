@@ -31,10 +31,10 @@ public class TasksList {
         this._tasksMap = new HashMap<Integer, Task>();
     }
 
-    public void prepareDayTasks(int day,int month,int year){
+    public void prepareDayTasks(int day,int month011,int year){
         try {
             //"datetime(sdate) <    datetime('"+year+"-"+ Do.to2Digits(month)+"-"+Do.to2Digits(day)+"')"
-           db_getDataAndFillMe("date(sdate) = date('"+year+"-"+ Do.to2Digits(month)+"-"+ Do.to2Digits(day)+"');");
+           db_getDataAndFillMe("date(sdate) = date('"+year+"-"+ Do.to2Digits(month011+1)+"-"+ Do.to2Digits(day)+"');");
         } catch (ParseException e) {
             e.printStackTrace();
         }

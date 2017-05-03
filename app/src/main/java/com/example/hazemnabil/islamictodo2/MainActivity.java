@@ -95,4 +95,8 @@ public class MainActivity extends ActivityMaster
         Intent myIntent = new Intent(this, CalenderDay.class);
         startActivity(myIntent);
     }
+    public void openOther(View view) {
+        Intent myIntent = new Intent(this, Testtt2Activity.class);
+        startActivity(myIntent);
+    }
 }

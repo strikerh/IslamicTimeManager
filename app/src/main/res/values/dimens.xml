@@ -9,4 +9,6 @@
     <dimen name="tools_height">38dp</dimen>
     <dimen name="tools_small_height">30dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="appbar_padding_top">8dp</dimen>
 </resources>

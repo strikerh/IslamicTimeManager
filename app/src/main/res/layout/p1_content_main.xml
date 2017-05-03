@@ -25,22 +25,23 @@
         android:layout_height="wrap_content"
         android:onClick="openMonthCalender"
         android:text="Month Calender" />
+
     <Button
         android:id="@+id/btn_dayCalender"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/btn_monthCalender"
         android:onClick="openDayCalender"
-        android:text="Month Calender" />
-    <fragment
-        android:id="@+id/fragment"
-        android:name="com.example.hazemnabil.islamictodo2.addTask.CalenderFragment"
-        android:layout_width="wrap_content"
+        android:text="Day Calender" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="118dp"
-        tools:layout="@layout/p2_fragment_calender"
-         />
+        android:layout_below="@+id/btn_dayCalender"
+        android:onClick="openOther"
+        android:text="Other Calender" />
 
 </RelativeLayout>

@@ -1,6 +1,7 @@
 package com.example.hazemnabil.islamictodo2.calenderDay;
 
-import com.example.hazemnabil.islamictodo2.objData.MoDays;
+import android.content.Context;
+
 import com.example.hazemnabil.islamictodo2.objData.Task;
 
 /**
@@ -21,7 +22,7 @@ public interface FragmentListener {
 
         // TODO: Update argument type and name
         void onFragmentListClicked(Task item);
-        MoDays onChangeDay();
+        Context getContext();
 
 
 }

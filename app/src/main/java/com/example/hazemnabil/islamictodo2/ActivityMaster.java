@@ -7,6 +7,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.hazemnabil.islamictodo2.calenderDay.CalenderDay;
 import com.example.hazemnabil.islamictodo2.calenderMonth.CalenderMonth2;
@@ -75,4 +76,6 @@ public class ActivityMaster extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }

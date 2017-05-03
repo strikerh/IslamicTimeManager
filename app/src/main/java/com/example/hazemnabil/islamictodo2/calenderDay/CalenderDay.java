@@ -1,8 +1,14 @@
 package com.example.hazemnabil.islamictodo2.calenderDay;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
@@ -14,31 +20,77 @@ import android.widget.TextView;
 
 import com.example.hazemnabil.islamictodo2.ActivityMaster;
 import com.example.hazemnabil.islamictodo2.ChangeFonts;
+import com.example.hazemnabil.islamictodo2.CheckableLinearLayout;
 import com.example.hazemnabil.islamictodo2.DbConnections;
 import com.example.hazemnabil.islamictodo2.R;
 import com.example.hazemnabil.islamictodo2.colection.DimensionConverter;
-import com.example.hazemnabil.islamictodo2.objData.MoDays;
-import com.example.hazemnabil.islamictodo2.objData.MoMonth;
+import com.example.hazemnabil.islamictodo2.colection.Vars;
+import com.example.hazemnabil.islamictodo2.objData.SmallDay;
 import com.example.hazemnabil.islamictodo2.objData.Task;
 
-public class CalenderDay extends ActivityMaster implements NavigationView.OnNavigationItemSelectedListener,FragmentListener {
+import java.util.Calendar;
+import java.util.List;
+
+public class CalenderDay extends ActivityMaster implements NavigationView.OnNavigationItemSelectedListener,FragmentListener,WeekTabFragment.WeekTabListener {
 
 
 
 
+    private static final String TAG = Vars.TAG + "_CalenderDay";
 
-
-    private static final String TAG = "zoma";
+    //for Draggable tab
     private ConstraintLayout.LayoutParams txt_notDatedParams;
-    private int xDelta;
     private int yDelta;
     DimensionConverter dimensionConverter;
     private TextView txt_notDated;
 
+    public Calendar currentDay;
+    public SmallDay smallCurrentDay;
+
+    /**
+     * The {@link android.support.v4.view.PagerAdapter} that will provide
+     * fragments for each of the sections. We use a
+     * {@link FragmentPagerAdapter} derivative, which will keep every
+     * loaded fragment in memory. If this becomes too memory intensive, it
+     * may be best to switch to a
+     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
+     */
+    private SectionsPagerAdapter mSectionsPagerAdapter;
+    private ViewPager mViewPager;   // The {@link ViewPager} that will host the section contents.
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i(TAG, "________________________ 2.onStart: ");
+       // mViewPager.getCurrentItem();
+
+        Log.i(TAG, "_________________________________________________ Activate: ");
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i(TAG, "________________________ 1.onCreate: ");
+
+        currentDay = Calendar.getInstance();
+        smallCurrentDay = new SmallDay(currentDay);
+
+        _activityInit();
+
+        _makeDraggablePnl();
+
+        _createTaskFrag();
+
+        _CreateTopWeekTab();
+
+    }
+
+    private void _activityInit() {
+        Log.i(TAG, "___________________ 1.1_activityInit: ");
+
         setContentView(R.layout.activity_calender_day);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DbConnections db = new DbConnections(this);
@@ -47,14 +99,6 @@ public class CalenderDay extends ActivityMaster implements NavigationView.OnNavi
         ViewGroup gr =(ViewGroup)findViewById(R.id.drawer_layout);
         ChangeFonts hh = new ChangeFonts(this,gr);
 
-       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -65,6 +109,13 @@ public class CalenderDay extends ActivityMaster implements NavigationView.OnNavi
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+    }
+
+    private void _makeDraggablePnl() {
+        Log.i(TAG, "___________________ 1.2_makeDraggablePnl: ");
+        /**
+         *    Make draggable pnl
+         */
         ConstraintLayout _root = (ConstraintLayout) findViewById(R.id._root);
         txt_notDated = (TextView) findViewById(R.id.txt_notdated);
 
@@ -77,23 +128,77 @@ public class CalenderDay extends ActivityMaster implements NavigationView.OnNavi
         txt_notDated.setLayoutParams(txt_notDatedParams);
 
         makeDraggable();
+    }
 
-        // txt_notDated.set
+    private void _createTaskFrag() {
+        Log.i(TAG, "___________________ 1.3_createTaskFrag: ");
+        TaskHasDateFragment fragment = (TaskHasDateFragment) getSupportFragmentManager().findFragmentById(R.id.fragment2);
+        fragment.updateView(smallCurrentDay.day,smallCurrentDay.month011,smallCurrentDay.year);
 
-        View ff = findViewById(R.id.mainTask);
-        android.app.Fragment myFragment = getFragmentManager().findFragmentById(R.id.fragment2);
+        TaskHasDateFragment fragment2 = (TaskHasDateFragment) getSupportFragmentManager().findFragmentById(R.id.fragment3);
+        fragment2.updateView(smallCurrentDay.day,smallCurrentDay.month011,smallCurrentDay.year);
+    }
+
+    public void _CreateTopWeekTab(){
+        Log.i(TAG, "___________________ 1.4_CreateTopWeekTab: ");
 
 
-        Log.i(TAG, "onCreate: " + myFragment);
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),smallCurrentDay);
+        mViewPager = (ViewPager) findViewById(R.id.container);
 
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+
+
+        Calendar c1 = currentDay;
+
+        int pagerPosition;
+
+        pagerPosition = c1.get(Calendar.WEEK_OF_YEAR);
+        c1.add(Calendar.YEAR,-1);
+        pagerPosition += c1.getMaximum(Calendar.WEEK_OF_YEAR);
+        pagerPosition -= 1;
+
+        mViewPager.setCurrentItem(pagerPosition);
+
+        WeekTabFragment frag =(WeekTabFragment)((SectionsPagerAdapter) mViewPager.getAdapter()).getItem(pagerPosition);
+
+
+        mViewPager.addOnPageChangeListener (new ViewPager.OnPageChangeListener() {
+            public void onPageScrollStateChanged(int state) {// show if the Viewpager is touch down or dragged or up
+                Log.i(TAG, "_________L________ onPageScrollStateChanged: "+state);
+            }
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+              //  Log.i(TAG, "________L_________ onPageScrolled: "+position);
+            }
+
+            public void onPageSelected(int position) {
+                // Check if this is the page you want.
+                Log.i(TAG, "_______L__________ onPageSelected: "+position);
+                //this;
+                WeekTabFragment frag =(WeekTabFragment)((SectionsPagerAdapter) mViewPager.getAdapter()).getItem(position);
+                List<Fragment> fragList = getSupportFragmentManager().getFragments();
+                for (int i = 0; i < fragList.size(); i++) {
+                    if(fragList.get(i) instanceof WeekTabFragment){
+                        WeekTabFragment wtf= (WeekTabFragment) fragList.get(i);
+                        if (wtf.tabNum == position){
+                            wtf.checkDay(smallCurrentDay);
+                        }
+                    }
+                }
+
+            }
+        });
 
     }
 
-    private void makeDraggable() {
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    private void makeDraggable() {
+        Log.i(TAG, "______________ 1.2.1.makeDraggable: ");
         txt_notDated.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                Log.i(TAG, "_________________ onTouch: ");
                 final int X = (int) event.getRawX();
                 final int Y = (int) event.getRawY();
                 //   Log.i(TAG, "onTouch: jhksdjhfkjhsdkjfhskdjfhkshfkshdfhskdjf");
@@ -132,19 +237,94 @@ public class CalenderDay extends ActivityMaster implements NavigationView.OnNavi
 
     }
 
-    @Override
-    public MoDays onChangeDay() {
 
-        MoMonth moMonth = new MoMonth(this, 4, 2017);
-        MoDays day = moMonth.getMoDay(10);
-        Log.i(TAG, "onListFragmentInteraction: 777777777777777777777777");
-        return day;
+
+    @Override
+    public Context getContext() {
+        Log.i(TAG, "_________________ getContext: ");
+        return this;
     }
 
     @Override
     public void onFragmentListClicked(Task item) {
+        Log.i(TAG, "_________________ onFragmentListClicked: ");
 
-        Log.i(TAG, "onFragmentListClicked: 33333333333333333333");
+
+
+
+
+    }
+
+
+
+
+
+    @Override
+    public void onWeekTabClicked(CheckableLinearLayout view, String test) {
+        Log.i(TAG, "_________________ onWeekTabClicked: ");
+        TextView tx = (TextView)view.getChildAt(1);
+        TaskHasDateFragment fragment = (TaskHasDateFragment) getSupportFragmentManager().findFragmentById(R.id.fragment2);
+        currentDay.set(view.nDay,view.nMonth011,view.nYear);
+        smallCurrentDay.set(view.nDay,view.nMonth011,view.nYear);
+        fragment.updateView(view.nDay,view.nMonth011,view.nYear);
+        Log.i(Vars.TAG, "onClick: ++++++++++++++++++ "+tx.getText() +" "+ view.nTab +" "+ view.nDay +" "+ view.nYear);
+
+    }
+
+    @Override
+    public void onWeekTabLoaded(WeekTabFragment frag,int tabNum) {
+        Log.i(TAG, "_________________ onWeekTabLoaded: ");
+        frag.checkDay(smallCurrentDay);
+    }
+
+
+    /**
+     * *************************** 1  Adapter *********************************************************************************
+     */
+    /**
+     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
+     * one of the sections/tabs/pages.
+     */
+    public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
+
+        Calendar mCal;
+
+        public SectionsPagerAdapter(FragmentManager fm, SmallDay smDay) {
+            super(fm);
+            Log.i(TAG, "_____________ PagerAdapter__ SectionsPagerAdapter(Constructor): ");
+            mCal = Calendar.getInstance();
+            mCal.set(smDay.day,smDay.month011,smDay.year);
+
+
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            Log.i(TAG, "_____________ PagerAdapter__ getItem " +position +" :");
+            // getItem is called to instantiate the fragment for the given page.
+            // Return a PlaceholderFragment (defined as a static inner class below).
+            return WeekTabFragment.newInstance(position);
+        }
+
+        @Override
+        public int getCount() {
+           // Log.i(TAG, "_____________ PagerAdapter__ getCount: 160");
+            return 160;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            Log.i(TAG, "_____________ PagerAdapter__ getPageTitle "+position+" :");
+            switch (position) {
+                case 0:
+                    return "SECTION 1";
+                case 1:
+                    return "SECTION 2";
+                case 2:
+                    return "hghjghj 3";
+            }
+            return null;
+        }
     }
 
 

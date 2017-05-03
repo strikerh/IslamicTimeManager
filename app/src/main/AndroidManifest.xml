@@ -44,6 +44,10 @@
         <activity
             android:name=".calenderDay.CalenderDay"
             android:label="@string/title_activity_calender_day"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Testtt2Activity"
+            android:label="@string/title_activity_testtt2"
             android:theme="@style/AppTheme"></activity>
     </application>
 

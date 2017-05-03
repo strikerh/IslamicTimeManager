@@ -1,0 +1,140 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="rtl"
+    tools:context="com.example.hazemnabil.islamictodo2.Testtt2Activity$PlaceholderFragment">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:rotationY="180"
+        >
+        <com.example.hazemnabil.islamictodo2.CheckableLinearLayout
+            android:id="@+id/btn_d0"
+            style="@style/top_day_btn"
+            >
+
+            <CheckedTextView
+                android:id="@+id/txt_dName0"
+                android:text="سبت"
+                style="@style/top_day_btn_name"
+                />
+
+            <CheckedTextView
+                android:id="@+id/txt_d0"
+                style="@style/top_day_btn_date"
+                />
+
+        </com.example.hazemnabil.islamictodo2.CheckableLinearLayout>
+        <com.example.hazemnabil.islamictodo2.CheckableLinearLayout
+            android:id="@+id/btn_d1"
+            style="@style/top_day_btn"
+            >
+
+            <CheckedTextView
+                android:id="@+id/txt_dName1"
+                android:text="أحد"
+                style="@style/top_day_btn_name"
+                />
+
+            <CheckedTextView
+                android:id="@+id/txt_d1"
+                style="@style/top_day_btn_date"
+                />
+
+        </com.example.hazemnabil.islamictodo2.CheckableLinearLayout>
+        <com.example.hazemnabil.islamictodo2.CheckableLinearLayout
+            android:id="@+id/btn_d2"
+            style="@style/top_day_btn"
+            >
+
+            <CheckedTextView
+                android:id="@+id/txt_dName2"
+                android:text="اثنين"
+                style="@style/top_day_btn_name"
+                />
+
+            <CheckedTextView
+                android:id="@+id/txt_d2"
+                style="@style/top_day_btn_date"
+                />
+
+        </com.example.hazemnabil.islamictodo2.CheckableLinearLayout>
+        <com.example.hazemnabil.islamictodo2.CheckableLinearLayout
+            android:id="@+id/btn_d3"
+            style="@style/top_day_btn"
+            >
+
+            <CheckedTextView
+                android:id="@+id/txt_dName3"
+                android:text="ثلاثاء"
+                style="@style/top_day_btn_name"
+                />
+
+            <CheckedTextView
+                android:id="@+id/txt_d3"
+                style="@style/top_day_btn_date"
+                />
+
+        </com.example.hazemnabil.islamictodo2.CheckableLinearLayout>
+        <com.example.hazemnabil.islamictodo2.CheckableLinearLayout
+            android:id="@+id/btn_d4"
+            style="@style/top_day_btn"
+            >
+
+            <CheckedTextView
+                android:id="@+id/txt_dName4"
+                android:text="أربع"
+                style="@style/top_day_btn_name"
+                />
+
+            <CheckedTextView
+                android:id="@+id/txt_d4"
+                style="@style/top_day_btn_date"
+                />
+
+        </com.example.hazemnabil.islamictodo2.CheckableLinearLayout>
+        <com.example.hazemnabil.islamictodo2.CheckableLinearLayout
+            android:id="@+id/btn_d5"
+            style="@style/top_day_btn"
+            >
+
+            <CheckedTextView
+                android:id="@+id/txt_dName5"
+                android:text="خميس"
+                style="@style/top_day_btn_name"
+
+                />
+
+            <CheckedTextView
+                android:id="@+id/txt_d5"
+                style="@style/top_day_btn_date"
+                />
+
+        </com.example.hazemnabil.islamictodo2.CheckableLinearLayout>
+        <com.example.hazemnabil.islamictodo2.CheckableLinearLayout
+            android:id="@+id/btn_d6"
+            style="@style/top_day_btn"
+            >
+
+            <CheckedTextView
+                android:id="@+id/txt_dName6"
+                android:text="جمعة"
+                style="@style/top_day_btn_name"
+                />
+
+            <CheckedTextView
+                android:id="@+id/txt_d6"
+                style="@style/top_day_btn_date"
+                />
+
+        </com.example.hazemnabil.islamictodo2.CheckableLinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
