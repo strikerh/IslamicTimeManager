@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+
+    >
+
+    <LinearLayout
+        android:id="@+id/llo_daysCont"
+        style="@style/llo_daysCont"
+        >
+
+        <TextView
+            android:id="@+id/txt_t1"
+            style="@style/txt_days_name"
+            />
+        <TextView
+            android:id="@+id/txt_t2"
+            style="@style/txt_days_name"
+            />
+        <TextView
+            android:id="@+id/txt_t3"
+            style="@style/txt_days_name"
+            />
+        <TextView
+            android:id="@+id/txt_t4"
+            style="@style/txt_days_name"
+            />
+        <TextView
+            android:id="@+id/txt_t5"
+            style="@style/txt_days_name"
+            />
+        <TextView
+            android:id="@+id/txt_t6"
+            style="@style/txt_days_name"
+            />
+        <TextView
+            android:id="@+id/txt_t7"
+            style="@style/txt_days_name"
+            />
+
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+    android:id="@+id/rcy_theCalender"
+    android:name="com.example.hazemnabil.islamictodo2.CalenderFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layoutManager="GridLayoutManager"
+    tools:context="com.example.hazemnabil.islamictodo2.calenderMonth2_old.CalenderFragment"
+    tools:listitem="@layout/p5_fragment_day" />
+
+
+</LinearLayout>

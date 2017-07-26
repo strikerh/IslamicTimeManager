@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/eveyDay"
+    style="@style/ll_main_day">
+
+    <TextView
+        android:id="@+id/txt_day"
+        android:text="1"
+        style="@style/txt_day"  />
+
+    <LinearLayout
+        android:id="@+id/taskCont"
+        style="@style/ll_taskCont" >
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txt_dayAlt"
+        android:text="25 شوال"
+        style="@style/txt_dayAlt"/>
+
+
+</LinearLayout>

@@ -1,4 +1,4 @@
-package com.example.hazemnabil.islamictodo2.calenderMonth;
+package com.example.hazemnabil.islamictodo2.calenderMonth_old;
 
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
@@ -27,7 +27,7 @@ import com.example.hazemnabil.islamictodo2.objData.MoMonth;
 
 import java.util.Calendar;
 import java.util.Date;
-
+@Deprecated
 public class CalenderMonth2 extends ActivityMaster
         implements NavigationView.OnNavigationItemSelectedListener {
 

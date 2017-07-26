@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * Created by hazem.nabil on 4/13/2017.
  */
-
+@Deprecated
 public class Tasks {
     public Tasks() {
 

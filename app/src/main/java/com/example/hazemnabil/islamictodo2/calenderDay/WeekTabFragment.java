@@ -14,7 +14,7 @@ import com.example.hazemnabil.islamictodo2.ChangeFonts;
 import com.example.hazemnabil.islamictodo2.CheckableLinearLayout;
 import com.example.hazemnabil.islamictodo2.R;
 import com.example.hazemnabil.islamictodo2.colection.Vars;
-import com.example.hazemnabil.islamictodo2.objData.SmallDay;
+import com.example.hazemnabil.islamictodo2.myCalender.SmallDate;
 
 import java.util.Calendar;
 
@@ -27,7 +27,7 @@ public class WeekTabFragment extends Fragment  {
     private static final String TAG = Vars.TAG+"_WeekTabFrag";
 
     public int tabNum;
-    private SmallDay selectedDay;
+    private SmallDate selectedDay;
     private CheckableLinearLayout[] chk = new  CheckableLinearLayout[7];
     private TextView[] txtDay = new TextView[7];
     private TextView[] txtDayName = new TextView[7];
@@ -199,7 +199,7 @@ public class WeekTabFragment extends Fragment  {
         }
 
     }
-    public void checkDay(SmallDay smDay) {
+    public void checkDay(SmallDate smDay) {
         Log.i(TAG, "____________ checkDay: ");
         for (int i = 0; i < 7; i++) {
             chk[i].setChecked(false);

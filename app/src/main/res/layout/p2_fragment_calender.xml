@@ -39,6 +39,10 @@
                         android:id="@+id/numberPicker"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
+
+                    <android.widget.SimpleMonthView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"></android.widget.SimpleMonthView>
                 </LinearLayout>
 
                 <LinearLayout

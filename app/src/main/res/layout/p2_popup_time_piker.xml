@@ -5,9 +5,10 @@
     android:layout_height="match_parent">
 
     <TimePicker
+        android:id="@+id/timePicker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/timePicker" />
+        android:timePickerMode="spinner" />
 
     <Button
         android:text="Button"

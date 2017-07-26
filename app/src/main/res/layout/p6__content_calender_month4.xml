@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.hazemnabil.islamictodo2.monthCalender.ActivityMonth"
+    tools:showIn="@layout/p6_app_bar_calender_month4">
+    <!-- Month header -->
+    <LinearLayout
+        android:id="@+id/month_header"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/month_header"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp">
+
+        <ImageButton
+            android:onClick="btn_prevMonth"
+            android:src="@drawable/ic_chevron_right_black_24dp"
+            android:contentDescription="Prev"
+            style="@style/btn_next_prev"
+            />
+        <TextView
+            android:id="@+id/txt_month"
+            android:text="مايو"
+            style="@style/txt_month"
+            android:maxLines="1"
+            />
+        <TextView
+            android:id="@+id/txt_altMonths"
+            android:text="ش66وال شعبان"
+            style="@style/txt_altMonths"
+            android:maxLines="1"/>
+
+        <ImageButton
+            android:onClick="btn_nextMonth"
+            android:src="@drawable/ic_chevron_left_black_24dp"
+            android:contentDescription="Next"
+            style="@style/btn_next_prev"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llo_daysCont"
+        style="@style/llo_daysCont"
+        android:layout_width="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/month_header"
+        >
+
+        <TextView
+            android:id="@+id/txt_t1"
+            style="@style/txt_days_name"
+            />
+        <TextView
+            android:id="@+id/txt_t2"
+            style="@style/txt_days_name"
+            />
+        <TextView
+            android:id="@+id/txt_t3"
+            style="@style/txt_days_name"
+            />
+        <TextView
+            android:id="@+id/txt_t4"
+            style="@style/txt_days_name"
+            />
+        <TextView
+            android:id="@+id/txt_t5"
+            style="@style/txt_days_name"
+            />
+        <TextView
+            android:id="@+id/txt_t6"
+            style="@style/txt_days_name"
+            />
+        <TextView
+            android:id="@+id/txt_t7"
+            style="@style/txt_days_name"
+            />
+
+
+    </LinearLayout>
+
+    <!-- Days in week-->
+    <android.support.v4.view.ViewPager
+        android:id="@+id/container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layoutDirection="rtl"
+        android:rotationY="180"
+        app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior"
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llo_daysCont"
+        />
+
+
+   <!-- <fragment
+        android:id="@+id/fragment"
+        android:name="com.example.hazemnabil.islamictodo2.calenderMonth2.CalenderFragment"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout="@layout/p5_fragment_calender_list"
+
+        /> -->
+</android.support.constraint.ConstraintLayout>

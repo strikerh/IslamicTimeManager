@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/content_add_task2"
+    android:id="@+id/a_content_add_task2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/lightbg"
@@ -31,37 +31,142 @@
 
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/a_textView2"
                 style="@style/label"
                 android:text="المهمة"
 
 
                 />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
             <EditText
-                android:id="@+id/txt_Task"
+                android:id="@+id/a_txt_taskName"
                 style="@style/txtBox"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
                 android:ems="10"
                 android:hint="اكتب مهمتك"
                 android:inputType="text" />
 
+                <CheckBox
+                    android:id="@+id/ckb_star"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="0dp"
+                    android:layout_margin="0dp"
+                    android:background="@drawable/bg_p2_star_ripple"
+                    android:button="@drawable/ckb_star"
+                    />
+                <!--<ImageButton-->
+                    <!--android:id="@+id/btn_important"-->
+                    <!--style="@style/star"-->
+                    <!--android:background="@drawable/bg_p2_star_ripple"-->
+                    <!--android:src="@drawable/ic_star_border_black_24dp"-->
+
+                    <!--android:tag="0"-->
+                    <!--/>-->
+
+            </LinearLayout>
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/a_textView3"
                 style="@style/label"
                 android:text="التوصيف" />
 
             <EditText
-                android:id="@+id/editText45454"
+                android:id="@+id/a_txt_description"
                 style="@style/txtBox"
-                android:layout_height="66dp"
+                android:minHeight="66dp"
+                android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="اكتب وصف مهمتك"
                 android:inputType="textMultiLine"
                 android:textSize="16sp" />
 
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="15dp">
+            <LinearLayout style="@style/toolWithLabelGroup"
+                android:layout_marginEnd="10dp">
+
+                <TextView
+                    style="@style/label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="تابعة لتصنيف"
+
+                    />
+
+                <LinearLayout
+                    style="@style/hToolWithLabel"
+                    >
+
+                    <Spinner
+                        android:id="@+id/a_sp_Groups"
+                        style="@style/spinner.smaller"
+                        android:layout_weight="1" />
+
+                    <ImageButton
+                        android:id="@+id/a_button2"
+                        style="@style/add_btn"
+
+                        />
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+
+    <LinearLayout style="@style/toolWithLabelGroup"
+        android:layout_marginEnd="10dp">
+
+        <TextView
+            style="@style/label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" تصنيف فرعي"
+
+            />
+
+        <LinearLayout
+            style="@style/hToolWithLabel"
+            >
+
+
+
+            <Spinner
+                android:id="@+id/a_sp_Tags"
+                style="@style/spinner.smaller"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:id="@+id/a_button3"
+                style="@style/add_btn"
+                />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>
+
+
+
+
+
             <!-- ======================= Time Group-->
             <LinearLayout
-                android:id="@+id/TimeSection"
+                android:id="@+id/a_TimeSection"
                 style="@style/section"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -71,17 +176,17 @@
 
 
                 <LinearLayout
-                    android:id="@+id/TimeTitle"
+                    android:id="@+id/a_TimeTitle"
                     style="@style/section_title"
 >
 
                     <TextView
-                        android:id="@+id/TimeTitleTxt"
+                        android:id="@+id/a_TimeTitleTxt"
                         style="@style/section_title_txt"
                         android:text="الوقت" />
 
                     <Switch
-                        android:id="@+id/TimeTitleSw"
+                        android:id="@+id/a_TimeTitleSw"
                         android:text="ليس لها وقت محدد"
                         style="@style/section_title_switch"
                         android:onClick="onSwitch_time"
@@ -92,12 +197,13 @@
 
                 <LinearLayout
 
-                    android:id="@+id/TimeBox"
+                    android:id="@+id/a_TimeBox"
                     style="@style/section_box"
                     android:visibility="visible">
 
 
                     <RadioGroup
+                        android:id="@+id/a_rdg_datetype"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
@@ -110,14 +216,14 @@
 
 
                         <RadioButton
-                            android:id="@+id/hh_radioButton3"
+                            android:id="@+id/a_rd_hijry"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="هجري" />
 
                         <RadioButton
-                            android:id="@+id/hh_radioButton2"
+                            android:id="@+id/a_rd_milady"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -148,7 +254,7 @@
                                 android:orientation="horizontal">
 
                                 <TextView
-                                    android:id="@+id/txt_date"
+                                    android:id="@+id/a_txt_date"
                                     style="@style/g_txtWithBtn_txt"
                                     android:text="     /       /      "
                                     android:onClick="openCalender"
@@ -180,7 +286,7 @@
                                 />
 
                             <Spinner
-                                android:id="@+id/sp_TimeName"
+                                android:id="@+id/a_sp_TimeName"
                                 style="@style/spinner" />
 
 
@@ -200,7 +306,7 @@
                                 android:orientation="horizontal">
 
                                 <TextView
-                                    android:id="@+id/txt_time"
+                                    android:id="@+id/a_txt_time"
                                     style="@style/g_txtWithBtn_txt"
                                     android:text="ليس لها وقت"
                                     android:onClick="openTimePiker" />
@@ -221,9 +327,9 @@
 
             </LinearLayout>
 
-            <!-- ======================= Repeat Group-->
+            <!-- ======================= REPEAT Group-->
             <LinearLayout
-                android:id="@+id/RepeatSection"
+                android:id="@+id/a_RepeatSection"
                 style="@style/section"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -231,17 +337,17 @@
 
 
                 <LinearLayout
-                    android:id="@+id/RepeatTitle"
+                    android:id="@+id/a_RepeatTitle"
                     style="@style/section_title"
                     >
 
                     <TextView
-                        android:id="@+id/RepeatTitleTxt"
+                        android:id="@+id/a_RepeatTitleTxt"
                         style="@style/section_title_txt"
                         android:text="التكرار" />
 
                     <Switch
-                        android:id="@+id/RepeatTitleSw"
+                        android:id="@+id/a_RepeatTitleSw"
                         android:text="غير مكرر"
                         style="@style/section_title_switch"
                         android:onClick="onSwitch_repeat"/>
@@ -250,7 +356,7 @@
 
 
                 <LinearLayout
-                    android:id="@+id/RepeatBox"
+                    android:id="@+id/a_RepeatBox"
                     style="@style/section_box">
 
                     <LinearLayout style="@style/RowGroup">
@@ -260,7 +366,7 @@
                             >
 
                             <TextView
-                                android:id="@+id/textView4"
+                                android:id="@+id/a_textView4"
                                 style="@style/label"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -269,7 +375,7 @@
 
 
                             <Spinner
-                                android:id="@+id/sp_RepeatType"
+                                android:id="@+id/a_sp_RepeatType"
                                 style="@style/spinner"
                                 android:layout_width="match_parent"
                                 android:layout_weight="0.5" />
@@ -285,27 +391,52 @@
                             android:layout_weight="1.5">
 
                             <TextView
-                                android:id="@+id/textView5"
+                                android:id="@+id/a_textView5"
                                 style="@style/label"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="عدد المرات" />
 
 
-                            <EditText
-                                android:id="@+id/num"
-                                style="@style/txtBox"
-                                android:ems="10"
-                                android:hint="0"
-                                android:inputType="number"
-                                android:textAlignment="center" />
+                            <!--<EditText-->
+                                <!--android:id="@+id/a_num"-->
+                                <!--style="@style/txtBox"-->
+                                <!--android:ems="10"-->
+                                <!--android:hint="0"-->
+                                <!--android:inputType="number"-->
+                                <!--android:textAlignment="center" />-->
 
+                            <LinearLayout
+                                style="@style/txtBox"
+                                android:gravity="center"
+
+
+                                >
+                            <com.aigestudio.wheelpicker.WheelPicker
+                                android:id="@+id/a_num2"
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:layout_gravity="center"
+
+
+                                android:paddingTop="0dp"
+                                android:paddingBottom="0dp"
+
+                                app:wheel_item_text_size="14sp"
+                                app:wheel_atmospheric="true"
+                                app:wheel_visible_item_count="2"
+                                app:wheel_selected_item_text_color="#000000"
+                                app:wheel_curved="true"
+
+
+                               ></com.aigestudio.wheelpicker.WheelPicker>
+                             </LinearLayout>
                         </LinearLayout>
 
                         <LinearLayout style="@style/toolWithLabelGroup">
 
                             <TextView
-                                android:id="@+id/textView6"
+                                android:id="@+id/a_textView6"
                                 style="@style/label"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -317,7 +448,7 @@
                                 android:orientation="horizontal">
 
                                 <TextView
-                                    android:id="@+id/repeatDate"
+                                    android:id="@+id/a_repeatDate"
                                     style="@style/g_txtWithBtn_txt"
                                     android:text="00/00/0000"
                                     android:inputType="date" />
@@ -333,47 +464,48 @@
                     </LinearLayout>
                     <LinearLayout
                         style="@style/RowGroup"
-                        android:id="@+id/pnl_week">
+                        android:id="@+id/a_pnl_week">
 
 
                         <ToggleButton
 
+                            android:id="@+id/a_tb_0"
                             android:textOn="سبت"
                             android:textOff="سبت"
                             style="@style/weeklyBtn"
                             />
                         <ToggleButton
-
+                            android:id="@+id/a_tb_1"
                             android:textOn="أحد"
                             android:textOff="أحد"
                             style="@style/weeklyBtn"
                             />
                         <ToggleButton
-
+                            android:id="@+id/a_tb_2"
                             android:textOn="أثنين"
                             android:textOff="أثنين"
                             style="@style/weeklyBtn"
                             />
                         <ToggleButton
-
+                            android:id="@+id/a_tb_3"
                             android:textOn="ثلاثاء"
                             android:textOff="ثلاثاء"
                             style="@style/weeklyBtn"
                             />
                         <ToggleButton
-
+                            android:id="@+id/a_tb_4"
                             android:textOn="أربعاء"
                             android:textOff="أربعاء"
                             style="@style/weeklyBtn"
                             />
                         <ToggleButton
-
+                            android:id="@+id/a_tb_5"
                             android:textOn="خميس"
                             android:textOff="خميس"
                             style="@style/weeklyBtn"
                             />
                         <ToggleButton
-
+                            android:id="@+id/a_tb_6"
                             android:textOn="جمعة"
                             android:textOff="جمعة"
                             style="@style/weeklyBtn"
@@ -385,109 +517,68 @@
 
             <!-- ======================= Important Group-->
 
-            <LinearLayout
-                android:id="@+id/ImportantSection"
-                style="@style/section"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+            <!--<LinearLayout-->
+                <!--android:id="@+id/a_ImportantSection"-->
+                <!--style="@style/section"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:orientation="vertical">-->
 
 
-                <LinearLayout
-                    android:id="@+id/ImportantTitle"
-                    style="@style/section_title">
+                <!--<LinearLayout-->
+                    <!--android:id="@+id/a_ImportantTitle"-->
+                    <!--style="@style/section_title">-->
 
-                    <TextView
-                        android:id="@+id/ImportantTitleTxt"
-                        style="@style/section_title_txt"
-                        android:text="معلومات أخرى" />
+                    <!--<TextView-->
+                        <!--android:id="@+id/a_ImportantTitleTxt"-->
+                        <!--style="@style/section_title_txt"-->
+                        <!--android:text="معلومات أخرى" />-->
 
-                    <Switch
-                        android:id="@+id/ImportantTitleSw"
-                        android:text="غير محدد"
-                        style="@style/section_title_switch"
-                        android:onClick="onSwitch_important"
-                        />
+                    <!--<Switch-->
+                        <!--android:id="@+id/a_ImportantTitleSw"-->
+                        <!--android:text="غير محدد"-->
+                        <!--style="@style/section_title_switch"-->
+                        <!--android:onClick="onSwitch_important"-->
+                        <!--/>-->
 
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:id="@+id/ImportantBox"
-                    style="@style/section_box"
-                   >
-
-                    <LinearLayout
-                        style="@style/hToolWithLabel"
-                        >
-
-                        <TextView
-                            android:text="درجة الأهمية"
-                            style="@style/hLabel"
-                             />
-
-                        <Spinner
-                            android:id="@+id/sp_Important"
-                            style="@style/spinner.smaller"
-                            android:layout_weight="1" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        style="@style/hToolWithLabel"
-                        >
-
-                        <TextView
-                            android:text="تابعة لمجموعة"
-                            style="@style/hLabel"
-                            />
-
-                        <Spinner
-                            android:id="@+id/sp_Groups"
-                            style="@style/spinner.smaller"
-                            android:layout_weight="1" />
-
-                        <ImageButton
-                            android:id="@+id/button2"
-                            style="@style/add_btn"
-
-                         />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        style="@style/hToolWithLabel"
-                        >
-
-                        <TextView
-                            android:text="كلمة مفتاحية"
-                            style="@style/hLabel"
-                            />
-
-                        <Spinner
-                            android:id="@+id/sp_Tags"
-                            style="@style/spinner.smaller"
-                            android:layout_weight="1" />
-
-                        <ImageButton
-                            android:id="@+id/button3"
-                            style="@style/add_btn"
-                            />
-
-                    </LinearLayout>
+                <!--</LinearLayout>-->
 
 
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"></LinearLayout>
-                </LinearLayout>
+                <!--<LinearLayout-->
+                    <!--android:id="@+id/a_ImportantBox"-->
+                    <!--style="@style/section_box"-->
+                   <!--&gt;-->
 
-            </LinearLayout>
+                    <!--<LinearLayout-->
+                        <!--style="@style/hToolWithLabel"-->
+                        <!--&gt;-->
+
+                        <!--<TextView-->
+                            <!--android:text="درجة الأهمية"-->
+                            <!--style="@style/hLabel"-->
+                             <!--/>-->
+
+                        <!--<Spinner-->
+                            <!--android:id="@+id/a_sp_Important"-->
+                            <!--style="@style/spinner.smaller"-->
+                            <!--android:layout_weight="1" />-->
+
+                    <!--</LinearLayout>-->
+
+
+
+
+                    <!--<LinearLayout-->
+                        <!--android:orientation="horizontal"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="match_parent"></LinearLayout>-->
+                <!--</LinearLayout>-->
+
+            <!--</LinearLayout>-->
 
             <!-- ======================= ٍSubTasks Group-->
             <LinearLayout
-                android:id="@+id/SubTasksSection"
+                android:id="@+id/a_SubTasksSection"
                 style="@style/section"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -495,26 +586,26 @@
 
 
                 <LinearLayout
-                    android:id="@+id/SubTasksTitle"
+                    android:id="@+id/a_SubTasksTitle"
                     style="@style/section_title"
 
                     >
 
                     <TextView
-                        android:id="@+id/SubTasksTitleTxt"
+                        android:id="@+id/a_SubTasksTitleTxt"
                         style="@style/section_title_txt"
                         android:layout_width="match_parent"
                         android:layout_weight="1"
                         android:text="المهام الفرعية" />
 
                     <!--<Switch
-                        android:id="@+id/SubTasksTitleSw"
+                        android:id="@+id/a_SubTasksTitleSw"
                         android:text="ليس بها مهام فرعية"
                         style="@style/section_title_switch"
                         android:onClick="onSwitch_subtasks"/>-->
 
                     <Button
-                        android:id="@+id/btn_subTasks_add"
+                        android:id="@+id/a_btn_subTasks_add"
                         style="@style/section_btn_add"
                         android:onClick="addSubTask"
                         android:layout_marginEnd="10dp"
@@ -534,7 +625,7 @@
 
 
                 <LinearLayout
-                    android:id="@+id/SubTasksBox"
+                    android:id="@+id/a_SubTasksBox"
                     style="@style/section_box"
                     android:layout_width="match_parent"
                     android:layout_weight="1"
@@ -545,7 +636,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:name="com.example.hazemnabil.islamictodo2.addTask.SubTaskFragment"
-                        android:id="@+id/fragment3"
+                        android:id="@+id/a_fragment3"
                         tools:layout="@layout/p2_fragment_subtask_list" />
                 </LinearLayout>
 

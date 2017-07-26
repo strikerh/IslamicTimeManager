@@ -10,10 +10,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.hazemnabil.islamictodo2.R;
-import com.example.hazemnabil.islamictodo2.objData.Day;
+import com.example.hazemnabil.islamictodo2.myCalender.MyTime;
+
+import java.util.Calendar;
 
 /**
  * A fragment representing a list of Items.
@@ -66,13 +67,14 @@ public class TaskHasDateFragment extends Fragment {
             mYear = getArguments().getInt(YEAR);
 
 
+
+
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.i(TAG, "____________ 3.onCreateView: "+this);
         View view = inflater.inflate(R.layout.p4_fragment_item_list, container, false);
 
         // Set the adapter
@@ -123,10 +125,17 @@ public class TaskHasDateFragment extends Fragment {
            // MoDays newDay  = mListener.onChangeDay();
             Context mContext   = mListener.getContext();
            // MoMonth moMonth = new MoMonth(mContext ,mMonth011, mYear);
-            Day hh = new Day(mContext,mDay,mMonth011,mYear);
-            hh.getTasks();
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(hh.getTasksList(), mListener));
-            Toast.makeText(getContext(), "Day: " + hh._day_n + " / " + (hh._month_n011 +1 )+ " / " + hh._year_n, Toast.LENGTH_SHORT).show();
+          //  Day hh = new Day(mContext,mDay,mMonth011,mYear);
+           // TasksList hh4 = hh.prepareTasks();
+            TasksList tasksList = new TasksList(mContext);
+            tasksList.prepareDayTasks(mDay,mMonth011,mYear);
+
+            Calendar cal = Calendar.getInstance();
+            cal.set(mDay, mMonth011, mYear);
+            MyTime mytime = new MyTime(cal);
+
+            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(mytime,tasksList.getTasksList(), mListener));
+           // Toast.makeText(getContext(), "Day: " + hh._day_n + " / " + (hh._month_n011 +1 )+ " / " + hh._year_n, Toast.LENGTH_SHORT).show();
 
         }
     }

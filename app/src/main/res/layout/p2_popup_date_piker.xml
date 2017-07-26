@@ -1,19 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="rtl"
+    android:textDirection="rtl"
+    android:minWidth="300dp">
 
 
     <DatePicker
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/datePicker2"
         android:calendarViewShown="false" />
 
-    <Button
-        android:text="Button"
+
+
+        <RadioGroup
+            android:id="@+id/rdg_datetype1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+
+
+            >
+
+        <RadioButton
+            android:id="@+id/rd_hijry1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="هجري"
+
+            />
+        <RadioButton
+            android:id="@+id/rd_milady1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="ميلادي"/>
+    </RadioGroup>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:padding="20dp"
+    android:background="#ccc"
+    >
+    <com.aigestudio.wheelpicker.WheelPicker
+        android:id="@+id/wheel_day"
+        app:wheel_data="@array/hijryMonths"
+        style="@style/wheel_spinner"
+        />
+    <com.aigestudio.wheelpicker.WheelPicker
+        android:id="@+id/wheel_month"
+        app:wheel_data="@array/hijryMonths"
+        style="@style/wheel_spinner"
+        android:layout_weight="0.8"
+        />
+    <com.aigestudio.wheelpicker.WheelPicker
+        android:id="@+id/wheel_year"
+        app:wheel_data="@array/hijryMonths"
+        style="@style/wheel_spinner"
+        />
+
+</LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button" />
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="الميلادي"/>
+        <TextView
+            android:id="@+id/txt_milady"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" الأثنين,25 اكتوبر 2017  "
+            android:padding="5dp"
+            android:background="@drawable/bg_addtask_datetxt"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:textColor="#000"
+            />
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="هجري"
+            android:layout_marginTop="20dp"/>
+        <TextView
+            android:id="@+id/txt_hijry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" الأثنين,25 محرم 1435  "
+            android:padding="5dp"
+            android:background="@drawable/bg_addtask_datetxt"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:textColor="#000"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end">
+    <Button
+        android:text="إلغاء"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cancel"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:textColor="@color/colorPrimary"
+        android:layout_gravity="end"
+        />
+        <Button
+            android:text="موافق"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ok"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:textColor="@color/colorPrimary"
+            android:layout_gravity="end"
+            />
+    </LinearLayout>
 </LinearLayout>

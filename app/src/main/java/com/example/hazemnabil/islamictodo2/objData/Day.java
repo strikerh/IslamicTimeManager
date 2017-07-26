@@ -2,6 +2,8 @@ package com.example.hazemnabil.islamictodo2.objData;
 
 import android.content.Context;
 
+import com.example.hazemnabil.islamictodo2.calenderDay.TasksList;
+import com.example.hazemnabil.islamictodo2.colection.Vars;
 import com.github.msarhan.ummalqura.calendar.UmmalquraCalendar;
 
 import java.util.Calendar;
@@ -11,7 +13,7 @@ import java.util.Locale;
 /**
  * Created by hazem.nabil on 5/1/2017.
  */
-
+@Deprecated
 public class Day {
     private Context mContext;
 
@@ -35,14 +37,14 @@ public class Day {
     public Day(Context mContext, int dayNum,int _month_n011,int year) {
         this.mContext = mContext;
         this.tasks = tasks;
-        this.setCalenders (CalOption.MILADY,year,_month_n011,dayNum);
+        this.setCalenders (Vars.D.MILADY,year,_month_n011,dayNum);
         this.setAllAttribute();
 
     }
     public Day(Context mContext,Calendar cal) {
         this.mContext = mContext;
         this.tasks = tasks;
-        this.setCalenders (CalOption.MILADY,cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DAY_OF_MONTH));
+        this.setCalenders (Vars.D.MILADY,cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DAY_OF_MONTH));
         this.setAllAttribute();
     }
 
@@ -51,14 +53,14 @@ public class Day {
     /// Setter
 
     public void setCalenders (int MorH , int year,int month_011, int day){
-        if (MorH == CalOption.MILADY) {
+        if (MorH == Vars.D.MILADY) {
             mCal = Calendar.getInstance();
             mCal.set(year, month_011, day);
 
             hCal = new UmmalquraCalendar();
             hCal.setTime(mCal.getTime());
 
-        }else if(MorH == CalOption.HEJRY){
+        }else if(MorH == Vars.D.HIJRY){
             hCal = new UmmalquraCalendar();
             hCal.set(year, month_011, day);
 
@@ -98,16 +100,7 @@ public class Day {
 
 
 
-    public TasksList getTasks() {
-//        Random rand = new Random();
-//
-//        int  n = rand.nextInt(10) ;
-//
-//        Task tasks[] = new Task[n];
-//
-//        for (int i = 0; i < n; i++) {
-//            tasks[i] = createRandomTask();
-//        }
+    public TasksList prepareTasks() {
 
         TasksList tasksList = new TasksList(mContext);
         tasksList.prepareDayTasks(this._day_n,this._month_n011,this._year_n);
@@ -116,10 +109,10 @@ public class Day {
     }
 
     public Task[] getTasksArray() {
-        return  getTasks().getTasksArray();
+        return  prepareTasks().getTasksArray();
     }
     public List<Task> getTasksList() {
-        return  getTasks().getTasksList();
+        return  prepareTasks().getTasksList();
     }
 
 

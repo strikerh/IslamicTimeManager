@@ -1,4 +1,4 @@
-package com.example.hazemnabil.islamictodo2.objData;
+package com.example.hazemnabil.islamictodo2.myCalender;
 
 import com.github.msarhan.ummalqura.calendar.UmmalquraCalendar;
 
@@ -8,10 +8,11 @@ import java.util.GregorianCalendar;
  * Created by hazem.nabil on 26/03/2017.
  */
 
+@Deprecated
 public  class CalOption {
 
     public static final int MILADY = 1;
-    public static final int HEJRY = 2;
+    public static final int HIJRY = 2;
 
     public static int dateType = MILADY;
     public static int gDay, gMonth, gYear;

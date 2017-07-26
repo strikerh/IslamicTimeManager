@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<item >
+    <shape >
+        <solid android:color="@color/colorPrimary" ></solid>
+        <gradient android:startColor="#263357" android:centerColor="#374674"
+            android:endColor="#263357" android:angle="90"
+
+
+
+
+            ></gradient>
+        <corners android:radius="6dp"></corners>
+        <stroke android:color="#1d2c57" android:width="3dp"></stroke>
+    </shape>
+    <ripple android:color="@color/cardview_light_background">
+
+    </ripple>
+</item>
+</selector>

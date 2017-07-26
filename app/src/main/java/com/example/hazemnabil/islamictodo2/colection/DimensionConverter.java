@@ -45,6 +45,10 @@ public class DimensionConverter {
 
         return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }
+    public float dpToPx_Float(int dp) {
+
+        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+    }
 
     public int pxToRatio(int px) {
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">islamicTodo2</string>
+    <string name="app_name">Islamic Task Manager</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -7,6 +7,7 @@
     <string name="action_settings">خصائص</string>
     <string name="title_activity_add_task">إضافة مهمة جديدة</string>
     <string name="Add">إضافة</string>
+    <string name="cancel">إلغاء </string>
     <string name="title_activity_add_task2">إضافة مهمة جديدة</string>
 
     <string-array name="TimeNames">
@@ -19,6 +20,52 @@
         <item>منتصف الليل</item>
 
     </string-array>
+
+    <string-array name="hijryMonths">
+        <item> محرم</item>
+        <item> صفر</item>
+        <item>ربيع الأول</item>
+        <item>ربيع الآخر</item>
+        <item>جمادى الأولى</item>
+        <item>جمادى الآخرة</item>
+        <item> رجب</item>
+        <item> شعبان</item>
+        <item> رمضان</item>
+        <item> شوال</item>
+        <item>ذو القعدة</item>
+        <item>ذو الحجة</item>
+
+    </string-array>
+
+    <string-array name="miladyMonths">
+        <item>يناير</item>
+        <item>فبراير</item>
+        <item>مارس</item>
+        <item>أبريل</item>
+        <item>مايو</item>
+        <item>يونيو</item>
+        <item>يوليو</item>
+        <item>أغسطس</item>
+        <item>سبتمبر</item>
+        <item>أكتوبر</item>
+        <item>نوفمبر</item>
+        <item>نوفمبر</item>
+    </string-array>
+    <string-array name="miladyMonths2">
+        <item>كانون الثاني</item>
+        <item>شباط</item>
+        <item> آذار</item>
+        <item> نيسان</item>
+        <item>أيار</item>
+        <item>حزيران</item>
+        <item>تموز</item>
+        <item>آب</item>
+        <item>أيلول</item>
+        <item>تشرين الأول</item>
+        <item>تشرين الثاني</item>
+        <item>كانون الأول</item>
+    </string-array>
+
     <string-array name="repeatType">
         <item>يومي</item>
         <item>أسبوعي</item>
@@ -36,13 +83,13 @@
 
 
     <string-array name="daysName">
-        <item>سبت</item>
         <item>أحد</item>
         <item>أثنين</item>
         <item>ثلاثاء</item>
         <item>أربعاء</item>
         <item>خميس</item>
         <item>جمعة</item>
+        <item>سبت</item>
 
     </string-array>
 
@@ -221,5 +268,8 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_testtt2">Testtt2Activity</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_calender_month3">شهري</string>
+    <string name="title_activity_add_task3">AddTask3Activity</string>
+
 
 </resources>

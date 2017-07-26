@@ -7,10 +7,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.example.hazemnabil.islamictodo2.calenderDay.CalenderDay;
-import com.example.hazemnabil.islamictodo2.calenderMonth.CalenderMonth2;
+import com.example.hazemnabil.islamictodo2.monthCalender.ActivityMonth;
 
 public class ActivityMaster extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -59,7 +58,7 @@ public class ActivityMaster extends AppCompatActivity
             Intent myIntent = new Intent(this, CalenderDay.class);
             startActivity(myIntent);
         } else if (id == R.id.nav_gallery) {
-            Intent myIntent = new Intent(this, CalenderMonth2.class);
+            Intent myIntent = new Intent(this, ActivityMonth.class);
             startActivity(myIntent);
 
         } else if (id == R.id.nav_slideshow) {

@@ -1,6 +1,7 @@
 package com.example.hazemnabil.islamictodo2.calenderDay;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.NavigationView;
@@ -13,27 +14,29 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.hazemnabil.islamictodo2.ActivityMaster;
 import com.example.hazemnabil.islamictodo2.ChangeFonts;
 import com.example.hazemnabil.islamictodo2.CheckableLinearLayout;
 import com.example.hazemnabil.islamictodo2.DbConnections;
 import com.example.hazemnabil.islamictodo2.R;
+import com.example.hazemnabil.islamictodo2.addTask.AddTask2;
 import com.example.hazemnabil.islamictodo2.colection.DimensionConverter;
 import com.example.hazemnabil.islamictodo2.colection.Vars;
-import com.example.hazemnabil.islamictodo2.objData.SmallDay;
+import com.example.hazemnabil.islamictodo2.myCalender.SmallDate;
 import com.example.hazemnabil.islamictodo2.objData.Task;
 
 import java.util.Calendar;
 import java.util.List;
 
-public class CalenderDay extends ActivityMaster implements NavigationView.OnNavigationItemSelectedListener,FragmentListener,WeekTabFragment.WeekTabListener {
-
-
+public class CalenderDay extends ActivityMaster
+        implements NavigationView.OnNavigationItemSelectedListener,FragmentListener,WeekTabFragment.WeekTabListener {
 
 
     private static final String TAG = Vars.TAG + "_CalenderDay";
@@ -43,9 +46,10 @@ public class CalenderDay extends ActivityMaster implements NavigationView.OnNavi
     private int yDelta;
     DimensionConverter dimensionConverter;
     private TextView txt_notDated;
+    private TaskHasDateFragment fragment;
 
     public Calendar currentDay;
-    public SmallDay smallCurrentDay;
+    public SmallDate smallCurrentDay;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -72,9 +76,16 @@ public class CalenderDay extends ActivityMaster implements NavigationView.OnNavi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i(TAG, "________________________ 1.onCreate: ");
-
         currentDay = Calendar.getInstance();
-        smallCurrentDay = new SmallDay(currentDay);
+
+        Bundle extras = getIntent().getExtras();
+
+        if (extras != null) {
+            Toast.makeText(this, "يوم " +extras.getInt("day")+" "+extras.getInt("month")+" "+extras.getInt("year"), Toast.LENGTH_SHORT).show();
+            currentDay.set(extras.getInt("year"),extras.getInt("month"),extras.getInt("day"));
+        }
+
+        smallCurrentDay = new SmallDate(currentDay);
 
         _activityInit();
 
@@ -132,11 +143,11 @@ public class CalenderDay extends ActivityMaster implements NavigationView.OnNavi
 
     private void _createTaskFrag() {
         Log.i(TAG, "___________________ 1.3_createTaskFrag: ");
-        TaskHasDateFragment fragment = (TaskHasDateFragment) getSupportFragmentManager().findFragmentById(R.id.fragment2);
+        fragment = (TaskHasDateFragment) getSupportFragmentManager().findFragmentById(R.id.fragment2);
         fragment.updateView(smallCurrentDay.day,smallCurrentDay.month011,smallCurrentDay.year);
 
-        TaskHasDateFragment fragment2 = (TaskHasDateFragment) getSupportFragmentManager().findFragmentById(R.id.fragment3);
-        fragment2.updateView(smallCurrentDay.day,smallCurrentDay.month011,smallCurrentDay.year);
+        //TaskHasDateFragment fragment2 = (TaskHasDateFragment) getSupportFragmentManager().findFragmentById(R.id.fragment3);
+       // fragment2.updateView(smallCurrentDay.day,smallCurrentDay.month011,smallCurrentDay.year);
     }
 
     public void _CreateTopWeekTab(){
@@ -256,8 +267,12 @@ public class CalenderDay extends ActivityMaster implements NavigationView.OnNavi
     }
 
 
+    @Override
+    protected void onResume() {
 
-
+        super.onResume();
+        fragment.updateView(smallCurrentDay.day,smallCurrentDay.month011,smallCurrentDay.year);
+    }
 
     @Override
     public void onWeekTabClicked(CheckableLinearLayout view, String test) {
@@ -278,6 +293,33 @@ public class CalenderDay extends ActivityMaster implements NavigationView.OnNavi
     }
 
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.menu_get_today) {
+
+//            myDate = new MyDate();
+//            currentYear = myDate.getYear();
+//            currentMonth = myDate.getMonth011();
+//
+//            _prepareUI_MonthBar();
+//            mViewPager.setCurrentItem(mPagerAdapter.calculatePosOfDate(myDate.getMonth011(),myDate.getYear()));
+            return true;
+
+
+        }else if (id == R.id.menu_add_new) {
+            Intent myIntent = new Intent(this,AddTask2.class);
+            startActivity(myIntent);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
     /**
      * *************************** 1  Adapter *********************************************************************************
      */
@@ -289,9 +331,9 @@ public class CalenderDay extends ActivityMaster implements NavigationView.OnNavi
 
         Calendar mCal;
 
-        public SectionsPagerAdapter(FragmentManager fm, SmallDay smDay) {
+        public SectionsPagerAdapter(FragmentManager fm, SmallDate smDay) {
             super(fm);
-            Log.i(TAG, "_____________ PagerAdapter__ SectionsPagerAdapter(Constructor): ");
+            Log.i(TAG, "_____________ PagerAdapter__ PagerAdapter(Constructor): ");
             mCal = Calendar.getInstance();
             mCal.set(smDay.day,smDay.month011,smDay.year);
 

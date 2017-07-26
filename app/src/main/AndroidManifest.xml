@@ -8,20 +8,17 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
         -->
+
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -33,21 +30,53 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />
-        <activity
-            android:name=".CalenderMonth"
-            android:label="@string/title_activity_calender_month"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".calenderMonth.CalenderMonth2"
-            android:label="@string/title_activity_calender_month2"
-            android:theme="@style/AppTheme" />
+        <!-- <activity -->
+        <!-- android:name=".CalenderMonth" -->
+        <!-- android:label="@string/title_activity_calender_month" -->
+        <!-- android:theme="@style/AppTheme"></activity> -->
+        <!-- <activity -->
+        <!-- android:name=".calenderMonth_old.CalenderMonth2" -->
+        <!-- android:label="@string/title_activity_calender_month2" -->
+        <!-- android:theme="@style/AppTheme" /> -->
         <activity
             android:name=".calenderDay.CalenderDay"
             android:label="@string/title_activity_calender_day"
+
             android:theme="@style/AppTheme" />
+        <!-- <activity -->
+        <!-- android:name=".Testtt2Activity" -->
+        <!-- android:label="@string/title_activity_testtt2" -->
+        <!-- android:theme="@style/AppTheme" /> -->
+        <!-- <activity -->
+        <!-- android:name=".calenderMonth2_old.CalenderMonth3Activity" -->
+        <!-- android:label="@string/title_activity_calender_month3" -->
+        <!-- android:theme="@style/AppTheme" /> -->
         <activity
-            android:name=".Testtt2Activity"
-            android:label="@string/title_activity_testtt2"
+            android:name=".monthCalender.ActivityMonth"
+            android:label="@string/title_activity_calender_month3"
+            android:launchMode="singleInstance"
+            android:theme="@style/AppTheme">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name=".StartActivity"
+            android:theme="@style/SplashTheme">
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".addTask3.AddTask3Activity"
+            android:label="@string/title_activity_add_task3"
             android:theme="@style/AppTheme"></activity>
     </application>
 

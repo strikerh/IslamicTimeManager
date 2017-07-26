@@ -14,6 +14,7 @@ import java.util.Random;
  * <p>
  * TODO: Replace all uses of this class before publishing your app.
  */
+@Deprecated
 public class DummyContent {
 
     /**
@@ -26,7 +27,7 @@ public class DummyContent {
      */
     public static final Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
 
-    private static final int COUNT = 25;
+    private static final int COUNT = 42;
 
     static {
         // Add some sample items.

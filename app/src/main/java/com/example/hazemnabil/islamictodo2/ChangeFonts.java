@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.hazemnabil.islamictodo2.colection.AppOptions;
+import com.example.hazemnabil.islamictodo2.colection.Vars;
+
 /**
  * Created by hazem.nabil on 27/02/2017.
  */
@@ -13,10 +16,10 @@ import android.widget.TextView;
  public class ChangeFonts {
 
 
-    public ChangeFonts(Context context, View v){
-        this.overrideFonts(context, v);
+    public  ChangeFonts(Context context, View v){
+        overrideFonts(context, v);
     }
-    public void overrideFonts(final Context context, final View v) {
+    public static void overrideFonts(final Context context, final View v) {
         try {
             if (v instanceof ViewGroup) {
                 ViewGroup vg = (ViewGroup) v;
@@ -32,9 +35,13 @@ import android.widget.TextView;
         }
     }
 
-    public String convertToArabic(CharSequence  value)
+    public static String convertToArabic(CharSequence  value)
     {
-        String newValue =   (((((((((((value+"").replaceAll("1", "١")).replaceAll("2", "٢")).replaceAll("3", "٣")).replaceAll("4", "٤")).replaceAll("5", "٥")).replaceAll("6", "٦")).replaceAll("7", "٧")).replaceAll("8", "٨")).replaceAll("9", "٩")).replaceAll("0", "٠"));
+        String newValue;
+        if(AppOptions.lang == Vars.LANG.AR)
+             newValue = (((((((((((value + "").replaceAll("1", "١")).replaceAll("2", "٢")).replaceAll("3", "٣")).replaceAll("4", "٤")).replaceAll("5", "٥")).replaceAll("6", "٦")).replaceAll("7", "٧")).replaceAll("8", "٨")).replaceAll("9", "٩")).replaceAll("0", "٠"));
+        else
+            newValue = (String) value;
         return newValue;
     }
 }

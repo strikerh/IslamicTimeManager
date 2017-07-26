@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layoutDirection="rtl"
+    >
+
+
+
+    <GridLayout
+        android:id="@+id/Calendar_grid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="7"
+        android:rowCount="6"
+        android:layout_gravity="center"
+        android:padding="0dp"
+
+        >
+
+
+
+
+        <!-- _____________________ Row 1 _______________ -->
+        <!--<LinearLayout       style="@style/ll_calender_row" >-->
+
+            <!--  Day_0  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_0"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_0"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_0"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_0" style="@style/txt_dayAlt"      />-->
+
+            </LinearLayout>
+
+            <!--  Day_1  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_1"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_1"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_1"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_1" style="@style/txt_dayAlt"      />-->
+
+            </LinearLayout>
+
+            <!--  Day_2  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_2"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_2"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_2"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_2" style="@style/txt_dayAlt"      />-->
+            </LinearLayout>
+
+            <!--  Day_3  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_3"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_3"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_3"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_3" style="@style/txt_dayAlt"      />-->
+            </LinearLayout>
+
+            <!--  Day_4  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_4"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_4"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_4"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_4" style="@style/txt_dayAlt"      />-->
+            </LinearLayout>
+
+            <!--  Day_5  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_5"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_5"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_5"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_5" style="@style/txt_dayAlt"      />-->
+            </LinearLayout>
+
+            <!--  Day_6  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_6"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_6"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_6"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_6" style="@style/txt_dayAlt"      />-->
+            </LinearLayout>
+
+        <!--</LinearLayout>-->
+
+
+
+
+        <!--&lt;!&ndash; _____________________ Row 2 _______________ &ndash;&gt;-->
+        <!--<LinearLayout       style="@style/ll_calender_row" >-->
+
+            <!--  Day_7  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_7"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_7"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_7"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_7" style="@style/txt_dayAlt"      />-->
+
+            </LinearLayout>
+
+            <!--  Day_8  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_8"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_8"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_8"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_8" style="@style/txt_dayAlt"      />-->
+
+            </LinearLayout>
+
+            <!--  Day_9  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_9"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_9"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_9"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_9" style="@style/txt_dayAlt"      />-->
+            </LinearLayout>
+
+            <!--  Day_10  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_10"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_10"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_10"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_10" style="@style/txt_dayAlt"      />-->
+            </LinearLayout>
+
+            <!--  Day_11  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_11"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_11"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_11"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_11" style="@style/txt_dayAlt"      />-->
+            </LinearLayout>
+
+            <!--  Day_12  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_12"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_12"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_12"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_12" style="@style/txt_dayAlt"      />-->
+            </LinearLayout>
+
+            <!--  Day_13  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_13"    style="@style/ll_main_day" android:onClick="onFieldClicked">
+                <TextView           android:id="@+id/txt_day_13"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_13"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_13" style="@style/txt_dayAlt"      />-->
+            </LinearLayout>
+
+
+        <!--</LinearLayout>-->
+
+
+
+
+        <!--&lt;!&ndash; _____________________ Row 3 _______________ &ndash;&gt;-->
+        <!--<LinearLayout       style="@style/ll_calender_row" >-->
+
+            <!--  Day_14  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_14"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_14"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_14"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_14" style="@style/txt_dayAlt"      />-->
+
+            </LinearLayout>
+
+            <!--  Day_15  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_15"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_15"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_15"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_15" style="@style/txt_dayAlt"      />-->
+
+            </LinearLayout>
+
+            <!--  Day_16  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_16"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_16"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_16"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_16" style="@style/txt_dayAlt"      />-->
+            </LinearLayout>
+
+            <!--  Day_17  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_17"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_17"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_17"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_17" style="@style/txt_dayAlt"      />-->
+            </LinearLayout>
+
+            <!--  Day_18  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_18"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_18"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_18"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_18" style="@style/txt_dayAlt"      />-->
+            </LinearLayout>
+
+            <!--  Day_19  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_19"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_19"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_19"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_19" style="@style/txt_dayAlt"      />-->
+            </LinearLayout>
+
+            <!--  Day_20  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_20"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_20"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_20"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_20" style="@style/txt_dayAlt"      />-->
+            </LinearLayout>
+
+
+        <!--</LinearLayout>-->
+
+        <!--&lt;!&ndash; _____________________ Row 4 _______________ &ndash;&gt;-->
+        <!--<LinearLayout       style="@style/ll_calender_row" >-->
+
+
+
+            <!--  Day_21  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_21"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_21"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_21"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_21" style="@style/txt_dayAlt"      />-->
+
+            </LinearLayout>
+
+            <!--  Day_22  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_22"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_22"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_22"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_22" style="@style/txt_dayAlt"      />-->
+
+            </LinearLayout>
+
+            <!--  Day_23  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_23"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_23"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_23"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_23" style="@style/txt_dayAlt"      />-->
+            </LinearLayout>
+
+            <!--  Day_24  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_24"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_24"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_24"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_24" style="@style/txt_dayAlt"      />-->
+            </LinearLayout>
+
+            <!--  Day_25  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_25"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_25"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_25"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_25" style="@style/txt_dayAlt"      />-->
+            </LinearLayout>
+
+            <!--  Day_26  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_26"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_26"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_26"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_26" style="@style/txt_dayAlt"      />-->
+            </LinearLayout>
+
+            <!--  Day_27  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_27"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_27"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_27"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_27" style="@style/txt_dayAlt"      />-->
+            </LinearLayout>
+
+
+
+        <!--</LinearLayout>-->
+
+
+        <!--&lt;!&ndash; _____________________ Row 5 _______________ &ndash;&gt;-->
+        <!--<LinearLayout       style="@style/ll_calender_row" >-->
+
+            <!--  Day_28  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_28"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_28"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_28"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_28" style="@style/txt_dayAlt"      />-->
+
+            </LinearLayout>
+
+            <!--  Day_29  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_29"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_29"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_29"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_29" style="@style/txt_dayAlt"      />-->
+
+            </LinearLayout>
+
+            <!--  Day_30  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_30"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_30"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_30"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_30" style="@style/txt_dayAlt"      />-->
+            </LinearLayout>
+
+            <!--  Day_31  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_31"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_31"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_31"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_31" style="@style/txt_dayAlt"      />-->
+            </LinearLayout>
+
+            <!--  Day_32  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_32"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_32"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_32"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_32" style="@style/txt_dayAlt"      />-->
+            </LinearLayout>
+
+            <!--  Day_33  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_33"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_33"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_33"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_33" style="@style/txt_dayAlt"      />-->
+            </LinearLayout>
+
+            <!--  Day_34  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_34"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_34"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_34"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_34" style="@style/txt_dayAlt"      />-->
+            </LinearLayout>
+
+
+
+        <!--</LinearLayout>-->
+
+
+
+
+        <!--&lt;!&ndash; _____________________ Row 6 _______________ &ndash;&gt;-->
+        <!--<LinearLayout       style="@style/ll_calender_row" >-->
+
+
+            <!--  Day_35  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_35"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_35"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_35"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_35" style="@style/txt_dayAlt"      />-->
+
+            </LinearLayout>
+
+            <!--  Day_36  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_36"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_36"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_36"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_36" style="@style/txt_dayAlt"      />-->
+
+            </LinearLayout>
+
+            <!--  Day_37  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_37"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_37"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_37"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_37" style="@style/txt_dayAlt"      />-->
+            </LinearLayout>
+
+            <!--  Day_38  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_38"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_38"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_38"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_38" style="@style/txt_dayAlt"      />-->
+            </LinearLayout>
+
+            <!--  Day_39  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_39"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_39"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_39"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_39" style="@style/txt_dayAlt"      />-->
+            </LinearLayout>
+
+            <!--  Day_40  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_40"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_40"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_40"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_40" style="@style/txt_dayAlt"      />-->
+            </LinearLayout>
+
+            <!--  Day_41  -->
+            <LinearLayout           android:id="@+id/ll_dayContainer_41"    style="@style/ll_main_day">
+                <TextView           android:id="@+id/txt_day_41"    style="@style/txt_day"      />
+                <!--<LinearLayout       android:id="@+id/ll_taskCont_41"   style="@style/ll_taskCont" >          </LinearLayout>-->
+                <!--<TextView           android:id="@+id/txt_dayAlt_41" style="@style/txt_dayAlt"      />-->
+            </LinearLayout>
+
+
+        <!--</LinearLayout>-->
+
+
+
+
+
+    </GridLayout>
+
+</LinearLayout>

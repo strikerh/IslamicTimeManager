@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.hazemnabil.islamictodo2.addTask3.AddTask3Activity"
+    tools:showIn="@layout/p7_app_bar_add_task3">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="124dp"
+
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+
+        app:layout_constraintRight_toRightOf="parent"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+       >
+
+        <TextView
+            android:id="@+id/a_textView2"
+            style="@style/label"
+            android:text="المهمة"
+
+
+            />
+
+        <EditText
+            android:id="@+id/a_txt_taskName"
+            style="@style/txtBox"
+            android:ems="10"
+            android:hint="اكتب مهمتك"
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/a_textView3"
+            style="@style/label"
+            android:text="التوصيف" />
+
+        <EditText
+            android:id="@+id/a_txt_description"
+            style="@style/txtBox"
+            android:layout_height="66dp"
+            android:ems="10"
+            android:hint="اكتب وصف مهمتك"
+            android:inputType="textMultiLine"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

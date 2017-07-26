@@ -14,7 +14,9 @@ import android.widget.Toast;
 
 import com.example.hazemnabil.islamictodo2.addTask.AddTask2;
 import com.example.hazemnabil.islamictodo2.calenderDay.CalenderDay;
-import com.example.hazemnabil.islamictodo2.calenderMonth.CalenderMonth2;
+import com.example.hazemnabil.islamictodo2.calenderMonth_old.CalenderMonth2;
+import com.example.hazemnabil.islamictodo2.calenderMonth2_old.CalenderMonth3Activity;
+import com.example.hazemnabil.islamictodo2.monthCalender.ActivityMonth;
 
 public class MainActivity extends ActivityMaster
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -96,7 +98,11 @@ public class MainActivity extends ActivityMaster
         startActivity(myIntent);
     }
     public void openOther(View view) {
-        Intent myIntent = new Intent(this, Testtt2Activity.class);
+        Intent myIntent = new Intent(this, CalenderMonth3Activity.class);
+        startActivity(myIntent);
+    }
+    public void openNewOther(View view) {
+        Intent myIntent = new Intent(this, ActivityMonth.class);
         startActivity(myIntent);
     }
 }

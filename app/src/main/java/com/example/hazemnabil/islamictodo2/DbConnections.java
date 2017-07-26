@@ -10,11 +10,13 @@ import android.util.Log;
 
 import com.example.hazemnabil.islamictodo2.colection.Do;
 import com.example.hazemnabil.islamictodo2.colection.Vars;
+import com.example.hazemnabil.islamictodo2.objData.Category;
 import com.example.hazemnabil.islamictodo2.objData.Task;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
 import java.util.Random;
 
 /**
@@ -23,7 +25,7 @@ import java.util.Random;
 
 public class DbConnections extends SQLiteOpenHelper {
 
-    public static final int version = 68;
+    public static final int version = 85;
     public static final String dbName = "Tasks.db";
 
     public static final String TABLE_TASKS  = "tasks";
@@ -53,7 +55,8 @@ public class DbConnections extends SQLiteOpenHelper {
         SQL_CREATE_ENTRIES  = Task.createDbTableString();
 
         db.execSQL(SQL_CREATE_ENTRIES);
-        SQL_CREATE_ENTRIES = "CREATE TABLE if not exists \""+ TABLE_CATEGORIES +"\" (\"id\" INTEGER PRIMARY KEY AUTOINCREMENT, \"name\" TEXT, \"color\" TEXT, \"description\" TEXT, \"source\" TEXT);\n";
+       // SQL_CREATE_ENTRIES = "CREATE TABLE if not exists \""+ TABLE_CATEGORIES +"\" (\"id\" INTEGER PRIMARY KEY AUTOINCREMENT, \"name\" TEXT, \"color\" TEXT, \"description\" TEXT, \"source\" TEXT);\n";
+        SQL_CREATE_ENTRIES = Category.createDbTableString();
         db.execSQL(SQL_CREATE_ENTRIES);
         SQL_CREATE_ENTRIES = "CREATE TABLE if not exists \""+ TABLE_SUB_TASKS +"\" (\"id\" INTEGER PRIMARY KEY AUTOINCREMENT, \"TaskName\" TEXT, \"isDone\" TEXT, \"dateOfDone\" TEXT, \"order\" TEXT);\n";
         db.execSQL(SQL_CREATE_ENTRIES);
@@ -118,16 +121,17 @@ public class DbConnections extends SQLiteOpenHelper {
         if (checkDbIsNew()) {
             ContentValues values = new ContentValues();
             //name" TEXT, "color" TEXT, "" TEXT, "source" TEXT
-            insertCategory("عمل", "ff5533", "ghghgh" , "google.ocm");
-            insertCategory("شخصي", null, "شخصي" , null);
-            insertCategory("ديني", null, "ديني" , null);
-            insertCategory("المنزل", null, "المنزل" , null);
+            insertCategory("عمل", "#ff5533", "ghghgh" , "google.ocm");
+            insertCategory("شخصي", "#55ff33", "شخصي" , null);
+            insertCategory("ديني", "#5533ff", "ديني" , null);
+            insertCategory("المنزل", "#665533", "المنزل" , null);
+            insertCategory("المنزل", "#665533", "المنزل" , null);
 
             Random rand = new Random();
             insertUser("Hazem");
             int d= 1;
             int m = 4;
-            for (int i = 0; i <40 ; i++) {
+            for (int i = 0; i <140 ; i++) {
                 if (d <30) {
                     d++;
                 }else {
@@ -173,7 +177,11 @@ public class DbConnections extends SQLiteOpenHelper {
         int hours = rand.nextInt(23);
         int m = rand.nextInt(59);
         int s = rand.nextInt(59);
+        Calendar cc = Calendar.getInstance();
+        cc.set(2017,month,day,hours,m,s);
+        //long sDate = cc.getTimeInMillis();
         String sDate = "2017-"+ Do.to2Digits(month)+"-"+ Do.to2Digits(day)+" "+ Do.to2Digits(hours)+":"+ Do.to2Digits(m)+":"+ Do.to2Digits(s)+" ";
+
         JSONObject dateTimeFrom = new JSONObject();
         JSONObject dateTimeTo = new JSONObject();
         JSONObject repeat = new JSONObject();
@@ -207,13 +215,14 @@ public class DbConnections extends SQLiteOpenHelper {
         int importance = rand.nextInt(3);
         int subTasks = 0;
         int userId = 1;
+        int category = rand.nextInt(3)+1;
         String description = tasksNameStrings[rand.nextInt(13)];
         int isArchived = rand.nextInt(1);
-        int isDone = rand.nextInt(1);
-        String createdDate = "";
+        int isDone = rand.nextInt(2);
+        long createdDate = 0;
 
         Log.i(TAG, "makeRandTask: "+dateTimeFrom.toString());
-        long h = insertTask( tasksName,sDate, dateTimeFrom.toString(), dateTimeTo.toString(), repeat.toString(), importance, subTasks, userId, description, isDone, isArchived,  createdDate);
+        long h = insertTask( tasksName,sDate, dateTimeFrom.toString(), dateTimeTo.toString(), repeat.toString(), importance, subTasks, userId, description, isDone, isArchived,  createdDate,category);
         Log.i(TAG, "makeRandTask: is Done "+h);
 
 
@@ -240,7 +249,7 @@ public class DbConnections extends SQLiteOpenHelper {
         return newRowId;
     }
 
-    public long insertTask(String name,String sDate,String dateTimeFrom,String dateTimeTo,String repeat,int importance,int subTasks,int userId,String description,int isDone,int isArchived, String createdDate){
+    public long insertTask(String name,String  sDate,String dateTimeFrom,String dateTimeTo,String repeat,int importance,int subTasks,int userId,String description,int isDone,int isArchived, long createdDate,int category){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -256,6 +265,7 @@ public class DbConnections extends SQLiteOpenHelper {
         values.put(Task.Col.IS_DONE, isDone);
         values.put(Task.Col.IS_ARCHIVED, isArchived);
         values.put(Task.Col.CREATED_DATE, createdDate);
+        values.put(Task.Col.CATEGORY, category);
 
         long newRowId = db.insert(TABLE_TASKS, null, values);
         Log.i(TAG, "dummyData: TagId: " + newRowId);
@@ -283,6 +293,7 @@ public class DbConnections extends SQLiteOpenHelper {
     /*********************************************************************************************************************************
      *                                   GETing Data
      * *******************************************************************************************************************************   */
+    @Deprecated
     public Cursor getMoTaskAtDay(int day, int month, int year){
 
 
@@ -300,7 +311,7 @@ public class DbConnections extends SQLiteOpenHelper {
         return cursor;
     }
 
-
+    @Deprecated
     public Cursor selectFromTask(String where){
         SQLiteDatabase db2 = this.getReadableDatabase();
         Cursor cursor = db2.rawQuery("select * from "+TABLE_TASKS +" "+where ,null);
@@ -311,7 +322,7 @@ public class DbConnections extends SQLiteOpenHelper {
 
 
     /**************************************************************************************
-     *                    Inserting Any Data in Any Table
+     *              Public    Inserting or Getting Any Data in Any Table
      * ************************************************************************************   */
 
     public long insertData(String tableName,ContentValues Data){
@@ -329,15 +340,24 @@ public class DbConnections extends SQLiteOpenHelper {
         Cursor cursor = db2.rawQuery("select * from "+tableName +" "+whereQuery ,null);
         cursor.moveToFirst();
         DatabaseUtils.cursorRowToContentValues(cursor, result);
-        cursor.close();
+
         return result;
 
 
     }
     public Cursor getListOfRows(String tableName,String whereQuery){
         SQLiteDatabase db2 = this.getReadableDatabase();
-        if(whereQuery!=null)    whereQuery = " where "+whereQuery;
+        if(whereQuery!=null)    whereQuery = " where "+whereQuery; else whereQuery = " ";
         Cursor cursor = db2.rawQuery("select * from "+tableName + whereQuery ,null);
+
+        return cursor;
+
+    }
+    public Cursor getListOfRows(String tableName,String theSelection ,String whereQuery){
+        SQLiteDatabase db2 = this.getReadableDatabase();
+        if(whereQuery!=null)    whereQuery = " where "+whereQuery; else whereQuery = " ";
+        Cursor cursor = db2.rawQuery("select "+theSelection+" from "+tableName + whereQuery ,null);
+
         return cursor;
 
     }
@@ -353,6 +373,13 @@ public class DbConnections extends SQLiteOpenHelper {
     }
 
 
+    public Cursor rawSelection(String rawQuery){
+        SQLiteDatabase db2 = this.getReadableDatabase();
+        Cursor cursor = db2.rawQuery(rawQuery ,null);
+
+        return cursor;
+
+    }
 
 
 /****************************************************

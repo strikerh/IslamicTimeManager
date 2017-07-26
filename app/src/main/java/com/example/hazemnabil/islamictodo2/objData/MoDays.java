@@ -5,7 +5,7 @@ import android.content.Context;
 import java.util.Random;
 
 
-
+@Deprecated
 public class MoDays extends Day{
 
     public MoMonth parentMonth;
@@ -28,7 +28,7 @@ public class MoDays extends Day{
 
 
 
-
+    @Deprecated
     public Task createRandomTask() {
 
         String tasksNameStrings[] = new String[14];

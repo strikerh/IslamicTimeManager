@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.hazemnabil.islamictodo2.calenderMonth.CalenderMonth2"
+    tools:context="com.example.hazemnabil.islamictodo2.calenderMonth_old.CalenderMonth2"
     tools:showIn="@layout/app_bar_calender_month2"
     android:layoutDirection="rtl"
     android:id="@+id/content_Calender_month2">

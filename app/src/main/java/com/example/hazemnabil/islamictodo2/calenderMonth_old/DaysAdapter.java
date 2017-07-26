@@ -1,4 +1,4 @@
-package com.example.hazemnabil.islamictodo2.calenderMonth;
+package com.example.hazemnabil.islamictodo2.calenderMonth_old;
 
 import android.app.Activity;
 import android.content.Context;
@@ -88,7 +88,7 @@ public class DaysAdapter extends BaseAdapter {
 
 
 
-            if(dayPosition<moMonth.calenderDays.length) {
+            if(dayPosition<moMonth.calenderDaysTable.length) {
                 txtDay.setText(moMonth.getCalDayDataAt(dayPosition,"day_n"));
                 txtDayAlt.setText(moMonth.getCalDayDataAt(dayPosition,"dayWithMonth_alt_s"));
 

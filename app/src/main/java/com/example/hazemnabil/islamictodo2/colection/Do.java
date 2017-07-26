@@ -9,5 +9,9 @@ public class Do {
         return  ((i < 10 ? "0" : "") + i);
 
     }
+    static public boolean notNull(Object obj){
+        if(obj != null)return true;
+        return false;
+    }
 
 }
