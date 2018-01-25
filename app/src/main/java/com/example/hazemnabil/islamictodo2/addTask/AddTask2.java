@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
+import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -72,6 +73,7 @@ public class AddTask2 extends ActivityMaster
     private RadioButton rb_milady;
     private RadioButton rb_hijry;
     private TextView txt_date;
+    private TextView txt_period;
     private Spinner sp_timeName;
     private WheelPicker wp_repeatCount;
     private Spinner sp_Important;
@@ -82,6 +84,7 @@ public class AddTask2 extends ActivityMaster
     private EditText txt_description;
     private TextView txt_time;
     private ToggleButton[] tb_weekNames = new ToggleButton[7];
+    private MyDate myCurrentDay;
     /////////////////////////
 
     @Override
@@ -89,6 +92,14 @@ public class AddTask2 extends ActivityMaster
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task2);
 
+
+        Bundle extras = getIntent().getExtras();
+
+        if (extras != null) {
+            Toast.makeText(this, "يوم " +extras.getInt("day")+" "+extras.getInt("month")+" "+extras.getInt("year"), Toast.LENGTH_SHORT).show();
+            myCurrentDay = new MyDate();
+            myCurrentDay.setDate(extras.getInt("day"),extras.getInt("month"),extras.getInt("year"));
+        }
         _initUiConnection();
         _init();
 
@@ -139,6 +150,7 @@ public class AddTask2 extends ActivityMaster
         rb_milady = (RadioButton) findViewById(R.id.a_rd_milady);
         rb_hijry = (RadioButton) findViewById(R.id.a_rd_hijry);
         txt_date = (TextView) findViewById(R.id.a_txt_date);
+        txt_period = (TextView) findViewById(R.id.a_txt_period);
         sp_timeName = (Spinner) findViewById(R.id.a_sp_TimeName);
         txt_time = (TextView) findViewById(R.id.a_txt_time);
 
@@ -161,7 +173,10 @@ public class AddTask2 extends ActivityMaster
         sp_Category = (Spinner) findViewById(R.id.a_sp_Groups);
         sp_Tag = (Spinner) findViewById(R.id.a_sp_Tags);
 
-
+        if(myCurrentDay!= null) {
+            txt_date.setTag(myCurrentDay);
+            txt_date.setText(myCurrentDay.getFullDate(AppOptions.dateType));
+        }
 
     }
 
@@ -420,11 +435,9 @@ public class AddTask2 extends ActivityMaster
 
 
         Categories cats = new Categories(this);
-        cats.getCategories();
-        String[] mTestArray = new String[3];
-        mTestArray[0] = "شخصي";
-        mTestArray[1] = "عمل";
-        mTestArray[2] = "اسلامي";
+        SparseArray<Categories.Category> sp = cats.getCategories();
+        String[] mTestArray = new String[cats.getCount()];
+
 
         myadapter = new Spinner_adapter(this, cats, sp_Category, myFont, R.layout.p2_my_spinner_style);
         sp_Category.setAdapter(myadapter);
@@ -592,6 +605,19 @@ public class AddTask2 extends ActivityMaster
 
     }
 
+    // ---- Show POPs windows (DatePiker - TimePiker)  ----- \/
+    public void openDurationPiker(View view) {
+        FragmentTransaction manager = getSupportFragmentManager().beginTransaction();
+
+        TextView txt_period = (TextView) findViewById(R.id.a_txt_period) ;
+        PopDurationPiker pop = new PopDurationPiker();
+        pop.setDefault(Integer.valueOf((String) txt_period.getTag()));
+        pop.SetOutputLocation(R.id.a_txt_period);
+
+        pop.show( manager,null);
+
+    }
+
     public void openCalender2(View view) {
         FragmentTransaction manager = getSupportFragmentManager().beginTransaction();
         PopDatePiker pop = new PopDatePiker();
@@ -604,6 +630,7 @@ public class AddTask2 extends ActivityMaster
     public void openTimePiker(View view) {
         FragmentTransaction manager = getSupportFragmentManager().beginTransaction();
         PopTimePiker pop = new PopTimePiker();
+        pop.setInputDate((MyDate)txt_date.getTag());
         pop.SetOutputLocation(R.id.a_txt_time);
         pop.show( manager,null);
 
@@ -639,34 +666,43 @@ public class AddTask2 extends ActivityMaster
         if(txt_description.getText().toString()!= "")
             task.setDescription(txt_description.getText().toString());
 
+        int dateStatus = Task.NO_DATE_No_TIME;
+        if (txt_date.getTag() != null) {
+            MyDate sDate = (MyDate) txt_date.getTag();
 
-            if (txt_date.getTag() != null) {
-                MyDate sDate = (MyDate) txt_date.getTag();
+            if (txt_time.getTag() != null) {
+                PopTimePiker.SmallTime stime = (PopTimePiker.SmallTime) txt_time.getTag();
+                dateStatus = Task.HAS_DATE_HAS_TIME;
 
-                if (txt_time.getTag() != null) {
-                    PopTimePiker.SmallTime stime = (PopTimePiker.SmallTime) txt_time.getTag();
-
-                    task.setStartingTime(
-                            dateType,
-                            sDate.getDay(),
-                            sDate.getMonth011(),
-                            sDate.getYear(),
-                            Vars.TIME.SPECIFIC,
-                            stime.hour24,
-                            stime.minute
-                    );
-                }else {
-                    task.setStartingTime(
-                            dateType,
-                            sDate.getDay(),
-                            sDate.getMonth011(),
-                            sDate.getYear(),
-                            Vars.TIME.NULL,
-                            0,
-                            0
-                    );
-                }
+                task.setStartingTime(
+                        dateType,
+                        dateStatus,
+                        sDate.getDay(),
+                        sDate.getMonth011(),
+                        sDate.getYear(),
+                        Vars.TIME.SPECIFIC,
+                        stime.hour24,
+                        stime.minute
+                );
+            } else {
+                dateStatus = Task.HAS_DATE_NO_TIME;
+                task.setStartingTime(
+                        dateType,
+                        dateStatus,
+                        sDate.getDay(),
+                        sDate.getMonth011(),
+                        sDate.getYear(),
+                        Vars.TIME.NULL,
+                        0,
+                        0
+                );
             }
+        }
+
+
+        if (txt_period.getTag() != null) {
+            task._date_time_to = txt_period.getTag().toString();
+        }
 
 
 
@@ -718,6 +754,8 @@ public class AddTask2 extends ActivityMaster
 
 
     }
+
+
 
 
     /////////////////////////////////////////////////////////////

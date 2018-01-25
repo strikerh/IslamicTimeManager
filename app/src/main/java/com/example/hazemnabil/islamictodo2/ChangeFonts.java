@@ -44,4 +44,7 @@ import com.example.hazemnabil.islamictodo2.colection.Vars;
             newValue = (String) value;
         return newValue;
     }
+    public static Typeface  getTypeface(Context context){
+        return Typeface.createFromAsset(context.getAssets(), "NotoKufiArabic-Regular.ttf");
+    }
 }

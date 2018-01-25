@@ -31,7 +31,9 @@ public class Categories {
         return  mCategoriesMap;
     }
 
-
+    public int getCount(){
+        return mCategoriesMap.size();
+    }
 
 
 

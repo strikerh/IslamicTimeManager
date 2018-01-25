@@ -36,6 +36,14 @@ public class Vars {
         public static final int MONTHLY = 2;
         public static final int[] REPEAT_TYPE  ={DAILY,WEEKLY,MONTHLY};
     }
+    public static class DATE_STATUE {
+        public static final int NO_DATE_No_TIME = 0;
+        public static final int HAS_DATE_HAS_TIME = 1;
+        public static final int HAS_DATE_NO_TIME = 2;
+        public static final int No_DATE_HAS_TIME = 2;
+
+    }
+
 
 
     public static final String[] MILADY_MONTHS_AR = {"يناير","فبراير","مارس","ابريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"};

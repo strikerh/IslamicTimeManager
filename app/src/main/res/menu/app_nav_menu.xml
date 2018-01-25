@@ -3,31 +3,35 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/nav_day"
             android:icon="@drawable/ic_menu_camera"
             android:title=" اليومي" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_month"
             android:icon="@drawable/ic_menu_gallery"
             android:title=" الشهري" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_categories"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="قائمة الأعمال" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/nav_tags"
             android:icon="@drawable/ic_menu_manage"
             android:title="تصنيفات الأعمال" />
         <item
-            android:id="@+id/nav_manage1"
+            android:id="@+id/nav_settings"
             android:icon="@drawable/ic_menu_manage"
             android:title="الإعدادات" />
+        <item
+            android:id="@+id/nav_test"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="تجربة" />
     </group>
 
     <item android:title="النتائج المتاحة">
         <menu>
             <item
-                android:id="@+id/nav_share"
+                android:id="@+id/nav_download"
                 android:icon="@drawable/ic_menu_share"
                 android:title="حمل المزيد" />
 

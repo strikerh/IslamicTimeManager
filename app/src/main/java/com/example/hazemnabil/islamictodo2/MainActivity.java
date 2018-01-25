@@ -18,6 +18,7 @@ import com.example.hazemnabil.islamictodo2.calenderMonth_old.CalenderMonth2;
 import com.example.hazemnabil.islamictodo2.calenderMonth2_old.CalenderMonth3Activity;
 import com.example.hazemnabil.islamictodo2.monthCalender.ActivityMonth;
 
+@Deprecated
 public class MainActivity extends ActivityMaster
         implements NavigationView.OnNavigationItemSelectedListener {
 

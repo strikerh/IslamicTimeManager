@@ -462,6 +462,21 @@ public class PrayTime {
         }
         return result;
     }
+    // convert double hours to 24h format
+    public int[] floatToTimeArray(double time) {
+
+        String result;
+
+        if (Double.isNaN(time)) {
+            return null;
+        }
+
+        time = fixHour(time + 0.5 / 60.0); // add 0.5 minutes to round
+        int hours = (int) Math.floor(time);
+        double minutes = Math.floor((time - hours) * 60.0);
+
+        return new int[]{hours,(int)Math.round(minutes)};
+    }
 
     // convert double hours to 12h format
     public String floatToTime12(double time, boolean noSuffix) {

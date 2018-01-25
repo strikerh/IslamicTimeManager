@@ -56,7 +56,9 @@
     android:id="@+id/ll_task_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:padding="2dp"
+    android:background="#fafafa">
         <CheckBox
             android:id="@+id/chk_checkBox"
             android:layout_width="wrap_content"
@@ -83,26 +85,21 @@
                     android:textSize="14sp"
                     android:textColor="#000"/>
 
-                <TextView
-                    android:id="@+id/txt_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="بعد الشروق من 5:00"
-                    android:textSize="10sp"
-                    android:textColor="#000"/>
+
              </LinearLayout>
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/txt_taskCategory"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"
+                    android:layout_weight="2"
                     android:background="#ee2233"
                     android:paddingEnd="10dp"
                     android:paddingStart="10dp"
@@ -112,8 +109,9 @@
                     android:textSize="9sp"
                     />
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/txt_taskTag"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="#22ee33"
@@ -124,35 +122,57 @@
                     android:layout_marginEnd="10dp"
                     android:textSize="9sp" />
 
-                <RatingBar
-                    android:id="@+id/ratingBar"
-                    style="@style/Widget.AppCompat.RatingBar.Small"
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/txt_time"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:numStars="3"
-                    android:rating="1.5"
-                    android:stepSize="0.5" />
+                    android:text="بعد الشروق من 5:00"
+                    android:textSize="10sp"
+                    android:textColor="#000"/>
+
+                <RatingBar
+                    android:visibility="gone"
+                    android:id="@+id/ratingBar"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.5"
+                    android:numStars="1"
+                    android:rating="0"
+                    android:gravity="left"
+                    android:stepSize="1" />
 
             </LinearLayout>
 
         </LinearLayout>
         <LinearLayout
-            android:layout_width="@dimen/tools_height"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
 
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <ImageButton
+                android:visibility="gone"
                 android:id="@+id/btn_edit"
                 android:layout_width="@dimen/tools_height"
                 android:layout_height="@dimen/tools_height"
                android:background="#00ffffff"
+
                 app:srcCompat="@drawable/ic_edit_black_24dp" />
 
             <ImageButton
-                android:id="@+id/btn_move"
+                android:scaleX="0.7"
+                android:scaleY="0.7"
+                android:id="@+id/btn_star"
                 android:layout_width="@dimen/tools_height"
+                android:layout_height="@dimen/tools_height"
+                android:background="#00ffffff"
+                app:srcCompat="@drawable/ic_star_black_24dp"
+                android:tint="@color/colorAccent"/>
+            <ImageButton
+                android:id="@+id/btn_move"
+                android:layout_width="20dp"
                 android:layout_height="@dimen/tools_height"
                 android:background="#00ffffff"
                 app:srcCompat="@drawable/ic_more_vert_black_24dp" />

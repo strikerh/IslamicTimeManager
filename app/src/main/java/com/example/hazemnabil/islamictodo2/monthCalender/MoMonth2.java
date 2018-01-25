@@ -64,12 +64,12 @@ public class MoMonth2 {
             int DayOfWeek = myDate.getCalendar().get(Calendar.DAY_OF_WEEK);
             int firstDayOfWeek = myDate.getCalendar().getFirstDayOfWeek();
 
-            firstDayOfMoMonth = firstDayOfWeek - DayOfWeek;
+            firstDayOfMoMonth = firstDayOfWeek - (DayOfWeek);
 
             if (firstDayOfMoMonth <= -7) firstDayOfMoMonth += 7;
             if (firstDayOfMoMonth > 0) firstDayOfMoMonth -= 7;
         }
-        return firstDayOfMoMonth;
+        return firstDayOfMoMonth+1; // adding 1 i don't know why??
     }
 
     public int countDays(){

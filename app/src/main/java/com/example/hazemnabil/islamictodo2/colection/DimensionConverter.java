@@ -2,6 +2,7 @@ package com.example.hazemnabil.islamictodo2.colection;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.util.DisplayMetrics;
 
 /**
@@ -11,6 +12,7 @@ import android.util.DisplayMetrics;
 public class DimensionConverter {
     private Context mContext ;
     public DisplayMetrics displayMetrics;
+    public int topHeight ;
 
 
     public  DimensionConverter(Context mContext) {
@@ -52,10 +54,39 @@ public class DimensionConverter {
 
     public int pxToRatio(int px) {
 
-        return Math.round( px*100/displayMetrics.heightPixels);
+        return Math.round( px*100/(displayMetrics.heightPixels - getStatusBarHeight()-getToolBarHeight()));
     }
     public int ratioToPx(int ratio) {
 
-        return Math.round(displayMetrics.heightPixels *ratio/100);
+        return Math.round((displayMetrics.heightPixels - getStatusBarHeight()-getToolBarHeight()) *ratio/100);
+    }
+
+    private int getNavigationHeight(){
+        Resources resources = mContext.getResources();
+        int resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            return resources.getDimensionPixelSize(resourceId);
+        }
+        return 0;
+    }
+    public int getStatusBarHeight() {
+        int result = 0;
+        int resourceId = mContext.getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = mContext.getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }
+    public int  getToolBarHeight() {
+        int result = 0;
+
+        int resourceId = mContext.getResources().getIdentifier("action_bar_size", "dimen", "android");
+        if (resourceId > 0) {
+            result = mContext.getResources().getDimensionPixelSize(resourceId);
+        }
+        if (result == 0){
+            result = dpToPx(56);
+        }
+        return result;
     }
 }

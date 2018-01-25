@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * {@link RecyclerView.Adapter} that can display a {@link TaskItem} and makes a call to the
  * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
+ * TODO: Replace the implementation with Code for your data type.
  */
 public class MySubTaskRecyclerViewAdapter extends RecyclerView.Adapter<MySubTaskRecyclerViewAdapter.ViewHolder> {
 

@@ -29,10 +29,9 @@ import com.example.hazemnabil.islamictodo2.R;
 import com.example.hazemnabil.islamictodo2.addTask.AddTask2;
 import com.example.hazemnabil.islamictodo2.colection.DimensionConverter;
 import com.example.hazemnabil.islamictodo2.colection.Vars;
-import com.example.hazemnabil.islamictodo2.myCalender.SmallDate;
+import com.example.hazemnabil.islamictodo2.myCalender.MyDate;
 import com.example.hazemnabil.islamictodo2.objData.Task;
 
-import java.util.Calendar;
 import java.util.List;
 
 public class CalenderDay extends ActivityMaster
@@ -47,9 +46,13 @@ public class CalenderDay extends ActivityMaster
     DimensionConverter dimensionConverter;
     private TextView txt_notDated;
     private TaskHasDateFragment fragment;
+    private TaskHasNotDateFragment fragmentNotDate;
+    private static final int splitterHeightInDp = 36;
+    public int splitterHeightInPx;
 
-    public Calendar currentDay;
-    public SmallDate smallCurrentDay;
+   // public Calendar currentDay;
+    //public SmallDate smallCurrentDay;
+    public MyDate myCurrentDay;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -62,6 +65,33 @@ public class CalenderDay extends ActivityMaster
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;   // The {@link ViewPager} that will host the section contents.
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.i(TAG, "________________________ 1.onCreate: ");
+        myCurrentDay = new MyDate();
+
+
+        Bundle extras = getIntent().getExtras();
+
+        if (extras != null) {
+            Toast.makeText(this, "يوم " +extras.getInt("day")+" "+extras.getInt("month")+" "+extras.getInt("year"), Toast.LENGTH_SHORT).show();
+            myCurrentDay.setDate(extras.getInt("day"),extras.getInt("month"),extras.getInt("year"));
+        }
+
+        // smallCurrentDay = new SmallDate(currentDay);
+
+        on1_activityInit();
+
+        ui_makeDraggablePnl();
+
+        on1_createTaskFrag();
+
+        on1_createTopWeekTab();
+
+        gotoDate(myCurrentDay);
+
+    }
 
     @Override
     protected void onStart() {
@@ -73,31 +103,16 @@ public class CalenderDay extends ActivityMaster
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.i(TAG, "________________________ 1.onCreate: ");
-        currentDay = Calendar.getInstance();
+    protected void onResume() {
 
-        Bundle extras = getIntent().getExtras();
-
-        if (extras != null) {
-            Toast.makeText(this, "يوم " +extras.getInt("day")+" "+extras.getInt("month")+" "+extras.getInt("year"), Toast.LENGTH_SHORT).show();
-            currentDay.set(extras.getInt("year"),extras.getInt("month"),extras.getInt("day"));
-        }
-
-        smallCurrentDay = new SmallDate(currentDay);
-
-        _activityInit();
-
-        _makeDraggablePnl();
-
-        _createTaskFrag();
-
-        _CreateTopWeekTab();
-
+        super.onResume();
+        fragment.updateView(myCurrentDay.getDay(),myCurrentDay.getMonth011(),myCurrentDay.getYear());
+        fragmentNotDate.updateView(myCurrentDay.getDay(),myCurrentDay.getMonth011(),myCurrentDay.getYear());
     }
 
-    private void _activityInit() {
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private void on1_activityInit() {
         Log.i(TAG, "___________________ 1.1_activityInit: ");
 
         setContentView(R.layout.activity_calender_day);
@@ -122,7 +137,14 @@ public class CalenderDay extends ActivityMaster
 
     }
 
-    private void _makeDraggablePnl() {
+
+
+
+
+
+
+
+    private void ui_makeDraggablePnl() {
         Log.i(TAG, "___________________ 1.2_makeDraggablePnl: ");
         /**
          *    Make draggable pnl
@@ -130,10 +152,18 @@ public class CalenderDay extends ActivityMaster
         ConstraintLayout _root = (ConstraintLayout) findViewById(R.id._root);
         txt_notDated = (TextView) findViewById(R.id.txt_notdated);
 
+
+
+
+
+
         //AttributeSet hh =  txt_notDated.attr
         txt_notDatedParams = (ConstraintLayout.LayoutParams) txt_notDated.getLayoutParams();
         dimensionConverter = new DimensionConverter(this);
-        txt_notDatedParams.topMargin = dimensionConverter.ratioToPx(70);
+        splitterHeightInPx = dimensionConverter.dpToPx(splitterHeightInDp);
+
+        txt_notDatedParams.topMargin = dimensionConverter.ratioToPx(100)- splitterHeightInPx ;
+      //  txt_notDatedParams.topMargin = dimensionConverter.ratioToPx(110)- splitterHeightInPx ;
         Log.i(TAG, "onCreate:dimensionConverter.displayMetrics: " + dimensionConverter.pxToDp(dimensionConverter.displayMetrics.heightPixels));
 
         txt_notDated.setLayoutParams(txt_notDatedParams);
@@ -141,37 +171,37 @@ public class CalenderDay extends ActivityMaster
         makeDraggable();
     }
 
-    private void _createTaskFrag() {
+    private void on1_createTaskFrag() {
         Log.i(TAG, "___________________ 1.3_createTaskFrag: ");
         fragment = (TaskHasDateFragment) getSupportFragmentManager().findFragmentById(R.id.fragment2);
-        fragment.updateView(smallCurrentDay.day,smallCurrentDay.month011,smallCurrentDay.year);
+        fragmentNotDate = (TaskHasNotDateFragment) getSupportFragmentManager().findFragmentById(R.id.fragment3);
+        //fragment.updateView(myCurrentDay.getDay(),myCurrentDay.getMonth011(),myCurrentDay.getYear());
 
         //TaskHasDateFragment fragment2 = (TaskHasDateFragment) getSupportFragmentManager().findFragmentById(R.id.fragment3);
        // fragment2.updateView(smallCurrentDay.day,smallCurrentDay.month011,smallCurrentDay.year);
     }
 
-    public void _CreateTopWeekTab(){
+    public void on1_createTopWeekTab(){
         Log.i(TAG, "___________________ 1.4_CreateTopWeekTab: ");
 
 
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),smallCurrentDay);
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),myCurrentDay);
         mViewPager = (ViewPager) findViewById(R.id.container);
-
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
 
-        Calendar c1 = currentDay;
 
-        int pagerPosition;
 
-        pagerPosition = c1.get(Calendar.WEEK_OF_YEAR);
-        c1.add(Calendar.YEAR,-1);
-        pagerPosition += c1.getMaximum(Calendar.WEEK_OF_YEAR);
-        pagerPosition -= 1;
+//        pagerPosition = c1.get(Calendar.WEEK_OF_YEAR);
+//        c1.add(Calendar.YEAR,-1);
+//        //c1.set(Calendar.DAY_OF_YEAR, c1.getActualMaximum(Calendar.DAY_OF_YEAR));
+//
+//        pagerPosition += c1.getActualMaximum(Calendar.WEEK_OF_YEAR);
+//        pagerPosition -= 2;
 
-        mViewPager.setCurrentItem(pagerPosition);
 
-        WeekTabFragment frag =(WeekTabFragment)((SectionsPagerAdapter) mViewPager.getAdapter()).getItem(pagerPosition);
+
+
 
 
         mViewPager.addOnPageChangeListener (new ViewPager.OnPageChangeListener() {
@@ -179,20 +209,22 @@ public class CalenderDay extends ActivityMaster
                 Log.i(TAG, "_________L________ onPageScrollStateChanged: "+state);
             }
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-              //  Log.i(TAG, "________L_________ onPageScrolled: "+position);
+                //  Log.i(TAG, "________L_________ onPageScrolled: "+position);
             }
 
             public void onPageSelected(int position) {
                 // Check if this is the page you want.
                 Log.i(TAG, "_______L__________ onPageSelected: "+position);
                 //this;
-                WeekTabFragment frag =(WeekTabFragment)((SectionsPagerAdapter) mViewPager.getAdapter()).getItem(position);
+                //WeekTabFragment frag =(WeekTabFragment)((SectionsPagerAdapter) mViewPager.getAdapter()).getItem(position);
                 List<Fragment> fragList = getSupportFragmentManager().getFragments();
                 for (int i = 0; i < fragList.size(); i++) {
                     if(fragList.get(i) instanceof WeekTabFragment){
                         WeekTabFragment wtf= (WeekTabFragment) fragList.get(i);
+                        wtf.checkDay(myCurrentDay);
                         if (wtf.tabNum == position){
-                            wtf.checkDay(smallCurrentDay);
+
+                            CalenderDay.this.getSupportActionBar().setTitle(wtf.getMonths());
                         }
                     }
                 }
@@ -202,7 +234,26 @@ public class CalenderDay extends ActivityMaster
 
     }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    private void gotoDate(MyDate myDate){
+
+
+        int pagerPosition;
+        pagerPosition = WeekTabFragment.calculatePageFromDate( myDate.getCalendar());
+        mViewPager.setCurrentItem(pagerPosition);
+
+
+        this.getSupportActionBar().setTitle(myDate.getMonthName()+" " +myDate.getYear());
+        fragment.updateView(myDate.getDay(),myDate.getMonth011(),myDate.getYear());
+        fragmentNotDate.updateView(myDate.getDay(),myDate.getMonth011(),myDate.getYear());
+    }
+
+
+
+
+
+
 
     private void makeDraggable() {
         Log.i(TAG, "______________ 1.2.1.makeDraggable: ");
@@ -221,7 +272,15 @@ public class CalenderDay extends ActivityMaster
                         break;
 
                     case MotionEvent.ACTION_UP:
-                        Log.i(TAG, "onTouch: ACTION_UP");
+                        Log.i(TAG, "onTouch: ACTION_UP : "+dimensionConverter.pxToRatio(txt_notDatedParams.topMargin));
+                        if(dimensionConverter.pxToRatio(txt_notDatedParams.topMargin)>100-dimensionConverter.pxToRatio(splitterHeightInPx)){
+                            txt_notDatedParams.topMargin = dimensionConverter.ratioToPx(100) -splitterHeightInPx;
+                            txt_notDated.setLayoutParams(txt_notDatedParams);
+                        }
+                        if(dimensionConverter.pxToRatio(txt_notDatedParams.topMargin)<9){
+                            txt_notDatedParams.topMargin = dimensionConverter.ratioToPx(9) ;
+                            txt_notDated.setLayoutParams(txt_notDatedParams);
+                        }
                         break;
 
                     case MotionEvent.ACTION_POINTER_DOWN:
@@ -267,21 +326,16 @@ public class CalenderDay extends ActivityMaster
     }
 
 
-    @Override
-    protected void onResume() {
 
-        super.onResume();
-        fragment.updateView(smallCurrentDay.day,smallCurrentDay.month011,smallCurrentDay.year);
-    }
 
     @Override
     public void onWeekTabClicked(CheckableLinearLayout view, String test) {
         Log.i(TAG, "_________________ onWeekTabClicked: ");
         TextView tx = (TextView)view.getChildAt(1);
-        TaskHasDateFragment fragment = (TaskHasDateFragment) getSupportFragmentManager().findFragmentById(R.id.fragment2);
-        currentDay.set(view.nDay,view.nMonth011,view.nYear);
-        smallCurrentDay.set(view.nDay,view.nMonth011,view.nYear);
+        //TaskHasDateFragment fragment = (TaskHasDateFragment) getSupportFragmentManager().findFragmentById(R.id.fragment2);
+        myCurrentDay.setDate(view.nDay,view.nMonth011,view.nYear);
         fragment.updateView(view.nDay,view.nMonth011,view.nYear);
+        fragmentNotDate.updateView(view.nDay,view.nMonth011,view.nYear);
         Log.i(Vars.TAG, "onClick: ++++++++++++++++++ "+tx.getText() +" "+ view.nTab +" "+ view.nDay +" "+ view.nYear);
 
     }
@@ -289,7 +343,7 @@ public class CalenderDay extends ActivityMaster
     @Override
     public void onWeekTabLoaded(WeekTabFragment frag,int tabNum) {
         Log.i(TAG, "_________________ onWeekTabLoaded: ");
-        frag.checkDay(smallCurrentDay);
+        frag.checkDay(myCurrentDay);
     }
 
 
@@ -310,7 +364,11 @@ public class CalenderDay extends ActivityMaster
 
 
         }else if (id == R.id.menu_add_new) {
+            Log.i(TAG, "onOptionsItemSelected:-------------------------- ");
             Intent myIntent = new Intent(this,AddTask2.class);
+            myIntent.putExtra("day", myCurrentDay.getDay());
+            myIntent.putExtra("month", myCurrentDay.getMonth011() );
+            myIntent.putExtra("year", myCurrentDay.getYear());
             startActivity(myIntent);
             return true;
         }
@@ -329,13 +387,12 @@ public class CalenderDay extends ActivityMaster
      */
     public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
-        Calendar mCal;
+       // Calendar mCal;
 
-        public SectionsPagerAdapter(FragmentManager fm, SmallDate smDay) {
+        public SectionsPagerAdapter(FragmentManager fm, MyDate myDate) {
             super(fm);
             Log.i(TAG, "_____________ PagerAdapter__ PagerAdapter(Constructor): ");
-            mCal = Calendar.getInstance();
-            mCal.set(smDay.day,smDay.month011,smDay.year);
+          //  mCal = myDate.getCalendar();
 
 
         }
@@ -351,7 +408,7 @@ public class CalenderDay extends ActivityMaster
         @Override
         public int getCount() {
            // Log.i(TAG, "_____________ PagerAdapter__ getCount: 160");
-            return 160;
+            return WeekTabFragment.CountOfWeeks();
         }
 
         @Override

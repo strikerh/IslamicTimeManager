@@ -48,6 +48,10 @@ public class Task {
     public String _repeat;
     public int _importance;
 
+    public JSONObject _json_date_time_from ;
+    public JSONObject _json_date_time_to ;
+    public JSONObject _json_repeat;
+
     public int _subTasks;
     public int _userId;
     public int _category;
@@ -64,6 +68,7 @@ public class Task {
     public int _stime_h;
     public int _stime_m;
     public int _stime_s;
+    public long _stime_timestamp;
 
     public String _catName;
     public String _catColor;
@@ -119,12 +124,21 @@ public class Task {
         this._description = description;
     }
 
-    private JSONObject createJsonDateTime(int dateType, int day, int month, int year, int timeType, int hours24_Or_TimeName, int minutes_Or_timeModifyByMinutes){
+
+    /* dateStatue VARS  */
+    public static final int NO_DATE_No_TIME = 0;
+    public static final int HAS_DATE_HAS_TIME = 1;
+    public static final int HAS_DATE_NO_TIME = 2;
+    public static final int No_DATE_HAS_TIME = 3;
+
+    private JSONObject createJsonDateTime(int dateType, int dateStatue, int day, int month, int year, int timeType, int hours24_Or_TimeName, int minutes_Or_timeModifyByMinutes){
         JSONObject dateTimeFrom = new JSONObject();
 
 
         try {
+            dateTimeFrom.put("version", 2);
             dateTimeFrom.put("type", dateType);
+            dateTimeFrom.put("datestatue", dateStatue);
             dateTimeFrom.put("date", year +"/" +Do.to2Digits(month)+  "/" +Do.to2Digits(day));
             dateTimeFrom.put("year", year);
             dateTimeFrom.put("month",Do.to2Digits(month));
@@ -155,11 +169,33 @@ public class Task {
         return dateTimeFrom;
     }
 
+    public static final int DT_DATE_TYPE = 0;
+    public static final int DT_DATE_STATUE = 1;
+    public static final int DT_DAY = 2;
+    public static final int DT_MONTH = 3;
+    public static final int DT_YEAR = 4;
+    public static final int DT_TIME_TYPE = 5;
+    public static final int DT_HOURS_24_OR_TIME_NAME = 6;
+    public static final int DT_MINUTES_OR_TIME_MODIFY_BY_MINUTES = 7;
 
+public JSONObject getDateTimeFromObj(){
+    if(_json_date_time_from == null){
+        if(_date_time_from != null)
+        try {
+            _json_date_time_from = new JSONObject( _date_time_from);
+            return _json_date_time_from;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-    public void setStartingTime(int dateType, int day,int month011,int year, int timeType, int hours24_Or_TimeName, int minutes_Or_timeModifyByMinutes){
+    }
 
-        JSONObject dateTimeFrom = createJsonDateTime( dateType,  day, month011+1, year,timeType,  hours24_Or_TimeName,  minutes_Or_timeModifyByMinutes);
+    return null;
+}
+
+    public void setStartingTime(int dateType, int dateStatue, int day,int month011,int year, int timeType, int hours24_Or_TimeName, int minutes_Or_timeModifyByMinutes){
+
+        JSONObject dateTimeFrom = createJsonDateTime( dateType, dateStatue,  day, month011+1, year,timeType,  hours24_Or_TimeName,  minutes_Or_timeModifyByMinutes);
 
         if(year >1800)
             _sdate  = year+"-"+ Do.to2Digits(month011+1)+"-"+ Do.to2Digits(day)+" "+ Do.to2Digits(hours24_Or_TimeName)+":"+ Do.to2Digits(minutes_Or_timeModifyByMinutes)+":"+ "00";
@@ -173,9 +209,9 @@ public class Task {
 
 
 
-    public void setEndTime(int dateType, int day,int month,int year, int timeType, int hours24_Or_TimeName, int minutes_Or_timeModifyByMinutes){
+    public void setEndTime(int dateType, int dateStatue, int day,int month,int year, int timeType, int hours24_Or_TimeName, int minutes_Or_timeModifyByMinutes){
 
-        JSONObject dateTimeFrom = createJsonDateTime( dateType,  day, month, year,timeType,  hours24_Or_TimeName,  minutes_Or_timeModifyByMinutes);
+        JSONObject dateTimeFrom = createJsonDateTime( dateType, dateStatue,  day, month, year,timeType,  hours24_Or_TimeName,  minutes_Or_timeModifyByMinutes);
        _date_time_to = dateTimeFrom.toString();
     }
 
@@ -263,13 +299,26 @@ public class Task {
         if (taskContent.get("stime_h") != null)           this._stime_h           =  taskContent.getAsInteger("stime_h");
         if (taskContent.get("stime_m") != null)           this._stime_m           =  taskContent.getAsInteger("stime_m");
         if (taskContent.get("stime_s") != null)           this._stime_s           =  taskContent.getAsInteger("stime_s");
+        if (taskContent.get("stime_timestamp") != null)   this._stime_timestamp   =  taskContent.getAsLong("stime_timestamp");
 
         if (taskContent.get("cat_name") != null)           this._catName          =  taskContent.getAsString("cat_name");
         if (taskContent.get("cat_color") != null)           this._catColor        =  taskContent.getAsString("cat_color");
 
+        if(myTime== null) {
+            Calendar cal = Calendar.getInstance();
+            if(this._stime_timestamp != 0) {
+                cal.setTimeInMillis(this._stime_timestamp * 1000);
 
-        this._sTime_string =  myTime.checkWhen_str(this._stime_h,this._stime_m);
-        this._posInTimes =  myTime.checkWhen(this._stime_h,this._stime_m);
+                myTime = new MyTime(cal);
+                this._sTime_string = myTime.checkWhen_str(this._stime_h, this._stime_m);
+                this._posInTimes = myTime.checkWhen(this._stime_h, this._stime_m);
+            }
+
+        }else{
+            this._sTime_string = myTime.checkWhen_str(this._stime_h, this._stime_m);
+            this._posInTimes = myTime.checkWhen(this._stime_h, this._stime_m);
+
+        }
 //        if (taskContent.get(Col.CATEGORY) != null) {
 //            this._category  = Integer.parseInt((String) taskContent.get(Col.CATEGORY) ) ;
 //            this._categoryObj = allCategories.get(this._category);
@@ -454,7 +503,21 @@ public class Task {
 
 
         DbConnections dbConnections = new DbConnections(mContext);
-        ContentValues row = dbConnections.getFirstRow(DbConnections.TABLE_TASKS, "id = "+_id);
+      // ContentValues row = dbConnections.getFirstRow(DbConnections.TABLE_TASKS, "id = "+_id);
+
+        String rawSelection = "";
+        rawSelection += "SELECT tasks.* , tasks.sdate, strftime('%d',sdate) as d_day, strftime('%m',sdate) as d_month, strftime('%Y',sdate) as d_year, strftime('%s',sdate) as stime_timestamp,";
+        rawSelection +=" categories.name as cat_name, categories.color as cat_color  ";
+        rawSelection +=" FROM tasks INNER JOIN categories";
+        rawSelection +=" on categories.id = tasks.category";
+        rawSelection +=" WHERE tasks.id = "+_id;
+        DbConnections db = new DbConnections(mContext);
+
+        ContentValues row =  new ContentValues() ;
+        Cursor row5 = db.rawSelection(rawSelection);
+        row5.moveToFirst();
+        DatabaseUtils.cursorRowToContentValues(row5, row);
+
 
         try {
             fillThisTask( row );

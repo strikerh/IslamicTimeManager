@@ -38,7 +38,7 @@ public class PopDatePiker extends DialogFragment implements View.OnClickListener
     private MyDate sDate;
     private String[] sdateStr = new String[3];
    // private DatePicker dp ;
-    private AppCompatActivity mComtext;
+    private AppCompatActivity mContext;
     private int placeID =-1;
 
     private WheelPicker wp_Day, wp_Month, wp_Year;
@@ -60,7 +60,7 @@ public class PopDatePiker extends DialogFragment implements View.OnClickListener
         // Inflate the layout for this fragment
         view1 =  inflater.inflate(R.layout.p2_popup_date_piker, container, false);
         getDialog().setTitle("تحديد التاريخ");
-        mComtext = (AppCompatActivity)  getActivity();
+        mContext = (AppCompatActivity)  getActivity();
 
         _init();
 
@@ -71,14 +71,14 @@ public class PopDatePiker extends DialogFragment implements View.OnClickListener
         _setListener();
         _actionFooter();
 
-         ChangeFonts.overrideFonts(mComtext,view1);
+         ChangeFonts.overrideFonts(mContext,view1);
 
         return view1;
 
     }
     private void _init() {
 
-        txt_outputLocation = (TextView) mComtext.findViewById(placeID);
+        txt_outputLocation = (TextView) mContext.findViewById(placeID);
 
         wp_Day = (WheelPicker) view1.findViewById(R.id.wheel_day);
         wp_Month = (WheelPicker) view1.findViewById(R.id.wheel_month);
@@ -134,7 +134,8 @@ public class PopDatePiker extends DialogFragment implements View.OnClickListener
         wp_Year.setData(years);
         wp_Month.setData(months);
 
-
+        wp_Year.setTypeface(ChangeFonts.getTypeface(mContext));
+        wp_Month.setTypeface(ChangeFonts.getTypeface(mContext));
 
 
 

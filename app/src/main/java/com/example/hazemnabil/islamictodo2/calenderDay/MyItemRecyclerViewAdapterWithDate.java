@@ -1,6 +1,7 @@
 package com.example.hazemnabil.islamictodo2.calenderDay;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,15 +19,17 @@ import com.example.hazemnabil.islamictodo2.R;
 import com.example.hazemnabil.islamictodo2.dummy.DummyContent.DummyItem;
 import com.example.hazemnabil.islamictodo2.myCalender.MyTime;
 import com.example.hazemnabil.islamictodo2.objData.Task;
+import com.example.hazemnabil.islamictodo2.viewTask.TaskItemDetailActivity;
+import com.example.hazemnabil.islamictodo2.viewTask.TaskItemDetailFragment;
 
 import java.util.List;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
  * specified {@link FragmentListener}.
- * TODO: Replace the implementation with code for your data type.
+ * TODO: Replace the implementation with Code for your data type.
  */
-public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
+public class MyItemRecyclerViewAdapterWithDate extends RecyclerView.Adapter<MyItemRecyclerViewAdapterWithDate.ViewHolder> {
 
     private static final String TAG ="zoma" ;
     private final List<Task> taskList;
@@ -36,7 +39,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     MyTime myTime = new MyTime();
 
 
-    public MyItemRecyclerViewAdapter(MyTime time, List<Task> taskList, FragmentListener listener) {
+    public MyItemRecyclerViewAdapterWithDate(MyTime time, List<Task> taskList, FragmentListener listener) {
         this.taskList =  taskList;
         this.mListener = listener;
          myTime = time;
@@ -68,7 +71,17 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 
            //holder.root_task_item
            holder.chk_checkBox.setChecked(holder.mTask.getDone());
-            holder.txt_task.setText(holder.mTask.getTaskName());
+           holder.txt_task.setText(holder.mTask.getTaskName());
+           holder.txt_task.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+
+                   Intent intent = new Intent(mContext, TaskItemDetailActivity.class);
+                   intent.putExtra(TaskItemDetailFragment.ARG_ITEM_ID, holder.mTask._id);
+
+                   mContext.startActivity(intent);
+               }
+           });
 
 
 

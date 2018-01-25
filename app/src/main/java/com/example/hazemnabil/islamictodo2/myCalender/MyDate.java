@@ -96,6 +96,8 @@ public class MyDate {
             cal = UmmalquraCalendar.getInstance();
         }
         cal.set(year, month011, day);
+        cal.setFirstDayOfWeek(AppOptions.firstDayOfWeek);
+
         this.day = cal.get(Calendar.DAY_OF_MONTH);
         this.month011 = cal.get(Calendar.MONTH);
         this.year = cal.get(Calendar.YEAR);

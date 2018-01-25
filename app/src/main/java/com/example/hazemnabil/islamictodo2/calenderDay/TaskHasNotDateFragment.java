@@ -10,9 +10,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.hazemnabil.islamictodo2.R;
+import com.example.hazemnabil.islamictodo2.myCalender.MyTime;
+
+import java.util.Calendar;
 
 /**
  * A fragment representing a list of Items.
@@ -30,9 +32,10 @@ public class TaskHasNotDateFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private int mDay = 1;
-    private int mMonth = 1;
+    private int mMonth011 = 1;
     private int mYear = 1;
     private FragmentListener mListener;
+    RecyclerView recyclerView;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -59,7 +62,7 @@ public class TaskHasNotDateFragment extends Fragment {
 
         if (getArguments() != null) {
             mDay = getArguments().getInt(DAY);
-            mMonth = getArguments().getInt(MONTH);
+            mMonth011 = getArguments().getInt(MONTH);
             mYear = getArguments().getInt(YEAR);
 
 
@@ -69,28 +72,21 @@ public class TaskHasNotDateFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.p4_fragment_item_list, container, false);
+        View view = inflater.inflate(R.layout.p4_fragment_item_list_nodate, container, false);
 
         Log.i(TAG, "onCreateView++++++++++: "+this);
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
-            Toast.makeText(context, "month:" + mMonth + " year:" + mYear, Toast.LENGTH_SHORT).show();
-            RecyclerView recyclerView = (RecyclerView) view;
+
+            recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            if (null != mListener) {
-               // MoDays hh  = mListener.onChangeDay();
-                //MoMonth moMonth = new MoMonth(4, 2017);
-                //MoDays hh = moMonth.getMoDay(6);
-               // hh.getTasks();
-               // recyclerView.setAdapter(new MyItemRecyclerViewAdapter(hh.getTasksList(), mListener));
+            updateView( mDay, mMonth011, mYear);
 
-
-            }
         }
 
         return view;
@@ -115,6 +111,28 @@ public class TaskHasNotDateFragment extends Fragment {
         mListener = null;
     }
 
+
+    public void updateView(int mDay,int mMonth011, int mYear) {
+        Log.i(TAG, "_________ 4.1.updateView: "+this);
+        this.mDay = mDay;
+        this.mMonth011 = mMonth011;
+        this.mYear = mYear;
+
+        if (null != mListener) {
+            Context mContext   = mListener.getContext();
+
+            TasksList tasksList = new TasksList(mContext);
+            tasksList.prepareDayTasks_WithNoTime(mDay,mMonth011,mYear);
+
+            Calendar cal = Calendar.getInstance();
+            cal.set(mDay, mMonth011, mYear);
+            MyTime mytime = new MyTime(cal);
+
+            recyclerView.setAdapter(new MyItemRecyclerViewAdapterNoDate(mytime,tasksList.getTasksList(), mListener));
+            // Toast.makeText(getContext(), "Day: " + hh._day_n + " / " + (hh._month_n011 +1 )+ " / " + hh._year_n, Toast.LENGTH_SHORT).show();
+
+        }
+    }
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated

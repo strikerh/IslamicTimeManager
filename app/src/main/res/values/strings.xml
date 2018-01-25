@@ -18,6 +18,17 @@
         <item>المغرب</item>
         <item>العشاء</item>
         <item>منتصف الليل</item>
+    </string-array>
+
+    <string-array name="timeNames">
+        <item>منتصف الليل</item>
+        <item>الفجر</item>
+        <item>الشروق</item>
+        <item>الظهر</item>
+        <item>العصر</item>
+        <item>المغرب</item>
+        <item>العشاء</item>
+        <item>منتصف الليل</item>
 
     </string-array>
 
@@ -270,6 +281,10 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_calender_month3">شهري</string>
     <string name="title_activity_add_task3">AddTask3Activity</string>
+    <string name="title_activity_view_task">ViewTask</string>
+    <string name="title_activity_scrolling_task_view">ScrollingTaskView</string>
+    <string name="title_taskitem_list">TaskItems</string>
+    <string name="title_taskitem_detail">TaskItem Detail</string>
 
 
 </resources>

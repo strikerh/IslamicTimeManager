@@ -11,7 +11,8 @@
     android:layoutDirection="rtl"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.hazemnabil.islamictodo2.addTask.AddTask2"
-    tools:showIn="@layout/activity_add_task2">
+    >
+    <!--tools:showIn="@layout/activity_add_task2"-->
 
     <ScrollView
         android:layout_width="match_parent"
@@ -125,7 +126,9 @@
             </LinearLayout>
 
 
-    <LinearLayout style="@style/toolWithLabelGroup"
+    <LinearLayout
+        android:visibility="gone"
+        style="@style/toolWithLabelGroup"
         android:layout_marginEnd="10dp">
 
         <TextView
@@ -176,6 +179,7 @@
 
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/a_TimeTitle"
                     style="@style/section_title"
 >
@@ -194,15 +198,19 @@
 
                 </LinearLayout>
 
-
                 <LinearLayout
 
                     android:id="@+id/a_TimeBox"
                     style="@style/section_box"
                     android:visibility="visible">
+                    </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
 
-                    <RadioGroup
+                    <RadioGroup android:visibility="gone"
                         android:id="@+id/a_rdg_datetype"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -256,7 +264,7 @@
                                 <TextView
                                     android:id="@+id/a_txt_date"
                                     style="@style/g_txtWithBtn_txt"
-                                    android:text="     /       /      "
+                                    android:text="غير محدد"
                                     android:onClick="openCalender"
                                     />
 
@@ -275,6 +283,7 @@
                     <LinearLayout style="@style/RowGroup">
 
                         <LinearLayout style="@style/toolWithLabelGroup"
+                            android:visibility="gone"
                             android:layout_marginEnd="10dp">
 
                             <TextView
@@ -320,6 +329,45 @@
                         </LinearLayout>
 
 
+
+                    </LinearLayout>
+
+                    <LinearLayout style="@style/toolWithLabelGroup">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="المدة" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/a_txt_period"
+                                    style="@style/g_txtWithBtn_txt"
+                                    android:text="غير محدد"
+                                    android:onClick="openDurationPiker"
+                                    android:tag="30"
+                                    />
+
+                                <Button
+                                    style="@style/g_txtWithBtn_btn"
+                                    android:drawableTop="@drawable/ic_insert_invitation1_black_24dp"
+                                    android:onClick="openDurationPiker" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
                     </LinearLayout>
 
 
@@ -327,13 +375,15 @@
 
             </LinearLayout>
 
-            <!-- ======================= REPEAT Group-->
+            <!-- ======================= REPEAT Group Hidden-->
             <LinearLayout
                 android:id="@+id/a_RepeatSection"
                 style="@style/section"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone"
+                >
 
 
                 <LinearLayout

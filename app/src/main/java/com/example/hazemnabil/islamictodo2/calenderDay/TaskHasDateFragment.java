@@ -88,6 +88,7 @@ public class TaskHasDateFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
             updateView( mDay, mMonth011, mYear);
+
         }
 
         return view;
@@ -134,7 +135,7 @@ public class TaskHasDateFragment extends Fragment {
             cal.set(mDay, mMonth011, mYear);
             MyTime mytime = new MyTime(cal);
 
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(mytime,tasksList.getTasksList(), mListener));
+            recyclerView.setAdapter(new MyItemRecyclerViewAdapterWithDate(mytime,tasksList.getTasksList(), mListener));
            // Toast.makeText(getContext(), "Day: " + hh._day_n + " / " + (hh._month_n011 +1 )+ " / " + hh._year_n, Toast.LENGTH_SHORT).show();
 
         }

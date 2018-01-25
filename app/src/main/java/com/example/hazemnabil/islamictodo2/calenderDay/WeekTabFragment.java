@@ -13,8 +13,9 @@ import android.widget.TextView;
 import com.example.hazemnabil.islamictodo2.ChangeFonts;
 import com.example.hazemnabil.islamictodo2.CheckableLinearLayout;
 import com.example.hazemnabil.islamictodo2.R;
+import com.example.hazemnabil.islamictodo2.colection.AppOptions;
 import com.example.hazemnabil.islamictodo2.colection.Vars;
-import com.example.hazemnabil.islamictodo2.myCalender.SmallDate;
+import com.example.hazemnabil.islamictodo2.myCalender.MyDate;
 
 import java.util.Calendar;
 
@@ -27,16 +28,74 @@ public class WeekTabFragment extends Fragment  {
     private static final String TAG = Vars.TAG+"_WeekTabFrag";
 
     public int tabNum;
-    private SmallDate selectedDay;
+   // private SmallDate selectedDay;
     private CheckableLinearLayout[] chk = new  CheckableLinearLayout[7];
     private TextView[] txtDay = new TextView[7];
     private TextView[] txtDayName = new TextView[7];
     private WeekTabListener mListener ;
 
+    private static final int statingDate = 2010;
+    private static final int endingDate = 2030;
+    private static Calendar statingDateCal;
+    public static final int deltaDate = endingDate - statingDate ;
 
+    public String monthStr;
+    public Calendar firstMonth011;
+    public Calendar lastMonth011;
+
+
+
+
+    public String getMonths(){
+        MyDate myDate1 = new MyDate(firstMonth011);
+        MyDate myDate2 = new MyDate(lastMonth011);
+        if(firstMonth011.get(Calendar.MONTH) == lastMonth011.get(Calendar.MONTH) ){
+
+            monthStr = myDate1.getMonthName() + " "+ myDate1.getYear() ;
+        }else {
+            if(firstMonth011.get(Calendar.YEAR) == lastMonth011.get(Calendar.YEAR) )
+                monthStr = myDate1.getMonthName() + ", "+ myDate2.getMonthName() +" "+myDate1.getYear() ;
+            else
+                monthStr = myDate1.getMonthName() +" " +myDate1.getYear() +  ", "+ myDate2.getMonthName() +" " +myDate2.getYear() ;
+
+        }
+        return monthStr;
+    }
+    private static Calendar getStartingDateCal(){
+        statingDateCal = Calendar.getInstance();
+        statingDateCal.setFirstDayOfWeek(AppOptions.firstDayOfWeek);
+        statingDateCal.set(2010,0,2-7+AppOptions.firstDayOfWeek);
+        return statingDateCal;
+    }
+
+    public static int CountOfWeeks(){
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(2030,11,31);
+        long d1 = cal.getTimeInMillis();
+        cal = getStartingDateCal();
+
+        d1 -= cal.getTimeInMillis();
+
+        float dayCount = (float) d1 / (24 * 60 * 60 * 1000);
+
+        return (int) (dayCount / 7);
+    }
+
+    public static int calculatePageFromDate(Calendar date){
+        Calendar cal = getStartingDateCal();
+        long dateInMillis = date.getTimeInMillis();
+        long startDateInMillis = cal.getTimeInMillis();
+
+        long delta =  dateInMillis - startDateInMillis;
+        float dayCount = (float) delta / (24 * 60 * 60 * 1000);
+
+        return  (int) (dayCount / 7);
+    }
 
     public WeekTabFragment() {
     }
+
     public static WeekTabFragment newInstance(int sectionNumber) {
         Log.i(TAG, "____________ newInstance: ");
         WeekTabFragment fragment = new WeekTabFragment();
@@ -47,6 +106,7 @@ public class WeekTabFragment extends Fragment  {
         fragment.setArguments(args);
         return fragment;
     }
+
     @Override
     public void onAttach(Context context) {
         Log.i(TAG, "____________ onAttach: "+this.tabNum);
@@ -125,21 +185,33 @@ public class WeekTabFragment extends Fragment  {
         chk[6] = (CheckableLinearLayout) rootView.findViewById(R.id.btn_d6) ;
 
 
+
         Calendar day = Calendar.getInstance();
+        MyDate myDate ;
+
+
+
+
 
        // day.setFirstDayOfWeek(Calendar.SATURDAY);
-        int pastYear = day.get(Calendar.YEAR)-1;
-        day.set(pastYear,0,1);
-        day.set(Calendar.DAY_OF_WEEK,0);
-        day.add(Calendar.WEEK_OF_YEAR,-1);
+//        int pastYear = day.get(Calendar.YEAR)-1;
+//        day.set(pastYear,0,1);
+//        day.set(Calendar.DAY_OF_WEEK,0);
+//        day.add(Calendar.WEEK_OF_YEAR,-1);
+        day.setFirstDayOfWeek(AppOptions.firstDayOfWeek);
+        day = getStartingDateCal();
+        day.add(Calendar.WEEK_OF_YEAR,tabNum);
 
-        day.add(Calendar.WEEK_OF_YEAR,getArguments().getInt(ARG_SECTION_NUMBER));
+
+        //day.add(Calendar.WEEK_OF_YEAR,tabNum);
         Log.i(TAG, "-----------------"+day.get(Calendar.YEAR) );
+
+        firstMonth011 =  (Calendar) day.clone();
         for (int i = 0; i <7 ; i++) {
 
 
             txtDay[i].setText(""+day.get(Calendar.DAY_OF_MONTH));
-            String[] dayNames =    {"سبت","أحد","اثنين","ثلاثاء","أربعاء","خميس","جمعة"};
+            String[] dayNames =    Vars.DAY_NAMES_AR;
             //txtDayName[i].setText(day.getDisplayName(Calendar.DAY_OF_WEEK,Calendar.SHORT,new Locale("ar")));
             txtDayName[i].setText(dayNames[day.get(Calendar.DAY_OF_WEEK)-1]);
             Calendar hh3 = day;
@@ -147,9 +219,9 @@ public class WeekTabFragment extends Fragment  {
             chk[i].nDay = day.get(Calendar.DAY_OF_MONTH) ;
             chk[i].nMonth011 = day.get(Calendar.MONTH) ;
             chk[i].nYear = day.get(Calendar.YEAR) ;
-            chk[i].nTab = getArguments().getInt(ARG_SECTION_NUMBER) ;
+            chk[i].nTab = tabNum ;
 
-            Log.i(TAG, "onCreateView-Tab: "+getArguments().getInt(ARG_SECTION_NUMBER)+" - "+day.get(Calendar.DAY_OF_YEAR)+" : day["+i+"] = "+ day.get(Calendar.DAY_OF_MONTH)+"-"+day.get(Calendar.MONTH)+"-"+day.get(Calendar.YEAR) );
+            Log.i(TAG, "onCreateView-Tab: "+tabNum+" - "+day.get(Calendar.DAY_OF_YEAR)+" : day["+i+"] = "+ day.get(Calendar.DAY_OF_MONTH)+"-"+day.get(Calendar.MONTH)+"-"+day.get(Calendar.YEAR) );
             day.add(Calendar.DAY_OF_MONTH,1);
 
             chk[i].setOnClickListener(new View.OnClickListener() {
@@ -159,6 +231,7 @@ public class WeekTabFragment extends Fragment  {
                     CheckableLinearLayout view = (CheckableLinearLayout) v;
 
                     unCheckDay();
+
 
                     for (int i = 0; i < 7; i++) {
                         chk[i].setChecked(false);
@@ -174,6 +247,7 @@ public class WeekTabFragment extends Fragment  {
                 }
             });
         }
+        lastMonth011 =  (Calendar) day.clone();;
         //Change Font
         ViewGroup gr =(ViewGroup)rootView;
         ChangeFonts hh = new ChangeFonts(this.getContext(),gr);
@@ -199,11 +273,11 @@ public class WeekTabFragment extends Fragment  {
         }
 
     }
-    public void checkDay(SmallDate smDay) {
+    public void checkDay(MyDate myDate) {
         Log.i(TAG, "____________ checkDay: ");
         for (int i = 0; i < 7; i++) {
             chk[i].setChecked(false);
-            if(chk[i].nMonth011 == smDay.month011 && chk[i].nDay == smDay.day && chk[i].nYear == smDay.year ){
+            if(chk[i].nMonth011 == myDate.getMonth011() && chk[i].nDay == myDate.getDay() && chk[i].nYear == myDate.getYear() ){
                 chk[i].setChecked(true);
             }
         }
