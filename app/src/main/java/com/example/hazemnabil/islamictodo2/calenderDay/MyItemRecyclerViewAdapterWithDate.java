@@ -29,6 +29,7 @@ import java.util.List;
  * specified {@link FragmentListener}.
  * TODO: Replace the implementation with Code for your data type.
  */
+@Deprecated
 public class MyItemRecyclerViewAdapterWithDate extends RecyclerView.Adapter<MyItemRecyclerViewAdapterWithDate.ViewHolder> {
 
     private static final String TAG ="zoma" ;

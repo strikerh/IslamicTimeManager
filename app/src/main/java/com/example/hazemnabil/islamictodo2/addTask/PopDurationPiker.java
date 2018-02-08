@@ -142,12 +142,13 @@ public class PopDurationPiker extends DialogFragment implements View.OnClickList
 
     }
 
-    private void prepareDuration(int day, int hours, int min){
+    public String prepareDuration(int day, int hours, int min){
 
-        txt_minutes.setText("" + min+ " دقيقة");
-        txt_hours.setText("" + hours+ " ساعة");
-        txt_days.setText("" + day+ " يوم");
-
+        if(txt_minutes != null) {
+            txt_minutes.setText("" + min + " دقيقة");
+            txt_hours.setText("" + hours + " ساعة");
+            txt_days.setText("" + day + " يوم");
+        }
 
 
         String txt = "";
@@ -182,7 +183,7 @@ public class PopDurationPiker extends DialogFragment implements View.OnClickList
 
             }
 
-            if(sk_min.getProgress() ==30) {
+            if(min ==30) {
                 minOnly = "نصف ساعة";
                 if (hours != 0)
                     minOnly = "و نصق";
@@ -196,11 +197,12 @@ public class PopDurationPiker extends DialogFragment implements View.OnClickList
 
             txt += minOnly;
         }
-
+        if(txt_duration !=null)
         txt_duration.setText(txt);
+        return txt;
     }
 
-    private int[] minToDayHourMin(int min){
+    public int[] minToDayHourMin(int min){
         int[] result = new int[3];
         result[0] =  min/24/60;
         result[1] = min/60%24;

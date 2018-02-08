@@ -11,6 +11,7 @@ import com.example.hazemnabil.islamictodo2.DbConnections;
 import com.example.hazemnabil.islamictodo2.colection.Do;
 import com.example.hazemnabil.islamictodo2.colection.Vars;
 import com.example.hazemnabil.islamictodo2.myCalender.MyDate;
+import com.example.hazemnabil.islamictodo2.myCalender.MyDateTime;
 import com.example.hazemnabil.islamictodo2.myCalender.MyTime;
 
 import org.json.JSONException;
@@ -44,13 +45,17 @@ public class Task {
 
 
     public String _date_time_from;
-    public String _date_time_to;
+    public String _duration_in_minutes;
     public String _repeat;
     public int _importance;
 
     public JSONObject _json_date_time_from ;
     public JSONObject _json_date_time_to ;
     public JSONObject _json_repeat;
+
+
+    public MyDateTime _myDateTime_from;
+
 
     public int _subTasks;
     public int _userId;
@@ -126,7 +131,7 @@ public class Task {
 
 
     /* dateStatue VARS  */
-    public static final int NO_DATE_No_TIME = 0;
+    public static final int NO_DATE_NO_TIME = 0;
     public static final int HAS_DATE_HAS_TIME = 1;
     public static final int HAS_DATE_NO_TIME = 2;
     public static final int No_DATE_HAS_TIME = 3;
@@ -169,29 +174,41 @@ public class Task {
         return dateTimeFrom;
     }
 
-    public static final int DT_DATE_TYPE = 0;
-    public static final int DT_DATE_STATUE = 1;
-    public static final int DT_DAY = 2;
-    public static final int DT_MONTH = 3;
-    public static final int DT_YEAR = 4;
-    public static final int DT_TIME_TYPE = 5;
-    public static final int DT_HOURS_24_OR_TIME_NAME = 6;
-    public static final int DT_MINUTES_OR_TIME_MODIFY_BY_MINUTES = 7;
+    public static final String DT_VERSION = "version";
+    public static final String DT_DATE_TYPE = "type";
+    public static final String DT_DATE_STATUE = "datestatue";
+    public static final String DT_DATE_TXT = "date";
+    public static final String DT_DAY = "day";
+    public static final String DT_MONTH = "month";
+    public static final String DT_YEAR = "year";
+    public static final String DT_TIME_TYPE = "timetype";
+    public static final String DT_TIME_TXT = "time";
+    public static final String DT_HOURS_24 = "hours";
+    public static final String DT_MINUTES = "minutes";
 
-public JSONObject getDateTimeFromObj(){
-    if(_json_date_time_from == null){
-        if(_date_time_from != null)
-        try {
-            _json_date_time_from = new JSONObject( _date_time_from);
-            return _json_date_time_from;
-        } catch (JSONException e) {
-            e.printStackTrace();
+
+    public JSONObject getDateTimeFromObj(){
+        if(_json_date_time_from == null){
+            if(_date_time_from != null)
+            try {
+                _json_date_time_from = new JSONObject( _date_time_from);
+                return _json_date_time_from;
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
         }
 
+        return null;
     }
 
-    return null;
-}
+    public void setMyDateTimeFromJSON(JSONObject jsonObj){
+      // TODO: _myDateTime_from = new MyDateTime();
+     //   MyDate myDate = new MyDate(  dateType,  dayNum,  month_011,  year) ;
+    //    _myDateTime_from = new MyDateTime()
+    }
+
+
 
     public void setStartingTime(int dateType, int dateStatue, int day,int month011,int year, int timeType, int hours24_Or_TimeName, int minutes_Or_timeModifyByMinutes){
 
@@ -212,7 +229,7 @@ public JSONObject getDateTimeFromObj(){
     public void setEndTime(int dateType, int dateStatue, int day,int month,int year, int timeType, int hours24_Or_TimeName, int minutes_Or_timeModifyByMinutes){
 
         JSONObject dateTimeFrom = createJsonDateTime( dateType, dateStatue,  day, month, year,timeType,  hours24_Or_TimeName,  minutes_Or_timeModifyByMinutes);
-       _date_time_to = dateTimeFrom.toString();
+       _duration_in_minutes = dateTimeFrom.toString();
     }
 
 
@@ -279,7 +296,7 @@ public JSONObject getDateTimeFromObj(){
         if (taskContent.get(Col.NAME) != null)            this._name              = taskContent.getAsString(Col.NAME) ;
 
         if (taskContent.get(Col.DATE_TIME_FROM) != null)  this._date_time_from    = taskContent.getAsString(Col.DATE_TIME_FROM) ;
-        if (taskContent.get(Col.DATE_TIME_TO) != null)    this._date_time_to      = taskContent.getAsString(Col.DATE_TIME_TO) ;
+        if (taskContent.get(Col.DATE_TIME_TO) != null)    this._duration_in_minutes = taskContent.getAsString(Col.DATE_TIME_TO) ;
         if (taskContent.get(Col.REPEAT) != null)          this._repeat            = taskContent.getAsString(Col.REPEAT) ;
         if (taskContent.get(Col.IMPORTANCE) != null)      this._importance        = taskContent.getAsInteger(Col.IMPORTANCE) ;
         if (taskContent.get(Col.SUB_TASKS) != null)       this._subTasks          = taskContent.getAsInteger(Col.SUB_TASKS)  ;
@@ -329,7 +346,7 @@ public JSONObject getDateTimeFromObj(){
 
     }
 
-    public void fillTaskContentWhisThisTask() {
+    public void fillTaskContentWithThisTask() {
 
        // SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         ContentValues taskContent = new ContentValues();
@@ -337,7 +354,7 @@ public JSONObject getDateTimeFromObj(){
         if (this._id                != null)       taskContent.put(Col.ID               , this._id                );
         if (this._name              != null)       taskContent.put(Col.NAME             , this._name              );
         if (this._date_time_from    != null)       taskContent.put(Col.DATE_TIME_FROM   , this._date_time_from    );
-        if (this._date_time_to      != null)       taskContent.put(Col.DATE_TIME_TO     , this._date_time_to      );
+        if (this._duration_in_minutes != null)       taskContent.put(Col.DATE_TIME_TO     , this._duration_in_minutes);
         if (this._repeat            != null)       taskContent.put(Col.REPEAT           , this._repeat            );
         if (this._importance        != -1)         taskContent.put(Col.IMPORTANCE       , this._importance        );
         if (this._subTasks          != -1)         taskContent.put(Col.SUB_TASKS        , this._subTasks          );
@@ -368,7 +385,7 @@ public JSONObject getDateTimeFromObj(){
         this._TaskContent.put(Col.NAME,_name);
         this._TaskContent.put(Col.SDATE,_sdate);
         this._TaskContent.put(Col.DATE_TIME_FROM,_date_time_from);
-        this._TaskContent.put(Col.DATE_TIME_TO,_date_time_to);
+        this._TaskContent.put(Col.DATE_TIME_TO, _duration_in_minutes);
         this._TaskContent.put(Col.REPEAT,_repeat);
         this._TaskContent.put(Col.IMPORTANCE,_importance);
         this._TaskContent.put(Col.SUB_TASKS,_subTasks);
@@ -435,6 +452,22 @@ public JSONObject getDateTimeFromObj(){
 
         return _isDone;
     }
+    public int setImportantAndSave(int important) {
+        if(_id!= null) {
+            int old = _importance;
+            _importance = important;
+
+            ContentValues  TaskContent1 = new ContentValues();
+            TaskContent1.put(Col.ID,_id);
+            TaskContent1.put(Col.IMPORTANCE,_importance);
+
+            if (db_updateMe(TaskContent1) == 0) {
+                _importance = old;
+            }
+        }
+
+        return _importance;
+    }
 
 
 
@@ -493,7 +526,7 @@ public JSONObject getDateTimeFromObj(){
 
         DbConnections dbConnections = new DbConnections(mContext);
         _TaskContent.putNull(Col.ID);
-        fillTaskContentWhisThisTask();
+        fillTaskContentWithThisTask();
         long newRowId = dbConnections.insertData(DbConnections.TABLE_TASKS, _TaskContent);
 
         return newRowId;
@@ -529,6 +562,13 @@ public JSONObject getDateTimeFromObj(){
 
     }
 
+    public int      db_updateMe(int taskId){
+        _TaskContent.putNull(Col.ID);
+        _id = taskId;
+        fillTaskContentWithThisTask();
+        DbConnections dbConnections = new DbConnections(mContext);
+        return   dbConnections.updateRow(DbConnections.TABLE_TASKS,"id = "+_id,_TaskContent);
+    }
     public int      db_updateMe(ContentValues TaskUpdate){
         DbConnections dbConnections = new DbConnections(mContext);
         return   dbConnections.updateRow(DbConnections.TABLE_TASKS,"id = "+_id,TaskUpdate);

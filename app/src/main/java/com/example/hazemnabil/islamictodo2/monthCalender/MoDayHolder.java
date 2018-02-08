@@ -1,6 +1,5 @@
-package com.example.hazemnabil.islamictodo2.objData;
+package com.example.hazemnabil.islamictodo2.monthCalender;
 
-import com.example.hazemnabil.islamictodo2.monthCalender.MoTask;
 import com.example.hazemnabil.islamictodo2.myCalender.MyDate;
 
 import java.util.ArrayList;

@@ -42,6 +42,8 @@
             android:name=".calenderDay.CalenderDay"
             android:label="@string/title_activity_calender_day"
             android:theme="@style/AppTheme"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             />
         <!--android:configChanges="orientation|screenSize|keyboardHidden"-->
         <!-- <activity -->
@@ -76,7 +78,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".addTask3.AddTask3Activity"
+            android:name=".removed.addTask3.AddTask3Activity"
             android:label="@string/title_activity_add_task3"
             android:theme="@style/AppTheme" />
         <activity

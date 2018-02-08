@@ -178,25 +178,7 @@
                 >
 
 
-                <LinearLayout
-                    android:visibility="gone"
-                    android:id="@+id/a_TimeTitle"
-                    style="@style/section_title"
->
 
-                    <TextView
-                        android:id="@+id/a_TimeTitleTxt"
-                        style="@style/section_title_txt"
-                        android:text="الوقت" />
-
-                    <Switch
-                        android:id="@+id/a_TimeTitleSw"
-                        android:text="ليس لها وقت محدد"
-                        style="@style/section_title_switch"
-                        android:onClick="onSwitch_time"
-                        />
-
-                </LinearLayout>
 
                 <LinearLayout
 
@@ -210,38 +192,7 @@
                     android:orientation="vertical">
 
 
-                    <RadioGroup android:visibility="gone"
-                        android:id="@+id/a_rdg_datetype"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
 
-                        <Space
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1.5
-                            " />
-
-
-                        <RadioButton
-                            android:id="@+id/a_rd_hijry"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="هجري" />
-
-                        <RadioButton
-                            android:id="@+id/a_rd_milady"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="ميلادي" />
-
-                        <Space
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1" />
-                    </RadioGroup>
 
                     <LinearLayout style="@style/toolWithLabelGroup">
 

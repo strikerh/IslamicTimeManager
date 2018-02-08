@@ -3,16 +3,14 @@ package com.example.hazemnabil.islamictodo2.calenderDay;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.example.hazemnabil.islamictodo2.R;
-import com.example.hazemnabil.islamictodo2.myCalender.MyTime;
 
 import java.util.Calendar;
 
@@ -22,6 +20,7 @@ import java.util.Calendar;
  * Activities containing this fragment MUST implement the {@link FragmentListener}
  * interface.
  */
+@Deprecated
 public class TaskHasNotDateFragment extends Fragment {
 
     // TODO: Customize parameter argument names
@@ -36,6 +35,7 @@ public class TaskHasNotDateFragment extends Fragment {
     private int mYear = 1;
     private FragmentListener mListener;
     RecyclerView recyclerView;
+    ListView listView;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -76,7 +76,7 @@ public class TaskHasNotDateFragment extends Fragment {
 
         Log.i(TAG, "onCreateView++++++++++: "+this);
         // Set the adapter
-        if (view instanceof RecyclerView) {
+       /* if (view instanceof RecyclerView) {
             Context context = view.getContext();
 
             recyclerView = (RecyclerView) view;
@@ -87,6 +87,13 @@ public class TaskHasNotDateFragment extends Fragment {
             }
             updateView( mDay, mMonth011, mYear);
 
+        }*/
+        if (view instanceof ListView) {
+           // Context mContext = view.getContext();
+
+            listView = (ListView) view;
+
+            updateView(mDay, mMonth011, mYear);
         }
 
         return view;
@@ -126,9 +133,10 @@ public class TaskHasNotDateFragment extends Fragment {
 
             Calendar cal = Calendar.getInstance();
             cal.set(mDay, mMonth011, mYear);
-            MyTime mytime = new MyTime(cal);
 
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapterNoDate(mytime,tasksList.getTasksList(), mListener));
+
+            /*recyclerView.setAdapter(new MyItemRecyclerViewAdapterNoDate(mytime,tasksList.getTasksList(), mListener));*/
+            listView.setAdapter(new TaskListAdapter(false,tasksList.getTasksList(), mListener));
             // Toast.makeText(getContext(), "Day: " + hh._day_n + " / " + (hh._month_n011 +1 )+ " / " + hh._year_n, Toast.LENGTH_SHORT).show();
 
         }
@@ -148,4 +156,8 @@ public class TaskHasNotDateFragment extends Fragment {
 //        void onFragmentListClicked(Task item);
 //        MoDays onChangeDay();
 //    }
+
+
+
+
 }

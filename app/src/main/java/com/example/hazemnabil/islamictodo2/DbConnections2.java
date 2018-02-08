@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Created by hazem.nabil on 4/13/2017.
  */
 
+@Deprecated
 public class DbConnections2 extends SQLiteOpenHelper {
 
     public static final int version = 1;

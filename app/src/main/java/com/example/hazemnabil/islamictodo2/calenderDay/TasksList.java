@@ -4,6 +4,7 @@ package com.example.hazemnabil.islamictodo2.calenderDay;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 
 import com.example.hazemnabil.islamictodo2.DbConnections;
 import com.example.hazemnabil.islamictodo2.colection.Do;
@@ -38,6 +39,7 @@ public class TasksList {
         this.mContext = mContext;
         this._tasksList_timeSpliter = new ArrayList<Task>();
         this._tasksMap = new HashMap<Integer, Task>();
+
     }
 
     public void prepareDayTasks(int day, int month011, int year) {
@@ -63,6 +65,7 @@ public class TasksList {
 
     ////////    Getter
     public Task[] getTasksArray() {
+        Log.i("Zoma_size", "getTasksArray:_tasksArray size: "+ Do.getBytes(_tasksArray));
         return _tasksArray;
     }
 
@@ -71,13 +74,13 @@ public class TasksList {
         return _tasksMap;
     }
 
-    @Deprecated
+
     public List<Task> getTasksList() {
 //      if(_tasksArray != null){
 //        _tasksList_timeSpliter =   new ArrayList<>(Arrays.asList(_tasksArray));
 //      }else
 //          _tasksList_timeSpliter = null;
-
+        Log.i("Zoma_size", "getTasksArray:_tasksArray size: "+ Do.sizeOf(_tasksList_timeSpliter));
         return _tasksList_timeSpliter;
     }
 
@@ -124,12 +127,30 @@ public class TasksList {
                 int id = tempTask.fillThisTask(cursor, mytime);
                 //this._tasksList_timeSpliter.add(tempTask);
                 // this._tasksMap.put(id,tempTask);
+
+                //
+                JSONObject hh = tempTask.getDateTimeFromObj();
+                int dateStatue = 1;
+                if(tempTask._date_time_from == null){
+                    dateStatue = 0;
+                }
+                if(hh != null)
+                    try {
+                        dateStatue = hh.getInt("datestatue");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    //
                 this._tasksArray[i] = tempTask;
 
+                //
 
-                int index = _tasksList_timeSpliter.indexOf(_timeSplitterOnly.get(tempTask._posInTimes));
+                if (dateStatue == Task.HAS_DATE_HAS_TIME) {
+                    int index = _tasksList_timeSpliter.indexOf(_timeSplitterOnly.get(tempTask._posInTimes));
 
-                this._tasksList_timeSpliter.add(index+1,tempTask);
+                    this._tasksList_timeSpliter.add(index + 1, tempTask);
+                }
 
                 cursor.moveToNext();
                 i++;
@@ -197,7 +218,7 @@ public class TasksList {
                      int index = _tasksList_timeSpliter.indexOf(_timeSplitterOnly_noTime.get(1));
 
                     this._tasksList_timeSpliter.add(index , tempTask);
-                }else if(dateStatue == Task.NO_DATE_No_TIME){
+                }else if(dateStatue == Task.NO_DATE_NO_TIME){
                     this._tasksList_timeSpliter.add( tempTask);
                 }
                 cursor.moveToNext();

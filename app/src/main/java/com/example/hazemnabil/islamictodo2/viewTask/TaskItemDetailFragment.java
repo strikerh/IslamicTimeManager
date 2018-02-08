@@ -52,7 +52,7 @@ public class TaskItemDetailFragment extends Fragment {
             // Load the dummy content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
-            mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
+            //mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
             taskData  = new Task(this.getContext());
             int xId = ((TaskItemDetailActivity) this.getContext()).getIntent().getIntExtra("item_id",0);
             taskData.getById(xId);
@@ -83,7 +83,7 @@ public class TaskItemDetailFragment extends Fragment {
 
             ((TextView) rootView.findViewById(R.id.a_txt_date)).setText(mydate.getFullDate(Vars.D.MILADY));
             ((TextView) rootView.findViewById(R.id.a_txt_time)).setText(taskData._sTime_string+" "+mytime.getTime(true));
-            ((TextView) rootView.findViewById(R.id.a_txt_period)).setText(taskData._date_time_to);
+            ((TextView) rootView.findViewById(R.id.a_txt_period)).setText(taskData._duration_in_minutes);
 
 
         }

@@ -170,8 +170,9 @@
                 android:background="#00ffffff"
                 app:srcCompat="@drawable/ic_star_black_24dp"
                 android:tint="@color/colorAccent"/>
+
             <ImageButton
-                android:id="@+id/btn_move"
+                android:id="@+id/btn_option"
                 android:layout_width="20dp"
                 android:layout_height="@dimen/tools_height"
                 android:background="#00ffffff"

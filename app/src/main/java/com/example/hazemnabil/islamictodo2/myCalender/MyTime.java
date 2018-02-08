@@ -50,6 +50,9 @@ public class MyTime extends PrayTime {
     public String getPayerTimeAt(int pos) {
         return prayerTimes.get(pos);
     }
+    public Float getTimeOfPayerTimeAt(int pos) {
+        return Float.valueOf(prayerTimes.get(pos));
+    }
     public String getPayerTimeAt(int pos,int TimeFormat) {
         Float time = Float.valueOf(prayerTimes.get(pos));
         String result;
@@ -132,6 +135,9 @@ public class MyTime extends PrayTime {
         return mean ;
     }
 
+    public Calendar getTimeCalendar(){
+        return cal;
+    }
     public int checkWhen(int hour, int minute) {
         float time = time24ToFloat(hour, minute);
         int result = prayerTimes.size();

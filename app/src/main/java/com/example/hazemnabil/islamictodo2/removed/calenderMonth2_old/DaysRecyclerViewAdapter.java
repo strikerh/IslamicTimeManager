@@ -1,4 +1,4 @@
-package com.example.hazemnabil.islamictodo2.calenderMonth2_old;
+package com.example.hazemnabil.islamictodo2.removed.calenderMonth2_old;
 
 import android.content.Context;
 import android.graphics.Bitmap;

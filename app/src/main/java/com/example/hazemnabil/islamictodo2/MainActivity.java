@@ -14,8 +14,8 @@ import android.widget.Toast;
 
 import com.example.hazemnabil.islamictodo2.addTask.AddTask2;
 import com.example.hazemnabil.islamictodo2.calenderDay.CalenderDay;
-import com.example.hazemnabil.islamictodo2.calenderMonth_old.CalenderMonth2;
-import com.example.hazemnabil.islamictodo2.calenderMonth2_old.CalenderMonth3Activity;
+import com.example.hazemnabil.islamictodo2.removed.calenderMonth_old.CalenderMonth2;
+import com.example.hazemnabil.islamictodo2.removed.calenderMonth2_old.CalenderMonth3Activity;
 import com.example.hazemnabil.islamictodo2.monthCalender.ActivityMonth;
 
 @Deprecated

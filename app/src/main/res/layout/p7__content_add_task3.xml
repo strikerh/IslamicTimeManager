@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.hazemnabil.islamictodo2.addTask3.AddTask3Activity"
+    tools:context="com.example.hazemnabil.islamictodo2.removed.addTask3.AddTask3Activity"
     tools:showIn="@layout/p7_app_bar_add_task3">
 
 

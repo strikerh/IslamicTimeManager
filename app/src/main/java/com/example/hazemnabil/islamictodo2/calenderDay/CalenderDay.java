@@ -46,7 +46,7 @@ public class CalenderDay extends ActivityMaster
     DimensionConverter dimensionConverter;
     private TextView txt_notDated;
     private TaskHasDateFragment fragment;
-    private TaskHasNotDateFragment fragmentNotDate;
+    private TaskHasDateFragment fragmentNotDate;
     private static final int splitterHeightInDp = 36;
     public int splitterHeightInPx;
 
@@ -99,6 +99,7 @@ public class CalenderDay extends ActivityMaster
         Log.i(TAG, "________________________ 2.onStart: ");
        // mViewPager.getCurrentItem();
 
+
         Log.i(TAG, "_________________________________________________ Activate: ");
     }
 
@@ -106,8 +107,8 @@ public class CalenderDay extends ActivityMaster
     protected void onResume() {
 
         super.onResume();
-        fragment.updateView(myCurrentDay.getDay(),myCurrentDay.getMonth011(),myCurrentDay.getYear());
-        fragmentNotDate.updateView(myCurrentDay.getDay(),myCurrentDay.getMonth011(),myCurrentDay.getYear());
+        fragment.updateView(true, myCurrentDay.getDay(),myCurrentDay.getMonth011(),myCurrentDay.getYear());
+        fragmentNotDate.updateView(false, myCurrentDay.getDay(),myCurrentDay.getMonth011(),myCurrentDay.getYear());
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -174,7 +175,7 @@ public class CalenderDay extends ActivityMaster
     private void on1_createTaskFrag() {
         Log.i(TAG, "___________________ 1.3_createTaskFrag: ");
         fragment = (TaskHasDateFragment) getSupportFragmentManager().findFragmentById(R.id.fragment2);
-        fragmentNotDate = (TaskHasNotDateFragment) getSupportFragmentManager().findFragmentById(R.id.fragment3);
+        fragmentNotDate = (TaskHasDateFragment) getSupportFragmentManager().findFragmentById(R.id.fragment3);
         //fragment.updateView(myCurrentDay.getDay(),myCurrentDay.getMonth011(),myCurrentDay.getYear());
 
         //TaskHasDateFragment fragment2 = (TaskHasDateFragment) getSupportFragmentManager().findFragmentById(R.id.fragment3);
@@ -245,8 +246,8 @@ public class CalenderDay extends ActivityMaster
 
 
         this.getSupportActionBar().setTitle(myDate.getMonthName()+" " +myDate.getYear());
-        fragment.updateView(myDate.getDay(),myDate.getMonth011(),myDate.getYear());
-        fragmentNotDate.updateView(myDate.getDay(),myDate.getMonth011(),myDate.getYear());
+        fragment.updateView(true, myDate.getDay(),myDate.getMonth011(),myDate.getYear());
+        fragmentNotDate.updateView(false, myDate.getDay(),myDate.getMonth011(),myDate.getYear());
     }
 
 
@@ -334,8 +335,8 @@ public class CalenderDay extends ActivityMaster
         TextView tx = (TextView)view.getChildAt(1);
         //TaskHasDateFragment fragment = (TaskHasDateFragment) getSupportFragmentManager().findFragmentById(R.id.fragment2);
         myCurrentDay.setDate(view.nDay,view.nMonth011,view.nYear);
-        fragment.updateView(view.nDay,view.nMonth011,view.nYear);
-        fragmentNotDate.updateView(view.nDay,view.nMonth011,view.nYear);
+        fragment.updateView(true, view.nDay,view.nMonth011,view.nYear);
+        fragmentNotDate.updateView(false, view.nDay,view.nMonth011,view.nYear);
         Log.i(Vars.TAG, "onClick: ++++++++++++++++++ "+tx.getText() +" "+ view.nTab +" "+ view.nDay +" "+ view.nYear);
 
     }

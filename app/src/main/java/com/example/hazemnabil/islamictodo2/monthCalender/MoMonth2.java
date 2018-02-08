@@ -7,7 +7,6 @@ import android.util.Log;
 import com.example.hazemnabil.islamictodo2.DbConnections;
 import com.example.hazemnabil.islamictodo2.colection.Do;
 import com.example.hazemnabil.islamictodo2.myCalender.MyDate;
-import com.example.hazemnabil.islamictodo2.objData.MoDayHolder;
 
 import java.util.ArrayList;
 import java.util.Calendar;

@@ -3,7 +3,6 @@ package com.example.hazemnabil.islamictodo2.addTask;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
@@ -20,13 +19,9 @@ import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import com.aigestudio.wheelpicker.WheelPicker;
 import com.example.hazemnabil.islamictodo2.ActivityMaster;
@@ -35,9 +30,13 @@ import com.example.hazemnabil.islamictodo2.R;
 import com.example.hazemnabil.islamictodo2.colection.AppOptions;
 import com.example.hazemnabil.islamictodo2.colection.Vars;
 import com.example.hazemnabil.islamictodo2.myCalender.MyDate;
+import com.example.hazemnabil.islamictodo2.myCalender.SmallTime;
 import com.example.hazemnabil.islamictodo2.objData.Categories;
 import com.example.hazemnabil.islamictodo2.objData.Task;
 import com.example.hazemnabil.islamictodo2.spinner.Spinner_adapter;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -47,44 +46,42 @@ public class AddTask2 extends ActivityMaster
 
 
     //////////////////////////
+    public static final String TASK_ID = "task_id";
+    public static final String STATE = "state";
+    public static final int ADD_MODE = 0;
+    public static final int EDIT_MODE = 1;
+
+    private  int pageState = ADD_MODE ;
     private Typeface myFont;
-    public LinearLayout pnl_week;
 
-    private GroupSection sTime ;
-
-    private GroupSection sRepeat ;
-    private GroupSection sImportant ;
-    private GroupSection sSubtasks;
 
     public String value = "";
 
-
     public SubTaskFragment f;
-    Spinner_adapter myadapter;
 
-
+    public LinearLayout pnl_week;
+    private Spinner_adapter myadapter;
     private  TextView txt_repeatDate;
-    private   EditText num;
-    private LinearLayout h1;
-    private LinearLayout h2;
-    private LinearLayout h3;
     private ViewGroup gr;
-    private RadioGroup rg_dateType;
-    private RadioButton rb_milady;
-    private RadioButton rb_hijry;
     private TextView txt_date;
     private TextView txt_period;
     private Spinner sp_timeName;
     private WheelPicker wp_repeatCount;
-    private Spinner sp_Important;
     private Spinner sp_Category;
     private Spinner sp_Tag;
     private Spinner repeatType;
     private EditText txt_name;
     private EditText txt_description;
     private TextView txt_time;
-    private ToggleButton[] tb_weekNames = new ToggleButton[7];
+    private CheckBox starImportance;
+
     private MyDate myCurrentDay;
+
+    private SparseArray<Categories.Category> sp;
+    // Edit
+    private int taskId;
+    private Task taskData;
+
     /////////////////////////
 
     @Override
@@ -96,46 +93,79 @@ public class AddTask2 extends ActivityMaster
         Bundle extras = getIntent().getExtras();
 
         if (extras != null) {
-            Toast.makeText(this, "يوم " +extras.getInt("day")+" "+extras.getInt("month")+" "+extras.getInt("year"), Toast.LENGTH_SHORT).show();
-            myCurrentDay = new MyDate();
-            myCurrentDay.setDate(extras.getInt("day"),extras.getInt("month"),extras.getInt("year"));
+            if (extras.get("state") == null || extras.getInt("state") == ADD_MODE) {
+                pageState = ADD_MODE;
+                Toast.makeText(this, "يوم " + extras.getInt("day") + " " + extras.getInt("month") + " " + extras.getInt("year"), Toast.LENGTH_SHORT).show();
+                myCurrentDay = new MyDate();
+                myCurrentDay.setDate(extras.getInt("day"), extras.getInt("month"), extras.getInt("year"));
+            }
+            if(extras.getInt("state") == EDIT_MODE){
+                pageState = EDIT_MODE;
+                if(extras.get("task_id")!= null){
+
+                    taskData = new Task(this);
+                    taskId = extras.getInt("task_id");
+                    taskData.getById(taskId);
+
+
+                }else {
+                    pageState = ADD_MODE;
+                }
+
+            }
         }
         _initUiConnection();
         _init();
 
-        _prepareMainGroups();
         _prepareTimeGroup();
         _prepareRepeatGroup();
         _prepareImportanceGroup();
 
+        _FillAllFields_ifUpdate();
+
+    }
+
+    private void _FillAllFields_ifUpdate() {
+        if(pageState == EDIT_MODE){
+            txt_name.setText(taskData._name);
+            txt_description.setText(taskData._description);
+            sp_Category.setSelection(sp.indexOfKey(taskData._category));
+
+             starImportance.setChecked(taskData._importance == 1);
+
+             txt_period.setTag(""+taskData._duration_in_minutes);
+             PopDurationPiker popDurationPiker = new PopDurationPiker();
+            int[] ff = popDurationPiker.minToDayHourMin(Integer.valueOf(taskData._duration_in_minutes));
+
+             txt_period.setText(popDurationPiker.prepareDuration(ff[0],ff[1],ff[2]));
+
+            JSONObject  dt= taskData.getDateTimeFromObj();
+            if(dt!= null)
+            try {
+                if(dt.getInt(Task.DT_DATE_STATUE) == Task.HAS_DATE_HAS_TIME || dt.getInt(Task.DT_DATE_STATUE) == Task.HAS_DATE_NO_TIME) {
+                    txt_date.setText(dt.getString(Task.DT_DATE_TXT));
+                    MyDate mdate = new MyDate(dt.getInt(Task.DT_DATE_TYPE),dt.getInt(Task.DT_DAY),(dt.getInt(Task.DT_MONTH)-1),dt.getInt(Task.DT_YEAR));
+                    PopDatePiker pop = new PopDatePiker();
+                    pop.setOutput(mdate,txt_date);
+
+                    if(dt.getInt(Task.DT_DATE_STATUE) == Task.HAS_DATE_HAS_TIME){
+                        txt_time.setText(dt.getString(Task.DT_TIME_TXT));
+
+                        Calendar cal = Calendar.getInstance();
+                        cal.set(dt.getInt(Task.DT_YEAR),dt.getInt(Task.DT_MONTH)-1,dt.getInt(Task.DT_DAY), dt.getInt(Task.DT_HOURS_24), dt.getInt(Task.DT_MINUTES), 0);
+                        SmallTime st = new SmallTime(dt.getInt(Task.DT_TIME_TYPE),cal);
+                        PopTimePiker popTimePiker = new PopTimePiker();
+                        popTimePiker.setOutput(st,txt_time);
+                    }
+                }
 
 
-        //////////////////////////////////////////
 
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
-
-
-
-        //////////////////////////////////////////
-
-
-//        TextView b = (TextView) sp_timeName.getSelectedItem();
-//        b.setText("sfsfsdf");
-
-        //  Toast.makeText(this,b.toString(),Toast.LENGTH_SHORT).show();
-        //  hh.overrideFonts(this,gr);
-
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.a_fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
-
+        }
     }
 
     private  void _initUiConnection(){
@@ -146,36 +176,26 @@ public class AddTask2 extends ActivityMaster
         txt_description = (EditText) findViewById(R.id.a_txt_description);
 
         // Time Group
-        rg_dateType = (RadioGroup) findViewById(R.id.a_rdg_datetype);
-        rb_milady = (RadioButton) findViewById(R.id.a_rd_milady);
-        rb_hijry = (RadioButton) findViewById(R.id.a_rd_hijry);
+
         txt_date = (TextView) findViewById(R.id.a_txt_date);
         txt_period = (TextView) findViewById(R.id.a_txt_period);
         sp_timeName = (Spinner) findViewById(R.id.a_sp_TimeName);
         txt_time = (TextView) findViewById(R.id.a_txt_time);
+        starImportance = (CheckBox)findViewById(R.id.ckb_star) ;
 
         //repeat Group
         repeatType = (Spinner) findViewById(R.id.a_sp_RepeatType);
         wp_repeatCount = (WheelPicker)findViewById(R.id.a_num2);
         txt_repeatDate = (TextView) findViewById(R.id.a_repeatDate);
         pnl_week = (LinearLayout) findViewById(R.id.a_pnl_week);
-        tb_weekNames[0] = (ToggleButton) findViewById(R.id.a_tb_0);
-        tb_weekNames[1] = (ToggleButton) findViewById(R.id.a_tb_1);
-        tb_weekNames[2] = (ToggleButton) findViewById(R.id.a_tb_2);
-        tb_weekNames[3] = (ToggleButton) findViewById(R.id.a_tb_3);
-        tb_weekNames[4] = (ToggleButton) findViewById(R.id.a_tb_4);
-        tb_weekNames[5] = (ToggleButton) findViewById(R.id.a_tb_5);
-        tb_weekNames[6] = (ToggleButton) findViewById(R.id.a_tb_6);
-
-
-        // other group
-       // sp_Important = (Spinner) findViewById(R.id.a_sp_Important);
         sp_Category = (Spinner) findViewById(R.id.a_sp_Groups);
         sp_Tag = (Spinner) findViewById(R.id.a_sp_Tags);
 
         if(myCurrentDay!= null) {
             txt_date.setTag(myCurrentDay);
             txt_date.setText(myCurrentDay.getFullDate(AppOptions.dateType));
+
+
         }
 
     }
@@ -190,6 +210,7 @@ public class AddTask2 extends ActivityMaster
         //--- toolbar ---
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+      //  toolbar.getMenu().getItem()
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -204,49 +225,12 @@ public class AddTask2 extends ActivityMaster
 
     }
 
-    private void _prepareMainGroups() {
-        sTime = new GroupSection(
-                R.id.a_TimeSection, R.id.a_TimeTitle, R.id.a_TimeTitleTxt, R.id.a_TimeTitleSw, R.id.a_TimeBox);
 
-        sRepeat = new GroupSection(
-                R.id.a_RepeatSection, R.id.a_RepeatTitle, R.id.a_RepeatTitleTxt, R.id.a_RepeatTitleSw, R.id.a_RepeatBox);
-
-//        sImportant = new GroupSection(
-//                R.id.a_ImportantSection, R.id.a_ImportantTitle, R.id.a_ImportantTitleTxt, R.id.a_ImportantTitleSw, R.id.a_ImportantBox);
-
-//          sSubtasks = new GroupSection(
-//                R.id.a_SubTasksSection, R.id.a_SubTasksTitle, R.id.a_SubTasksTitleTxt, null, R.id.a_SubTasksBox);
-
-
-        //--- Close Groups ---
-        CloseAllGroups();
-    }
 
     private void _prepareTimeGroup() {
 
 
 
-
-        if (rg_dateType.getCheckedRadioButtonId() == -1) {
-            if (AppOptions.dateType == Vars.D.HIJRY)
-                rb_hijry.setChecked(true);
-            else
-                rb_milady.setChecked(true);
-        }
-        rg_dateType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-
-                if (txt_date.getTag() != null) {
-                    MyDate sDate = (MyDate) txt_date.getTag();
-                    if (checkedId == R.id.a_rd_milady)
-                        txt_date.setText(sDate.getFullDate(Vars.MILADY));
-                    else if (checkedId == R.id.a_rd_hijry)
-                        txt_date.setText(sDate.getFullDate(Vars.HIJRY));
-
-                }
-            }
-        });
 
 
         //--- Spinners ---
@@ -293,81 +277,6 @@ public class AddTask2 extends ActivityMaster
         txt_repeatDate.setText(today.getShortDate());
 
 
-//        num = (EditText) findViewById(R.id.a_num);
-//        num.addTextChangedListener(new TextWatcher() {
-//
-//            public void afterTextChanged(Editable s) {
-//
-//                // you can call or do what you want with your EditText here
-//
-//                Spinner repeatType = (Spinner) findViewById(R.id.a_sp_RepeatType);
-//
-//                int num1;
-//                if (num.getText().length() > 0) {
-//                    num1 = Integer.parseInt(num.getText().toString());
-//                } else {
-//                    num1 = 0;
-//                }
-//                if (num1 >= 0) {
-//
-//                    Date today = new Date();
-//                    SimpleDateFormat curFormater = new SimpleDateFormat("dd/MM/yyy");
-//                    String newDateStr = curFormater.format(today);
-//                    Calendar calendar = GregorianCalendar.getInstance(); // creates a new calendar instance
-//                    calendar.setTime(today);
-//
-//
-//                    Date NewDate = new Date();
-//                    TextView hh = (TextView) findViewById(R.id.a_repeatDate);
-//
-//                    if (repeatType.getSelectedItemId() == 0) {    //-------------- Daily
-//                        calendar.add(Calendar.DAY_OF_MONTH, num1);
-//
-//                    } else if (repeatType.getSelectedItemId() == 1) {   //-------------- Weekly
-//                        calendar.add(Calendar.DAY_OF_MONTH, num1 * 7);
-//
-//                    } else if (repeatType.getSelectedItemId() == 2) {   //-------------- Monthly
-//                        calendar.add(Calendar.MONTH, num1);
-//                    }
-//                    String newDateString = calendar.get(Calendar.DAY_OF_MONTH) + "/" + (calendar.get(Calendar.MONTH) + 1) + "/" + calendar.get(Calendar.YEAR);
-//
-//                    try {
-//                        NewDate = curFormater.parse(newDateString);
-//                    } catch (ParseException e) {
-//                        e.printStackTrace();
-//                    }
-//
-//                    Toast.makeText(getBaseContext(), "week: " + newDateString, Toast.LENGTH_SHORT).show();
-//                    hh.setText(newDateString);
-//
-//                }
-//
-//
-//            }
-//
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//            }
-//
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//            }
-//        });
-//
-//
-//        num.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//            @Override
-//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//                Toast.makeText(getBaseContext(), num.getText(), Toast.LENGTH_SHORT).show();
-//                return false;
-//            }
-//        });
-//        num.setOnKeyListener(new View.OnKeyListener() {
-//            @Override
-//            public boolean onKey(View v, int keyCode, KeyEvent event) {
-//                //  Toast.makeText(getBaseContext(),num.getText(),Toast.LENGTH_SHORT).show();
-//                return false;
-//            }
-//        });
-//
 
 
         ArrayList<String> arrlist = new ArrayList();
@@ -429,14 +338,9 @@ public class AddTask2 extends ActivityMaster
     private void _prepareImportanceGroup() {
 
 
-        //String[] mTestArray = getResources().getStringArray(R.array.TimeNames);
-      //  myadapter = new Spinner_adapter(this, R.array.importantType, sp_Important, myFont, R.layout.p2_my_spinner_style);
-//        sp_Important.setAdapter(myadapter);
-
-
         Categories cats = new Categories(this);
-        SparseArray<Categories.Category> sp = cats.getCategories();
-        String[] mTestArray = new String[cats.getCount()];
+        sp = cats.getCategories();
+
 
 
         myadapter = new Spinner_adapter(this, cats, sp_Category, myFont, R.layout.p2_my_spinner_style);
@@ -444,13 +348,17 @@ public class AddTask2 extends ActivityMaster
 
 
 
-        String[] mTags = new String[3];
-        mTags[0] = "مشتريات";
-        mTags[1] = "مشروع ا";
-        mTags[2] = "مشروع ب";
 
-        myadapter = new Spinner_adapter(this, mTags, sp_Tag, myFont, R.layout.p2_my_spinner_style);
-        sp_Tag.setAdapter(myadapter);
+
+//        String[] mTags = new String[3];
+//        mTags[0] = "مشتريات";
+//        mTags[1] = "مشروع ا";
+//        mTags[2] = "مشروع ب";
+
+
+
+        //myadapter = new Spinner_adapter(this, mTags, sp_Tag, myFont, R.layout.p2_my_spinner_style);
+        //sp_Tag.setAdapter(myadapter);
 
 
     }
@@ -460,7 +368,11 @@ public class AddTask2 extends ActivityMaster
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.add_task2, menu);
+        if(pageState == EDIT_MODE) {
+            getMenuInflater().inflate(R.menu.edit_task2, menu);
+        }else {
+            getMenuInflater().inflate(R.menu.add_task2, menu);
+        }
         return true;
     }
 
@@ -490,21 +402,7 @@ public class AddTask2 extends ActivityMaster
 
 
 
-    private void CloseAllGroups() {  //in OnCreate up
 
-        h1 = (LinearLayout) findViewById(sTime.secBox_id);
-        h2 = (LinearLayout) findViewById(sRepeat.secBox_id);
-//        h3 = (LinearLayout) findViewById(sImportant.secBox_id);
-
-
-     //   LinearLayout h4 = (LinearLayout) findViewById(sSubtasks.secBox_id);
-        h1.setVisibility(View.GONE);
-        h2.setVisibility(View.GONE);
-    //    h3.setVisibility(View.GONE);
-
-       // h4.setVisibility(View.GONE);
-
-    }
 
     public void addSubTask(View view) {
         Toast.makeText(this,"add",Toast.LENGTH_SHORT).show();
@@ -552,33 +450,7 @@ public class AddTask2 extends ActivityMaster
 
     }
 
-    // ---- Group Switchs (Show & Hide Groups)  -----
-    public void onSwitch_time(View view) {
-        Switchat(sTime.title_switch_id,sTime.secBox_id,"ليس لها وقت محدد");
-    }
-    public void onSwitch_repeat(View view) {
-        Switchat(sRepeat.title_switch_id,sRepeat.secBox_id,"غير مكرر");
-    }
-    public void onSwitch_important(View view) {
-        Switchat(sImportant.title_switch_id,sImportant.secBox_id,"غير محدد");
-    }
-    public void onSwitch_subtasks(View view) {
-        Switchat(sSubtasks.title_switch_id,sSubtasks.secBox_id,"ليس بها مهام فرعية");
-    }
 
-    private void Switchat(int swichName,int parentGroup,String txt){
-        Switch sw1 = (Switch) findViewById(swichName) ;
-        LinearLayout group_time = (LinearLayout) findViewById(parentGroup);
-
-        if (sw1.isChecked()){
-            group_time.setVisibility(View.VISIBLE);
-            sw1.setText("");
-
-        }else{
-            group_time.setVisibility(View.GONE);
-            sw1.setText(txt);
-        }
-    }
     // --------- END -------------- Group Switchs (Show & Hide Groups)  ----- /\
 
 
@@ -589,15 +461,11 @@ public class AddTask2 extends ActivityMaster
 
 
 
-        int selected = -1;
-        if(rg_dateType.getCheckedRadioButtonId() == R.id.a_rd_milady){
-            selected = Vars.MILADY;
-        }else if(rg_dateType.getCheckedRadioButtonId() == R.id.a_rd_hijry){
-            selected = Vars.HIJRY;
-        }
+        int selected = AppOptions.dateType;
+
         PopDatePiker pop = new PopDatePiker();
         pop.SetOutputLocation(R.id.a_txt_date);
-        pop.SetNeededDateType(selected);
+        //pop.SetNeededDateType(selected);
         pop.show( manager,null);
 
 
@@ -643,10 +511,8 @@ public class AddTask2 extends ActivityMaster
 
         /////////////////////////////
         int dateType;
-        if (rg_dateType.getCheckedRadioButtonId() == R.id.a_rd_hijry)
-            dateType = Vars.D.HIJRY;
-        else
-            dateType = Vars.D.MILADY;
+
+            dateType = AppOptions.dateType ;
 
 
 
@@ -666,28 +532,28 @@ public class AddTask2 extends ActivityMaster
         if(txt_description.getText().toString()!= "")
             task.setDescription(txt_description.getText().toString());
 
-        int dateStatus = Task.NO_DATE_No_TIME;
+        int dateStatus = Task.NO_DATE_NO_TIME;
         if (txt_date.getTag() != null) {
             MyDate sDate = (MyDate) txt_date.getTag();
 
             if (txt_time.getTag() != null) {
-                PopTimePiker.SmallTime stime = (PopTimePiker.SmallTime) txt_time.getTag();
+                SmallTime stime = (SmallTime) txt_time.getTag();
                 dateStatus = Task.HAS_DATE_HAS_TIME;
 
                 task.setStartingTime(
-                        dateType,
+                        sDate.getType(),
                         dateStatus,
                         sDate.getDay(),
                         sDate.getMonth011(),
                         sDate.getYear(),
                         Vars.TIME.SPECIFIC,
-                        stime.hour24,
-                        stime.minute
+                        stime.getHour24(),
+                        stime.getMinute()
                 );
             } else {
                 dateStatus = Task.HAS_DATE_NO_TIME;
                 task.setStartingTime(
-                        dateType,
+                        sDate.getType(),
                         dateStatus,
                         sDate.getDay(),
                         sDate.getMonth011(),
@@ -701,39 +567,18 @@ public class AddTask2 extends ActivityMaster
 
 
         if (txt_period.getTag() != null) {
-            task._date_time_to = txt_period.getTag().toString();
+            task._duration_in_minutes = txt_period.getTag().toString();
         }
 
 
 
-        if(sRepeat.switchBtn.isChecked() ) {
-            MyDate toDate = null;
-            String toDateStr = "";
-            if(txt_repeatDate.getTag()!=null) {
-                toDate = (MyDate) txt_repeatDate.getTag();
-                toDateStr =  toDate.getShortDate(Vars.MILADY, false);
-            }
-
-
-            task.setRepeat(
-                    repeatType.getSelectedItemPosition(),
-                    wp_repeatCount.getCurrentItemPosition(),
-                    toDateStr,
-                    "02456" //TODO: Week Selected
-            );
-        }
-        CheckBox starImportance = (CheckBox)findViewById(R.id.ckb_star) ;
         int imp = 0;
         if(starImportance.isChecked()) imp = 1;
         task.setImportance(imp);
 
-//        if(sImportant.switchBtn.isChecked())
-//            task.setImportance(sp_Important.getSelectedItemPosition());
-//
-//        if(sImportant.switchBtn.isChecked())
             task.setCategory((int)((View)sp_Category.getSelectedView().getTag()).getTag());
 
-      //  if(sImportant.switchBtn.isChecked())
+
             task.setTags(sp_Tag.getSelectedItemPosition());
 
         task.setSubTasks(); //todo
@@ -741,7 +586,13 @@ public class AddTask2 extends ActivityMaster
 
 
         if(!task._name.isEmpty()) {
-            task.db_saveMe();
+            if(pageState == ADD_MODE) {
+                task.db_saveMe();
+            }else {
+                task.db_updateMe(taskId);
+            }
+
+
             finish();
         }else {
             Toast.makeText(this, "من فضلك لا تترك المهمة فارغة", Toast.LENGTH_LONG).show();
@@ -759,40 +610,7 @@ public class AddTask2 extends ActivityMaster
 
 
     /////////////////////////////////////////////////////////////
-class  GroupSection {
 
-        public int mainSec_id;
-        public int secTitle_id;
-        public int title_txt_id;
-        public int title_switch_id;
-        public int title_icon_id;
-        public int secBox_id;
-
-
-        public Switch switchBtn;
-
-        public String title_swich_txt;
-        public String title_txt_txt;
-
-        public GroupSection(int mainSec_id) {
-
-
-        }
-
-        public GroupSection( int mainSec_id, int secTitle_id, int title_txt_id, int title_switch_id, int secBox_id) {
-            this.mainSec_id = mainSec_id;
-            this.secTitle_id = secTitle_id;
-            this.title_txt_id = title_txt_id;
-            this.title_switch_id = title_switch_id;
-            this.title_icon_id = title_icon_id;
-            this.secBox_id = secBox_id;
-            switchBtn = (Switch) findViewById(title_switch_id);
-
-
-
-
-        }
-    }
 
     //TODO: weeks color on the old version (22).
     //TODO:AddTask Move tool.

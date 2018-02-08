@@ -15,7 +15,6 @@ import android.widget.TextView;
 import com.aigestudio.wheelpicker.WheelPicker;
 import com.example.hazemnabil.islamictodo2.ChangeFonts;
 import com.example.hazemnabil.islamictodo2.R;
-import com.example.hazemnabil.islamictodo2.colection.AppOptions;
 import com.example.hazemnabil.islamictodo2.colection.Vars;
 import com.example.hazemnabil.islamictodo2.myCalender.MyDate;
 
@@ -26,7 +25,7 @@ import java.util.Calendar;
  * Created by hazem.nabil on 16/02/2017.
  */
 
-public class PopDatePiker extends DialogFragment implements View.OnClickListener{
+public class PopAddNewCategory extends DialogFragment implements View.OnClickListener{
     View view1;
     private int defaultDateType = Vars.MILADY;
     private int neededDateType = defaultDateType ;

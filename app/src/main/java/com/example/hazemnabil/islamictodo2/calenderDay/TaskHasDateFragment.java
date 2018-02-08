@@ -3,18 +3,14 @@ package com.example.hazemnabil.islamictodo2.calenderDay;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.example.hazemnabil.islamictodo2.R;
-import com.example.hazemnabil.islamictodo2.myCalender.MyTime;
-
-import java.util.Calendar;
 
 /**
  * A fragment representing a list of Items.
@@ -31,11 +27,13 @@ public class TaskHasDateFragment extends Fragment {
     private static final String TAG ="zoma_TaskFrag" ;
     // TODO: Customize parameters
     private int mColumnCount = 1;
+    private boolean mHasTime;
     private int mDay = 6;
     private int mMonth011 = 4;
     private int mYear = 2017;
     private FragmentListener mListener;
     RecyclerView recyclerView;
+    ListView listView;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -78,7 +76,7 @@ public class TaskHasDateFragment extends Fragment {
         View view = inflater.inflate(R.layout.p4_fragment_item_list, container, false);
 
         // Set the adapter
-        if (view instanceof RecyclerView) {
+       /* if (view instanceof RecyclerView) {
             Context context = view.getContext();
 
             recyclerView = (RecyclerView) view;
@@ -89,6 +87,12 @@ public class TaskHasDateFragment extends Fragment {
             }
             updateView( mDay, mMonth011, mYear);
 
+        }*/
+        if (view instanceof ListView) {
+          //  Context mContext = view.getContext();
+            listView = (ListView) view;
+
+            updateView(mHasTime, mDay, mMonth011, mYear);
         }
 
         return view;
@@ -116,8 +120,9 @@ public class TaskHasDateFragment extends Fragment {
 
 
 
-    public void updateView(int mDay,int mMonth011, int mYear) {
+    public void updateView(boolean hasTime ,int mDay,int mMonth011, int mYear) {
         Log.i(TAG, "_________ 4.1.updateView: "+this);
+        this.mHasTime = hasTime;
         this.mDay = mDay;
         this.mMonth011 = mMonth011;
         this.mYear = mYear;
@@ -129,24 +134,20 @@ public class TaskHasDateFragment extends Fragment {
           //  Day hh = new Day(mContext,mDay,mMonth011,mYear);
            // TasksList hh4 = hh.prepareTasks();
             TasksList tasksList = new TasksList(mContext);
-            tasksList.prepareDayTasks(mDay,mMonth011,mYear);
+            if(mHasTime)
+                tasksList.prepareDayTasks(mDay,mMonth011,mYear);
+            else
+                tasksList.prepareDayTasks_WithNoTime(mDay,mMonth011,mYear);
 
-            Calendar cal = Calendar.getInstance();
-            cal.set(mDay, mMonth011, mYear);
-            MyTime mytime = new MyTime(cal);
 
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapterWithDate(mytime,tasksList.getTasksList(), mListener));
+
+
+            /*recyclerView.setAdapter(new MyItemRecyclerViewAdapterWithDate(mytime,tasksList.getTasksList(), mListener));*/
+            listView.setAdapter(new TaskListAdapter(hasTime,tasksList.getTasksList(), mListener));
            // Toast.makeText(getContext(), "Day: " + hh._day_n + " / " + (hh._month_n011 +1 )+ " / " + hh._year_n, Toast.LENGTH_SHORT).show();
 
         }
     }
-
-
-
-
-
-
-
 
 
 

@@ -1,9 +1,9 @@
 package com.example.hazemnabil.islamictodo2.calenderDay;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +19,6 @@ import com.example.hazemnabil.islamictodo2.R;
 import com.example.hazemnabil.islamictodo2.dummy.DummyContent.DummyItem;
 import com.example.hazemnabil.islamictodo2.myCalender.MyTime;
 import com.example.hazemnabil.islamictodo2.objData.Task;
-import com.example.hazemnabil.islamictodo2.viewTask.TaskItemDetailActivity;
-import com.example.hazemnabil.islamictodo2.viewTask.TaskItemDetailFragment;
 
 import java.util.List;
 
@@ -29,6 +27,7 @@ import java.util.List;
  * specified {@link FragmentListener}.
  * TODO: Replace the implementation with Code for your data type.
  */
+@Deprecated
 public class MyItemRecyclerViewAdapterNoDate extends RecyclerView.Adapter<MyItemRecyclerViewAdapterNoDate.ViewHolder> {
 
     private static final String TAG ="zoma" ;
@@ -37,6 +36,7 @@ public class MyItemRecyclerViewAdapterNoDate extends RecyclerView.Adapter<MyItem
     private final FragmentListener mListener;
     private Context mContext ;
     MyTime myTime = new MyTime();
+
 
 
     public MyItemRecyclerViewAdapterNoDate(MyTime time, List<Task> taskList, FragmentListener listener) {
@@ -59,12 +59,14 @@ public class MyItemRecyclerViewAdapterNoDate extends RecyclerView.Adapter<MyItem
     public void onBindViewHolder(final ViewHolder holder, int position) {  // Every Row
         if(taskList !=null && taskList.get(position).isSplitter == true) {
 
+
             holder.txt_timeName.setText(taskList.get(position).splitter_TimesName);
             holder.txt_splitterTime.setText(taskList.get(position).splitter_time);
             holder.ll_spliter.setVisibility(View.VISIBLE);
             holder.ll_task_item.setVisibility(View.GONE);
         }
        if(taskList !=null && taskList.get(position).isSplitter == false) {
+           Log.i(TAG+"_p", "onBindViewHolder: -------"+position+"___"+taskList.get(position)._name);
            holder.mTask = taskList.get(position);
 
 
@@ -72,7 +74,7 @@ public class MyItemRecyclerViewAdapterNoDate extends RecyclerView.Adapter<MyItem
            //holder.root_task_item
            holder.chk_checkBox.setChecked(holder.mTask.getDone());
            holder.txt_task.setText(holder.mTask.getTaskName());
-           holder.txt_task.setOnClickListener(new View.OnClickListener() {
+        /*   holder.txt_task.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View v) {
 
@@ -81,12 +83,12 @@ public class MyItemRecyclerViewAdapterNoDate extends RecyclerView.Adapter<MyItem
 
                    mContext.startActivity(intent);
                }
-           });
+           });*/
 
 
 
           holder.txt_taskCategory.setText(holder.mTask._catName);
-           holder.txt_taskCategory.setBackgroundColor(Color.parseColor(holder.mTask._catColor));
+          holder.txt_taskCategory.setBackgroundColor(Color.parseColor(holder.mTask._catColor));
 
           // String mean = myTime.checkWhen_str(taskList.get(position)._stime_h,taskList.get(position)._stime_m);
 

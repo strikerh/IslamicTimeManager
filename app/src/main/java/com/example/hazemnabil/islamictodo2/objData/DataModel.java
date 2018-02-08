@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 /**
  * Created by hazem.nabil on 5/18/2017.
  */
-
+@Deprecated
 public class DataModel {
 
 
