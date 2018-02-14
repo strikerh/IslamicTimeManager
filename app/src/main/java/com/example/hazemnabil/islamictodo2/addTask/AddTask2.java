@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -119,7 +120,7 @@ public class AddTask2 extends ActivityMaster
 
         _prepareTimeGroup();
         _prepareRepeatGroup();
-        _prepareImportanceGroup();
+        _prepareCategory();
 
         _FillAllFields_ifUpdate();
 
@@ -332,20 +333,29 @@ public class AddTask2 extends ActivityMaster
 
             }
         });
-    //////////////////////////////////// END  _ prepare REPEAT Group  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////// END  _ prepare Category Group  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 
-    private void _prepareImportanceGroup() {
+    public void _prepareCategory() {
 
 
         Categories cats = new Categories(this);
         sp = cats.getCategories();
 
-
-
         myadapter = new Spinner_adapter(this, cats, sp_Category, myFont, R.layout.p2_my_spinner_style);
         sp_Category.setAdapter(myadapter);
+        ImageButton btn_add_category = (ImageButton)findViewById(R.id.btn_add_category) ;
+        btn_add_category.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction manager = getSupportFragmentManager().beginTransaction();
+                PopAddNewCategory popAddNewCategory = new PopAddNewCategory();
+                popAddNewCategory.SetOutputLocation(R.id.a_txt_date);
+                //pop.SetNeededDateType(selected);
+                popAddNewCategory.show( manager,null);
 
+            }
+        });
 
 
 
@@ -605,7 +615,6 @@ public class AddTask2 extends ActivityMaster
 
 
     }
-
 
 
 

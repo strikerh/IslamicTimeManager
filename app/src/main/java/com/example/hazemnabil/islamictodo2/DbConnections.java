@@ -121,36 +121,31 @@ public class DbConnections extends SQLiteOpenHelper {
         if (checkDbIsNew()) {
             ContentValues values = new ContentValues();
             //name" TEXT, "color" TEXT, "" TEXT, "source" TEXT
-            insertCategory("عمل", "#ff5533", "ghghgh" , "google.ocm");
-            insertCategory("شخصي", "#55ff33", "شخصي" , null);
-            insertCategory("ديني", "#5533ff", "ديني" , null);
-            insertCategory("المنزل", "#665533", "المنزل" , null);
-            insertCategory("المنزل", "#665533", "المنزل" , null);
+            insertCategory("عمل", "#ff5533", "ghghgh", "google.ocm");
+            insertCategory("شخصي", "#55ff33", "شخصي", null);
+            insertCategory("ديني", "#5533ff", "ديني", null);
+            insertCategory("المنزل", "#665533", "المنزل", null);
+            insertCategory("المنزل", "#665533", "المنزل", null);
 
             Random rand = new Random();
             insertUser("Hazem");
-            int d= 1;
+            int d = 1;
             int m = 4;
-            for (int i = 0; i <140 ; i++) {
-                if (d <30) {
+            for (int i = 0; i < 140; i++) {
+                if (d < 30) {
                     d++;
-                }else {
-                    d=1;
+                } else {
+                    d = 1;
                     m++;
                 }
-                for (int j = 0; j <rand.nextInt(7) ; j++) {
-                    makeRandTask( d,m);
+                for (int j = 0; j < rand.nextInt(7); j++) {
+                    makeRandTask(d, m);
                 }
 
             }
 
 
-
-
-
-
-
-            }
+        }
 
 
     }
@@ -378,6 +373,13 @@ public class DbConnections extends SQLiteOpenHelper {
         Cursor cursor = db2.rawQuery(rawQuery ,null);
 
         return cursor;
+
+    }
+    public int deleteRow(String tableName,String whereQuery){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        return db.delete(tableName, whereQuery, null) ;
+
 
     }
 

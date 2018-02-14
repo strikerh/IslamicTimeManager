@@ -15,6 +15,7 @@ import com.example.hazemnabil.islamictodo2.CheckableLinearLayout;
 import com.example.hazemnabil.islamictodo2.R;
 import com.example.hazemnabil.islamictodo2.colection.AppOptions;
 import com.example.hazemnabil.islamictodo2.colection.Vars;
+import com.example.hazemnabil.islamictodo2.colection.tags.Cd_WeekTab;
 import com.example.hazemnabil.islamictodo2.myCalender.MyDate;
 
 import java.util.Calendar;
@@ -112,7 +113,7 @@ public class WeekTabFragment extends Fragment  {
         Log.i(TAG, "____________ onAttach: "+this.tabNum);
         super.onAttach(context);
 
-        tabNum = getArguments().getInt(ARG_SECTION_NUMBER);
+        tabNum = getTabNum();
 
         if (context instanceof FragmentListener) {
             mListener = (WeekTabListener) context;
@@ -121,6 +122,10 @@ public class WeekTabFragment extends Fragment  {
             //throw new RuntimeException(context.toString()
             //        + " must implement OnListFragmentInteractionListener");
         }
+    }
+
+    public int getTabNum() {
+        return  getArguments().getInt(ARG_SECTION_NUMBER);
     }
 
     @Override
@@ -156,6 +161,7 @@ public class WeekTabFragment extends Fragment  {
                              Bundle savedInstanceState) {
         Log.i(TAG, "____________ onCreateView: "+this.tabNum);
         View rootView = inflater.inflate(R.layout.p4_fragment_days_tab, container, false);
+
 
 
 
@@ -206,7 +212,10 @@ public class WeekTabFragment extends Fragment  {
         //day.add(Calendar.WEEK_OF_YEAR,tabNum);
         Log.i(TAG, "-----------------"+day.get(Calendar.YEAR) );
 
+
         firstMonth011 =  (Calendar) day.clone();
+
+
         for (int i = 0; i <7 ; i++) {
 
 

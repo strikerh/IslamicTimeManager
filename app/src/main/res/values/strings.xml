@@ -32,6 +32,17 @@
         <item>منتصف الليل</item>
 
     </string-array>
+    <string-array name="colors">
+        <item>#121212</item>
+        <item>#124578</item>
+        <item>#121212</item>
+        <item>#217852</item>
+        <item>#346533</item>
+        <item>#224467</item>
+        <item>#886644</item>
+        <item>#346789</item>
+        <item>#345643</item>
+    </string-array>
 
     <string-array name="hijryMonths">
         <item> محرم</item>
@@ -281,11 +292,13 @@
     <string name="title_activity_testtt2">Testtt2Activity</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_calender_month3">شهري</string>
+    <string name="title_activity_category">التصنيفات</string>
     <string name="title_activity_add_task3">AddTask3Activity</string>
     <string name="title_activity_view_task">ViewTask</string>
     <string name="title_activity_scrolling_task_view">ScrollingTaskView</string>
     <string name="title_taskitem_list">TaskItems</string>
     <string name="title_taskitem_detail">TaskItem Detail</string>
+    <string name="title_activity_settings2">Settings</string>
 
 
 </resources>

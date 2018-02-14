@@ -98,8 +98,8 @@ public class MyItemRecyclerViewAdapterNoDate extends RecyclerView.Adapter<MyItem
 //        holder.btn_edit done
 //        holder.btn_move todo
 
-           //holder.mIdView.setText(taskList.get(position).id);
-           //holder.mContentView.setText(taskList.get(position).content);
+           //holder.txt_id.setText(taskList.get(position).id);
+           //holder.txt_name.setText(taskList.get(position).content);
 
            holder.mView.setOnClickListener(new View.OnClickListener() {
                @Override
@@ -142,8 +142,8 @@ public class MyItemRecyclerViewAdapterNoDate extends RecyclerView.Adapter<MyItem
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-       // public final TextView mIdView;
-       // public final TextView mContentView;
+       // public final TextView txt_id;
+       // public final TextView txt_name;
         public final LinearLayout root_task_item;
         public final LinearLayout ll_task_item;
         public final LinearLayout ll_spliter ;
@@ -183,8 +183,8 @@ public class MyItemRecyclerViewAdapterNoDate extends RecyclerView.Adapter<MyItem
             txt_timeName = (TextView) view.findViewById(R.id.txt_time_name);
             txt_splitterTime = (TextView) view.findViewById(R.id.txt_splitter_time);
 
-           // mIdView = (TextView) view.findViewById(R.id.txt_task1);
-           // mContentView = (TextView) view.findViewById(R.id.txt_time1);
+           // txt_id = (TextView) view.findViewById(R.id.txt_task1);
+           // txt_name = (TextView) view.findViewById(R.id.txt_time1);
 
             //Change Font
             ViewGroup gr =(ViewGroup)root_task_item;

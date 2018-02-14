@@ -23,6 +23,7 @@ import com.example.hazemnabil.islamictodo2.myCalender.MyDate;
 import com.example.hazemnabil.islamictodo2.myCalender.MyTime;
 import com.example.hazemnabil.islamictodo2.myCalender.SmallTime;
 
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -278,6 +279,8 @@ public class PopTimePiker extends DialogFragment implements View.OnClickListener
     @Override
     public void onClick(View v) {
         this.dismiss();
+
+
         if (v.getId() == R.id.ok) {
 
             if(selectedTab == RELATED_TAB){

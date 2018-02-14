@@ -107,6 +107,20 @@ public class CalenderDay extends ActivityMaster
     protected void onResume() {
 
         super.onResume();
+
+
+
+
+
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),myCurrentDay);
+        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+
+        int pagerPosition;
+        pagerPosition = WeekTabFragment.calculatePageFromDate( myCurrentDay.getCalendar());
+        mViewPager.setCurrentItem(pagerPosition);
+
+
         fragment.updateView(true, myCurrentDay.getDay(),myCurrentDay.getMonth011(),myCurrentDay.getYear());
         fragmentNotDate.updateView(false, myCurrentDay.getDay(),myCurrentDay.getMonth011(),myCurrentDay.getYear());
     }
@@ -217,24 +231,28 @@ public class CalenderDay extends ActivityMaster
                 // Check if this is the page you want.
                 Log.i(TAG, "_______L__________ onPageSelected: "+position);
                 //this;
+                ChangeMonthTitle(position);
                 //WeekTabFragment frag =(WeekTabFragment)((SectionsPagerAdapter) mViewPager.getAdapter()).getItem(position);
-                List<Fragment> fragList = getSupportFragmentManager().getFragments();
-                for (int i = 0; i < fragList.size(); i++) {
-                    if(fragList.get(i) instanceof WeekTabFragment){
-                        WeekTabFragment wtf= (WeekTabFragment) fragList.get(i);
-                        wtf.checkDay(myCurrentDay);
-                        if (wtf.tabNum == position){
 
-                            CalenderDay.this.getSupportActionBar().setTitle(wtf.getMonths());
-                        }
-                    }
-                }
 
             }
         });
 
     }
 
+    private void ChangeMonthTitle(int position) {
+        List<Fragment> fragList = getSupportFragmentManager().getFragments();
+        for (int i = 0; i < fragList.size(); i++) {
+            if(fragList.get(i) instanceof WeekTabFragment){
+                WeekTabFragment wtf= (WeekTabFragment) fragList.get(i);
+                wtf.checkDay(myCurrentDay);
+                if (wtf.tabNum == position){
+
+                    CalenderDay.this.getSupportActionBar().setTitle(wtf.getMonths());
+                }
+            }
+        }
+    }
 
 
     private void gotoDate(MyDate myDate){
@@ -354,13 +372,26 @@ public class CalenderDay extends ActivityMaster
         int id = item.getItemId();
 
         if (id == R.id.menu_get_today) {
+           // TextView tx = (TextView)view.getChildAt(1);
+            //TaskHasDateFragment fragment = (TaskHasDateFragment) getSupportFragmentManager().findFragmentById(R.id.fragment2);
 
-//            myDate = new MyDate();
-//            currentYear = myDate.getYear();
-//            currentMonth = myDate.getMonth011();
-//
-//            _prepareUI_MonthBar();
-//            mViewPager.setCurrentItem(mPagerAdapter.calculatePosOfDate(myDate.getMonth011(),myDate.getYear()));
+
+            MyDate newdate = new MyDate();
+            myCurrentDay.setDate(newdate.getDay(),newdate.getMonth011(),newdate.getYear());
+
+            mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),myCurrentDay);
+            mViewPager = (ViewPager) findViewById(R.id.container);
+            mViewPager.setAdapter(mSectionsPagerAdapter);
+
+            int pagerPosition;
+            pagerPosition = WeekTabFragment.calculatePageFromDate( newdate.getCalendar());
+            mViewPager.setCurrentItem(pagerPosition);
+
+
+            fragment.updateView(true, newdate.getDay(),newdate.getMonth011(),newdate.getYear());
+            fragmentNotDate.updateView(false, newdate.getDay(),newdate.getMonth011(),newdate.getYear());
+           // Log.i(Vars.TAG, "onClick: ++++++++++++++++++ "+tx.getText() +" "+ view.nTab +" "+ view.nDay +" "+ view.nYear);
+
             return true;
 
 

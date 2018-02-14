@@ -9,7 +9,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.hazemnabil.islamictodo2.calenderDay.CalenderDay;
+import com.example.hazemnabil.islamictodo2.category.ActivityCategory;
 import com.example.hazemnabil.islamictodo2.monthCalender.ActivityMonth;
+import com.example.hazemnabil.islamictodo2.objData.Categories;
 import com.example.hazemnabil.islamictodo2.viewTask.TaskItemListActivity;
 
 public class ActivityMaster extends AppCompatActivity
@@ -64,11 +66,15 @@ public class ActivityMaster extends AppCompatActivity
 
         } else if (id == R.id.nav_categories) {
 
+            Intent myIntent = new Intent(this, ActivityCategory.class);
+            startActivity(myIntent);
 
-        } else if (id == R.id.nav_tags) {
 
 
         } else if (id == R.id.nav_settings) {
+            Intent myIntent = new Intent(this, SettingsActivity.class);
+            startActivity(myIntent);
+
 
         } else if (id == R.id.nav_test) {
             Intent myIntent = new Intent(this, TaskItemListActivity.class);

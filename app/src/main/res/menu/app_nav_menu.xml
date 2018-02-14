@@ -5,19 +5,19 @@
         <item
             android:id="@+id/nav_day"
             android:icon="@drawable/ic_menu_camera"
-            android:title=" اليومي" />
+            android:title="المهام اليومية" />
         <item
             android:id="@+id/nav_month"
             android:icon="@drawable/ic_menu_gallery"
-            android:title=" الشهري" />
+            android:title="المهام الشهرية" />
         <item
             android:id="@+id/nav_categories"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="قائمة الأعمال" />
-        <item
+            android:title="تصنيفات المهام" />
+       <!-- <item
             android:id="@+id/nav_tags"
             android:icon="@drawable/ic_menu_manage"
-            android:title="تصنيفات الأعمال" />
+            android:title="تصنيفات المهام" />  -->
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_menu_manage"

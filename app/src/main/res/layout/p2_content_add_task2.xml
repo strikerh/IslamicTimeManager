@@ -114,7 +114,7 @@
                         android:layout_weight="1" />
 
                     <ImageButton
-                        android:id="@+id/a_button2"
+                        android:id="@+id/btn_add_category"
                         style="@style/add_btn"
 
                         />

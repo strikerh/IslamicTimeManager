@@ -35,8 +35,8 @@ public class TaskListAdapter extends BaseAdapter {
     private List<Task> listOfTasks;
 
     private View mView;
-    // public final TextView mIdView;
-    // public final TextView mContentView;
+    // public final TextView txt_id;
+    // public final TextView txt_name;
     private LinearLayout root_task_item;
     private LinearLayout ll_task_item;
     private LinearLayout ll_spliter;
@@ -134,8 +134,8 @@ public class TaskListAdapter extends BaseAdapter {
         txt_timeName = (TextView) view.findViewById(R.id.txt_time_name);
         txt_splitterTime = (TextView) view.findViewById(R.id.txt_splitter_time);
 
-        // mIdView = (TextView) view.findViewById(R.id.txt_task1);
-        // mContentView = (TextView) view.findViewById(R.id.txt_time1);
+        // txt_id = (TextView) view.findViewById(R.id.txt_task1);
+        // txt_name = (TextView) view.findViewById(R.id.txt_time1);
 
         //Change Font
         // ViewGroup gr = (ViewGroup) root_task_item;
@@ -198,8 +198,8 @@ public class TaskListAdapter extends BaseAdapter {
 //        btn_edit done
 //        btn_move todo
 
-            //mIdView.setText(listOfTasks.get(position).id);
-            //mContentView.setText(listOfTasks.get(position).content);
+            //txt_id.setText(listOfTasks.get(position).id);
+            //txt_name.setText(listOfTasks.get(position).content);
 
             mView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -211,9 +211,15 @@ public class TaskListAdapter extends BaseAdapter {
                         mListener.onFragmentListClicked(thisTask);
 
 
-                        Intent intent = new Intent(mContext ,TaskItemDetailActivity.class);
+                      /*  Intent intent = new Intent(mContext ,TaskItemDetailActivity.class);
                         intent.putExtra(TaskItemDetailFragment.ARG_ITEM_ID, thisTask._id);
-                        mContext.startActivity(intent);
+                        mContext.startActivity(intent);*/
+                        Intent intent1 = new Intent(mContext ,AddTask2.class);
+                        intent1.putExtra(AddTask2.TASK_ID,  thisTask._id);
+                        intent1.putExtra(AddTask2.STATE, AddTask2.EDIT_MODE);
+                        mContext.startActivity(intent1);
+
+
                     }
                 }
             });

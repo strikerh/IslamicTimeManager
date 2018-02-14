@@ -128,6 +128,20 @@ public class Categories {
             this.fillThisTask(categoryContent);
 
         }
+         public void updateCategory(int id, String name, String color) {
+             _id = id;
+             _name = name;
+             _color = color;
+             _CategoryContent = new ContentValues();
+            if(_name !=null)
+                _CategoryContent.put(Col.NAME,_name);
+             if(_name !=null)
+                 _CategoryContent.put(Col.COLOR,_color);
+
+             db_updateMe();
+
+
+         }
 
 
         public int fillThisTask(Cursor categoryCursor)  {
@@ -198,11 +212,19 @@ public class Categories {
 
         public int db_updateMe() {
             DbConnections dbConnections = new DbConnections(mContext);
-            return dbConnections.updateRow(DbConnections.TABLE_CATEGORIES, "id = " + _id, _CategoryContent);
+            return dbConnections.updateRow(DbConnections.TABLE_CATEGORIES, " id = " + _id, _CategoryContent);
         }
 
         public void db_deleteMe() {
-            //Todo:Delete
+            DbConnections dbConnections = new DbConnections(mContext);
+             dbConnections.deleteRow(DbConnections.TABLE_CATEGORIES, "id = " + _id);
+        }
+
+        public int getTasksCount(){
+            DbConnections dbConnections = new DbConnections(mContext);
+            Cursor cu = dbConnections.getListOfRows(DbConnections.TABLE_TASKS, Task.Col.CATEGORY + " = " + _id);
+            return cu.getCount();
+
         }
 
     }

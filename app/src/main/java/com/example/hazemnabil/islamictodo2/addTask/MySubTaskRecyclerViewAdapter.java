@@ -39,7 +39,7 @@ public class MySubTaskRecyclerViewAdapter extends RecyclerView.Adapter<MySubTask
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-       // holder.mIdView.setText(mValues.get(position).id);
+       // holder.txt_id.setText(mValues.get(position).id);
         holder.mTodoItemChk.setText(mValues.get(position).content);
         holder.mPos = position;
 
@@ -71,8 +71,8 @@ public class MySubTaskRecyclerViewAdapter extends RecyclerView.Adapter<MySubTask
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-       // public final TextView mIdView;
-        //public final TextView mContentView;
+       // public final TextView txt_id;
+        //public final TextView txt_name;
         public int mPos;
         public final CheckBox mTodoItemChk;
         public final ImageButton mDeletBtn;
@@ -84,8 +84,8 @@ public class MySubTaskRecyclerViewAdapter extends RecyclerView.Adapter<MySubTask
         public ViewHolder(View view) {
             super(view);
             mView = view;
-          //  mIdView = (TextView) view.findViewById(R.id.ch_todoItem);
-           // mContentView = (TextView) view.findViewById(R.id.ch_todoItem);
+          //  txt_id = (TextView) view.findViewById(R.id.ch_todoItem);
+           // txt_name = (TextView) view.findViewById(R.id.ch_todoItem);
             mTodoItemChk = (CheckBox)view.findViewById(R.id.ch_todoItem);
             mDeletBtn = (ImageButton) view.findViewById(R.id.btn_delete);
             mMoveBtn = (ImageButton) view.findViewById(R.id.btn_delete);

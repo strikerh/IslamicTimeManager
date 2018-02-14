@@ -40,12 +40,11 @@
         <!-- android:theme="@style/AppTheme" /> -->
         <activity
             android:name=".calenderDay.CalenderDay"
-            android:label="@string/title_activity_calender_day"
-            android:theme="@style/AppTheme"
             android:configChanges="orientation"
+            android:label="@string/title_activity_calender_day"
             android:screenOrientation="portrait"
-            />
-        <!--android:configChanges="orientation|screenSize|keyboardHidden"-->
+            android:theme="@style/AppTheme" />
+        <!-- android:configChanges="orientation|screenSize|keyboardHidden" -->
         <!-- <activity -->
         <!-- android:name=".Testtt2Activity" -->
         <!-- android:label="@string/title_activity_testtt2" -->
@@ -67,6 +66,11 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
+        <activity
+            android:name=".category.ActivityCategory"
+            android:label="@string/title_activity_category"
+            android:launchMode="singleInstance"
+            android:theme="@style/AppTheme"></activity>
         <activity
             android:name=".StartActivity"
             android:theme="@style/SplashTheme">
@@ -92,7 +96,7 @@
         <activity
             android:name=".viewTask.TaskItemListActivity"
             android:label="@string/title_taskitem_list"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".viewTask.TaskItemDetailActivity"
             android:label="@string/title_taskitem_detail"
@@ -102,6 +106,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.hazemnabil.islamictodo2.viewTask.TaskItemListActivity" />
         </activity>
+        <activity
+            android:name=".SettingsActivity2"
+            android:label="@string/title_activity_settings2"></activity>
     </application>
 
 </manifest>
